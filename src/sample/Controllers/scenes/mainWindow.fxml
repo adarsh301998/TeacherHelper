@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="710.0" style="-fx-background-color: #2C3A47; -fx-border-radius: 3em;"
+            xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.Controllers.MainWindowController" fx:id="rootScene">
+    <children>
+        <FontAwesomeIcon/>
+        <FontAwesomeIcon fx:id="btn_close" fill="#f8f8f8" glyphName="CLOSE" layoutX="677.0" layoutY="22.0"
+                         onMouseClicked="#closeEvent" size="2em"/>
+        <JFXButton fx:id="btn_new" graphicTextGap="20.0" layoutX="72.0" layoutY="134.0" onAction="#handelEvent"
+                   prefHeight="78.0" prefWidth="194.0" ripplerFill="#a49a9a"
+                   style="-fx-background-color: #CAD3C8; -fx-background-radius: 3em; -fx-border-radius: 3em;" text="New"
+                   textFill="#eeeaea">
+            <font>
+                <Font name="Bell MT" size="33.0"/>
+            </font>
+            <graphic>
+                <FontAwesomeIcon fill="WHITE" glyphName="FILE"/>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btn_open" graphicTextGap="20.0" layoutX="381.0" layoutY="134.0" onAction="#handelEvent"
+                   prefHeight="78.0" prefWidth="194.0" ripplerFill="#a49a9a"
+                   style="-fx-background-color: #CAD3C8; -fx-background-radius: 3em; -fx-border-radius: 3em;"
+                   text="Open" textFill="#eeeaea">
+            <font>
+                <Font name="Bell MT" size="33.0"/>
+            </font>
+            <graphic>
+                <FontAwesomeIcon fill="WHITE" glyphName="FOLDER"/>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btn_key" graphicTextGap="20.0" layoutX="73.0" layoutY="254.0" onAction="#handelEvent"
+                   prefHeight="78.0" prefWidth="194.0" ripplerFill="#a49a9a"
+                   style="-fx-background-color: #CAD3C8; -fx-background-radius: 3em; -fx-border-radius: 3em;" text="Key"
+                   textFill="#eeeaea">
+            <font>
+                <Font name="Bell MT" size="33.0"/>
+            </font>
+            <graphic>
+                <FontAwesomeIcon fill="WHITE" glyphName="KEY"/>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btn_report" graphicTextGap="20.0" layoutX="395.0" layoutY="254.0" onAction="#handelEvent"
+                   prefHeight="78.0" prefWidth="194.0" ripplerFill="#a49a9a"
+                   style="-fx-background-color: #CAD3C8; -fx-background-radius: 3em; -fx-border-radius: 3em;"
+                   text="Report" textFill="#eeeaea">
+            <font>
+                <Font name="Bell MT" size="33.0"/>
+            </font>
+            <graphic>
+                <FontAwesomeIcon fill="WHITE" glyphName="BOOK"/>
+            </graphic>
+        </JFXButton>
+    </children>
+</AnchorPane>

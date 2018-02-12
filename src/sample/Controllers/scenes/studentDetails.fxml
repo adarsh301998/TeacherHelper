@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane fx:id="key_map_main_layout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="515.0" prefWidth="703.0" styleClass="dark-background"
+            stylesheets="@../../layouts/CSS/maincss.css" xmlns="http://javafx.com/javafx/8.0.141"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.StudentDetailsController">
+    <children>
+        <AnchorPane prefHeight="515.0" prefWidth="310.0" styleClass="bluebackground"
+                    stylesheets="@../../layouts/CSS/maincss.css">
+            <children>
+                <JFXComboBox fx:id="ques_num_txt" labelFloat="true" layoutX="36.0" layoutY="145.0" prefHeight="36.0"
+                             prefWidth="246.0" promptText="Select Question" style="-fx-background-color: #59C7C6;"/>
+                <JFXTextField fx:id="studentNameTxt" labelFloat="true" layoutX="37.0" layoutY="222.0" prefHeight="36.0"
+                              prefWidth="236.0" promptText="Student Name">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </JFXTextField>
+                <JFXButton fx:id="proceed_btn" layoutX="204.0" layoutY="452.0" onAction="#generateRadioButton"
+                           prefHeight="36.0" prefWidth="93.0" styleClass="darkborder"
+                           stylesheets="@../../layouts/CSS/maincss.css" text="Proceed"/>
+                <Label layoutX="14.0" layoutY="68.0" prefHeight="39.0" prefWidth="236.0" text="Student Deatails"
+                       textFill="#fcf7f7">
+                    <font>
+                        <Font name="Segoe UI" size="32.0"/>
+                    </font>
+                </Label>
+                <FontAwesomeIcon fx:id="keymap_close_btn" glyphName="CLOSE" layoutX="276.0" layoutY="18.0"
+                                 onMouseClicked="#closeEvent" size="2em"/>
+                <JFXTextField fx:id="rollNumberTxt" labelFloat="true" layoutX="41.0" layoutY="306.0" prefHeight="36.0"
+                              prefWidth="236.0" promptText="Roll number">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </JFXTextField>
+                <JFXButton fx:id="nextStudent_btn" layoutX="47.0" layoutY="452.0" onAction="#nextStudent"
+                           prefHeight="36.0" prefWidth="93.0" styleClass="darkborder"
+                           stylesheets="@../../layouts/CSS/maincss.css" text="Next Student"/>
+                <JFXTextField fx:id="subQuestionTxt" labelFloat="true" layoutX="37.0" layoutY="368.0" prefHeight="36.0"
+                              prefWidth="246.0" promptText="SubQuestion">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </JFXTextField>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="side_anchor" layoutX="310.0" prefHeight="515.0" prefWidth="395.0"
+                    styleClass="dark-background">
+            <children>
+                <ScrollPane prefHeight="471.0" prefWidth="395.0" styleClass="dark-background">
+                    <content>
+                        <AnchorPane prefHeight="471.0" prefWidth="395.0" styleClass="dark-background">
+                            <children>
+                                <GridPane fx:id="keymap_gridpane" prefHeight="-Infinity" prefWidth="-Infinity"
+                                          styleClass="dark-background" stylesheets="@../../layouts/CSS/maincss.css"
+                                          vgap="20.0">
+
+                                </GridPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+                <JFXButton fx:id="student_response_btn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" layoutX="239.0"
+                           layoutY="485.0" onAction="#generateReport" text="Generate Report"/>
+                <JFXButton fx:id="keymap_save_button" layoutX="14.0" layoutY="485.0" onAction="#saveRadioData"
+                           prefHeight="27.0" prefWidth="124.0" text="Save"/>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
