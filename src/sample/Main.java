@@ -6,13 +6,34 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sample.Controllers.KeyMapController;
+import sample.DataClasses.TestDetails;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main extends Application {
 
+    TestDetails testDetails;
     @Override
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("Controllers/scenes/mainWindow.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("Controllers/scenes/mainWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Controllers/scenes/keyMap.fxml"));
+        Parent root = loader.load();
+        KeyMapController controller = loader.getController();
+
+        testDetails = new TestDetails();
+        testDetails.setTeacherName("xyz");
+        testDetails.setClassLabel("bca");
+        testDetails.setTestName("English");
+        testDetails.setInstitute("Birla Institute of technology");
+        testDetails.setDateTime(LocalDate.now());
+        testDetails.setNumberOfStudent(2);
+        testDetails.setNumberOfQuestion(3);
+        initialize_arrayList(3, 2);
+        controller.init_create(testDetails);
+
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
@@ -21,5 +42,21 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private void initialize_arrayList(int ques, int num_students) {
+        testDetails.setQuestion(new ArrayList<>());
+        testDetails.setKey(new ArrayList<>());
+        testDetails.setStudentDetails(new ArrayList<>());
+        testDetails.setSubQuestionList(new ArrayList<>());
+        for (int i = 0; i < ques; i++) {
+            testDetails.getQuestion().add(null);
+            testDetails.getSubQuestionList().add(null);
+            testDetails.getKey().add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < num_students; i++) {
+            testDetails.getStudentDetails().add(null);
+        }
     }
 }

@@ -1,25 +1,7 @@
 package sample.Controllers;
 
-import HelperClasses.RadioButtonHelper;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import sample.DataClasses.DataBaseCommunication;
-import sample.DataClasses.DataInstance;
-import sample.DataClasses.StudentDetails;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class StudentDetailsController {
-    @FXML
+    /*@FXML
     private AnchorPane key_map_main_layout;
 
     @FXML
@@ -145,7 +127,7 @@ public class StudentDetailsController {
                     evaluation.add(0);
                 }
             }
-            /*int responseSize = studentDetails.get(studentIndexCount).getResponse()==null?0:studentDetails.get(studentIndexCount).getResponse().size();
+            *//*int responseSize = studentDetails.get(studentIndexCount).getResponse()==null?0:studentDetails.get(studentIndexCount).getResponse().size();
             if (responseSize<selectedIndex) {
                 for (int i=responseSize;i<selectedIndex;i++) {
                     studentDetails.get(studentIndexCount).getResponse().add(new ArrayList<>());
@@ -156,7 +138,7 @@ public class StudentDetailsController {
             }else{
                 studentDetails.get(studentIndexCount).getResponse().add(selectedIndex,response);
                 studentDetails.get(studentIndexCount).getEvaluation().add(evaluation);
-            }*/
+            }*//*
             System.out.println("Key " + key + " response " + response + " evaluation " + evaluation);
 
             // Setting up of data
@@ -184,6 +166,6 @@ public class StudentDetailsController {
 
     }
 
-
+*/
 }
 

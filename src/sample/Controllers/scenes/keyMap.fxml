@@ -35,22 +35,26 @@
                                  onMouseClicked="#closeEvent" size="2em"/>
             </children>
         </AnchorPane>
-        <BorderPane fx:id="border_pane" layoutX="310.0" prefHeight="474.0" prefWidth="395.0"
-                    styleClass="dark-background" stylesheets="@../../layouts/CSS/maincss.css">
-            <center>
-                <ScrollPane prefHeight="471.0" prefWidth="395.0" BorderPane.alignment="CENTER">
-                    <content>
-                        <GridPane fx:id="keymap_gridpane" prefHeight="-Infinity" prefWidth="-Infinity"
-                                  styleClass="dark-background" stylesheets="@../../layouts/CSS/maincss.css" vgap="20.0">
-
-                        </GridPane>
-                    </content>
-                </ScrollPane>
-            </center>
-        </BorderPane>
         <JFXButton fx:id="student_response_btn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" layoutX="575.0"
                    layoutY="480.0" onAction="#studentResponseEvent" text="Student Response"/>
         <JFXButton fx:id="keymap_save_button" layoutX="330.0" layoutY="480.0" onAction="#saveRadioData"
                    prefHeight="27.0" prefWidth="124.0" text="Save"/>
+        <AnchorPane fx:id="keymap_anchor_radioMap" layoutX="310.0" prefHeight="475.0" prefWidth="392.0">
+            <children>
+                <ScrollPane fx:id="scroll_pane" layoutX="14.0" layoutY="14.0" prefHeight="453.0" prefWidth="369.0">
+                    <content>
+                        <AnchorPane prefHeight="471.0" prefWidth="395.0" styleClass="dark-background">
+                            <children>
+                                <GridPane fx:id="keymap_gridpane" prefHeight="-Infinity" prefWidth="-Infinity"
+                                          styleClass="dark-background" stylesheets="@../../layouts/CSS/maincss.css"
+                                          vgap="20.0">
+
+                                </GridPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

@@ -11,13 +11,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sample.DataClasses.DataBaseCommunication;
-import sample.DataClasses.DataInstance;
-import sample.DataClasses.MainDataClass;
 import sample.DataClasses.TestDetails;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
+//import sample.DataClasses.DataInstance;
 
 public class MainWindowController {
     @FXML
@@ -41,7 +39,6 @@ public class MainWindowController {
 
     @FXML
     public void initialize() {
-        DataInstance.setInstance(DataBaseCommunication.convertJSONToJava(MainDataClass.class));
     }
 
 
@@ -61,7 +58,7 @@ public class MainWindowController {
 
             TestDetails testDetails = new TestDetails();
 
-            if (DataInstance.getInstance().getTestDetails() != null) {
+            /*if (DataInstance.getInstance().getTestDetails() != null) {
 
                 testDetails.setIndex(DataInstance.getInstance().getTestDetails().size());
                 DataInstance.getInstance().getTestDetails().add(testDetails);
@@ -70,7 +67,7 @@ public class MainWindowController {
                 DataInstance.setInstance(new MainDataClass());
                 DataInstance.getInstance().setTestDetails(new ArrayList<>());
                 DataInstance.getInstance().getTestDetails().add(testDetails);
-            }
+            }*/
 
 
             stage.setScene(scene);

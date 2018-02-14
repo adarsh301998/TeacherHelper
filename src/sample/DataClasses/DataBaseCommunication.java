@@ -12,11 +12,12 @@ public class DataBaseCommunication {
         mapper = new ObjectMapper();
     }
 
-    public static void convertJavaToJSON(Object object) {
+    public static void convertJavaToJSON(TestDetails object, String filename) {
         try {
+            System.out.println(object.getTeacherName());
             String result = mapper.writeValueAsString(object);
-            System.out.println(result);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("data.json"));
+            System.out.println("Result" + result);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src//Tests//" + filename + ".json"));
             writer.write(result);
             writer.close();
         } catch (IOException exception) {
@@ -24,10 +25,10 @@ public class DataBaseCommunication {
         }
     }
 
-    public static <T> T convertJSONToJava(Class<T> cls) {
+    public static <T> T convertJSONToJava(Class<T> cls, String testname) {
         T result = null;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("data.json"));
+            BufferedReader reader = new BufferedReader(new FileReader("src//Tests//" + testname + ".json"));
             String line, data = "";
             while ((line = reader.readLine()) != null) {
                 data += line;

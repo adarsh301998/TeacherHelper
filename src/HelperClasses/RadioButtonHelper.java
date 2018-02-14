@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class RadioButtonHelper {
 
-    public static ToggleGroup[] generateRadioButton(GridPane gridPane, int n, int width, ToggleGroup[] toggleGroups) throws InterruptedException {
+    public static ToggleGroup[] generateRadioButton(GridPane gridPane, int n, int width, ToggleGroup[] toggleGroups, ArrayList<Character> keyPresent) throws InterruptedException {
 
         char[] options = {'A', 'B', 'C', 'D'};
         // Creating option lables
@@ -38,13 +38,98 @@ public class RadioButtonHelper {
             for (int j = 0; j < options.length; j++) {
                 JFXRadioButton radioButton = new JFXRadioButton();
                 radioButton.setUserData(options[j]);
+                // int s,ex;
+           /*     if (!keyPresent.isEmpty()) {
+                    if(keyPresent.get(i-1) != null) {
+                        s = keyPresent.get(i - 1);
+                        if (j == (s % 65)) {
+                            radioButton.setSelected(true);
+                        }
+                    }
+                }*/
+
                 radioButton.setToggleGroup(toggleGroups[i - 1]);
                 gridPane.add(radioButton, j + 1, i);
             }
         }
 
+        selectedKey(keyPresent, gridPane);
+
         return toggleGroups;
     }
+
+    public static void selectedKey(ArrayList<Character> keyprsent, GridPane key_map) {
+        int count = 5;
+        int index = 0;
+        int s;
+        for (int i = 0; i < keyprsent.size(); i++) {
+            if (keyprsent.get(i) != null) {
+                s = keyprsent.get(i);
+                index = count + (s % 65);
+
+                System.out.println("index  = " + index);
+                if (count < key_map.getChildren().size()) {
+                    if (key_map.getChildren().get(index) instanceof JFXRadioButton) {
+                        System.out.println("index  = " + index);
+                        JFXRadioButton radioButton = (JFXRadioButton) key_map.getChildren().get(index);
+                        radioButton.setSelected(true);
+
+                        System.out.println("Radio" + radioButton.getUserData());
+                    }
+                    count += 5;
+                } else {
+                    break;
+                }
+
+
+            }
+
+        }
+
+    }
+
+    /*public static ArrayList<Integer> getSelectedToggles(ToggleGroup[] toggleGroup) {
+        ArrayList<Integer> selectedToggles = new ArrayList<>();
+        for (int i = 0; i < toggleGroup.length; i++) {
+            try {
+                if (toggleGroup[i].getSelectedToggle() != null) {
+                    selectedToggles.add(i);
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return selectedToggles;
+    }*/
+
+    /*public static ArrayList<Character> getSelectedRadio(GridPane key_map) {
+
+        ArrayList<Character> key = new ArrayList<>();
+            int j=0,f=0;
+         for (int i=5;i<key_map.getChildren().size();i++) {
+
+             if (key_map.getChildren().get(i) instanceof JFXRadioButton) {
+                 JFXRadioButton radioButton = (JFXRadioButton) key_map.getChildren().get(i);
+                 if (radioButton.isSelected()==true) {
+                     f++;
+                 }
+                 j++;
+                 if (j==4) {
+                     if (f==0)
+                         key.add(null);
+                     else
+                         key.add((char) radioButton.getUserData());
+
+                     f=0;
+                     j=0;
+                     i++;
+                 }
+             }
+         }
+
+        return key;
+    }
+*/
 
     public static ArrayList<Integer> getSelectedToggles(ToggleGroup[] toggleGroup) {
         ArrayList<Integer> selectedToggles = new ArrayList<>();
@@ -75,14 +160,30 @@ public class RadioButtonHelper {
         return key;
     }
 
-    public static void deselectRadioButton(ToggleGroup[] toggleGroups) {
+    public static void deselectRadioButton(GridPane key_map) {
 
 
-        for (int i = 0; i < toggleGroups.length; i++) {
+        /*for (int i = 0; i < toggleGroups.length; i++) {
             if (toggleGroups[i].getSelectedToggle() != null) {
                 toggleGroups[i].getSelectedToggle().setSelected(false);
             }
+        }*/
+
+        int j = 0;
+        for (int i = 5; i < key_map.getChildren().size(); i++) {
+            System.out.println(i);
+            if (key_map.getChildren().get(i) instanceof JFXRadioButton) {
+                JFXRadioButton r1 = (JFXRadioButton) key_map.getChildren().get(i);
+                r1.setSelected(false);
+                j++;
+                if (j == 4) {
+                    i++;
+                    j = 0;
+                }
+            }
+
         }
+
 
     }
 

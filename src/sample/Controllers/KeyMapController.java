@@ -11,18 +11,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import sample.DataClasses.DataInstance;
+import sample.DataClasses.DataBaseCommunication;
 import sample.DataClasses.TestDetails;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+//import sample.DataClasses.DataInstance;
 
 public class KeyMapController {
     @FXML
@@ -41,19 +43,13 @@ public class KeyMapController {
 //    private AnchorPane keymap_anchorPane;
 
     @FXML
-    private BorderPane borderPane;
-
-    @FXML
-    private GridPane keymap_gridpane;
+    ScrollPane scrollPane;
 
     @FXML
     private JFXButton student_response_btn;
 
     @FXML
-    private AnchorPane key_map_main_layout;
-
-    @FXML
-    private JFXButton keymap_save_button;
+    private GridPane keymap_gridpane;
 
     int subQuestions;
     String questionLabel;
@@ -61,34 +57,22 @@ public class KeyMapController {
     int testIndex;
     TestDetails testDetails;
 
+
     public void initialize() {
-        List ques_list = new ArrayList<>();
-        testIndex = DataInstance.getInstance().getTestDetails().size() - 1; // -1
-        System.out.println(testIndex);
-        System.out.println(DataInstance.getInstance().toString());
-        System.out.println(DataInstance.getInstance().getTestDetails().get(0).getTeacherName());
-        System.out.println(DataInstance.getInstance().getTestDetails().get(testIndex).toString());
-        for (int i = 1; i <= DataInstance.getInstance().getTestDetails().get(testIndex).getNumberOfQuestion(); i++) {
-            ques_list.add(i);
-            int j = i - 1;
-            DataInstance.getInstance().getTestDetails().get(testIndex).getQuestion().set(j, String.valueOf(i));
-        }
         ques_num_txt.setEditable(true);
-        ques_num_txt.getItems().addAll(ques_list);
-
-        int sub_ques = 0;
-        try {
-            sub_ques = DataInstance.getInstance().getTestDetails().get(testIndex).getSubQuestionList().get(0);
-            sub_ques_txt.setText("" + sub_ques);
-        } catch (Exception e) {
-            sub_ques_txt.setText("");
-        }
-
+        ques_num_txt.setOnAction(event -> {
+            int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
+            if (testDetails.getSubQuestionList().get(selectedIndex) != null)
+                sub_ques_txt.setText(String.valueOf(testDetails.getSubQuestionList().get(selectedIndex)));
+        });
     }
+
 
     @FXML
     void generateRadioButton(ActionEvent event) {
         if (event.getSource().equals(proceed_btn)) {
+            RadioButtonHelper.deselectRadioButton(keymap_gridpane);
+            keymap_gridpane.getChildren().clear();
             questionLabel = String.valueOf(ques_num_txt.getSelectionModel().getSelectedItem());
             int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
             if (questionLabel == null) {
@@ -99,11 +83,10 @@ public class KeyMapController {
 
             // Validation
 
-//             DataInstance.getInstance().getTestDetails().get(testIndex).getSubQuestionList().set(selectedIndex, subQuestions);
+            testDetails.getSubQuestionList().set(selectedIndex, subQuestions);
             toggleGroups = new ToggleGroup[subQuestions];
             try {
-                toggleGroups = RadioButtonHelper.generateRadioButton(keymap_gridpane, subQuestions, 85, toggleGroups);
-
+                toggleGroups = RadioButtonHelper.generateRadioButton(keymap_gridpane, subQuestions, 85, toggleGroups, testDetails.getKey().get(selectedIndex));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -113,7 +96,7 @@ public class KeyMapController {
 
     @FXML
     void studentResponseEvent(ActionEvent event) {
-        // Getting radio button response
+
         if (event.getSource().equals(student_response_btn)) {
             try {
                 Parent parent = (AnchorPane) FXMLLoader.load(getClass().getResource("scenes/studentDetails.fxml"));
@@ -130,45 +113,62 @@ public class KeyMapController {
     void closeEvent(MouseEvent event) {
         System.exit(0);
     }
-
-    /*@FXML
-    void createSubQuestion(ActionEvent event) {
-        if (event.getSource().equals(proceed_btn)) {
-            int ques_number = Integer.parseInt(String.valueOf(ques_combo.getValue()));
-            int ques_sub = Integer.parseInt(sub_question_txt.getText());
-            scroll_pane.setVisible(true);
-            grid_pane.add(new Label("A"), 1,0);
-        }
-
-    }*/
-
     @FXML
     void saveRadioData(ActionEvent event) {
         //getting selected toggle
         ArrayList<Integer> selectedToggles = RadioButtonHelper.getSelectedToggles(toggleGroups);
         int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
         ArrayList<Character> key = new ArrayList<>();
-        if (selectedToggles != null) {
-            key = RadioButtonHelper.getSelectedRadio(toggleGroups, selectedToggles);
-        }
+
+        key = RadioButtonHelper.getSelectedRadio(toggleGroups, selectedToggles);
 
         //Settings question number
-        /*for (int i=0;i<CreateNewTestController.testDetails.getNumberOfQuestion();i++) {
-                if (i<selectedIndex)
-                CreateNewTestController.testDetails.getQuestion().add(null);
-            }*/
 
-        DataInstance.getInstance().getTestDetails().get(testIndex).getQuestion().set(selectedIndex, questionLabel);
-        DataInstance.getInstance().getTestDetails().get(testIndex).getKey().set(selectedIndex, key);
-        //System.out.println(CreateNewTestController.testDetails.getKey());
-        keymap_gridpane.getChildren().removeAll();
-        RadioButtonHelper.deselectRadioButton(toggleGroups);
-    }
+        testDetails.getQuestion().set(selectedIndex, questionLabel);
+        testDetails.getKey().set(selectedIndex, key);
 
-    public void init_create(TestDetails testDetails) {
-        this.testDetails = testDetails;
+        RadioButtonHelper.deselectRadioButton(keymap_gridpane);
+
+        DataBaseCommunication.convertJavaToJSON(testDetails, testDetails.getTestName());
+
+
+        keymap_gridpane.getChildren().clear();
+
 
     }
+
+    public void init_create(TestDetails packet) {
+        testDetails = packet;
+        List ques_list = new ArrayList<>();
+        ;
+        System.out.println(testDetails.getTeacherName());
+        for (int i = 1; i <= testDetails.getNumberOfQuestion(); i++) {
+            ques_list.add(i);
+            int j = i - 1;
+            testDetails.getQuestion().set(j, String.valueOf(i));
+        }
+        ques_num_txt.getItems().addAll(ques_list);
+
+        int sub_ques = 0;
+        try {
+            sub_ques = testDetails.getSubQuestionList().get(0);
+            sub_ques_txt.setText("" + sub_ques);
+        } catch (Exception e) {
+            sub_ques_txt.setText("");
+        }
+    }
+
+    public void init_open(TestDetails packet) {
+        testDetails = packet;
+
+        List list = testDetails.getQuestion();
+        ques_num_txt.getItems().removeAll();
+        ques_num_txt.getItems().addAll(list);
+        sub_ques_txt.setText("" + testDetails.getSubQuestionList().get(0));
+
+    }
+
+
 }
 
 

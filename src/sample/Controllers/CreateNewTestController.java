@@ -14,7 +14,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import sample.DataClasses.DataInstance;
+import sample.DataClasses.DataBaseCommunication;
+import sample.DataClasses.TestDetails;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -52,7 +53,7 @@ public class CreateNewTestController {
 
     // public static TestDetails testDetails;
 
-    int testIndex;
+    TestDetails testDetails;
 
     @FXML
     void closeEvent(MouseEvent event) {
@@ -60,11 +61,10 @@ public class CreateNewTestController {
     }
 
     public void initialize() {
+        testDetails = new TestDetails();
         List combo_box_list = new ArrayList();
         combo_box_list.add("Birla Institute Of Technology");
         institute_name.getItems().addAll(combo_box_list);
-
-        testIndex = DataInstance.getInstance().getTestDetails().size();
     }
 
     @FXML
@@ -82,19 +82,32 @@ public class CreateNewTestController {
             initialize_arrayList(ques, num_student);
 
             //Apply some validation
+            if (date == null) {
+                date = LocalDate.now();
+            }
+            if (institute == null) {
+                institute = institute_name.getItems().get(0).toString();
+            }
 
             //Initialize other data
-            DataInstance.getInstance().getTestDetails().get(testIndex).setTestName(testname);
-            DataInstance.getInstance().getTestDetails().get(testIndex).setNumberOfStudent(num_student);
-            DataInstance.getInstance().getTestDetails().get(testIndex).setNumberOfQuestion(ques);
-            DataInstance.getInstance().getTestDetails().get(testIndex).setTeacherName(teacherName);
-            DataInstance.getInstance().getTestDetails().get(testIndex).setDateTime(date);
-            DataInstance.getInstance().getTestDetails().get(testIndex).setInstitute(institute);
-            DataInstance.getInstance().getTestDetails().get(testIndex).setClassLabel(classLabel);
+            testDetails.setTestName(testname);
+            testDetails.setNumberOfStudent(num_student);
+            testDetails.setNumberOfQuestion(ques);
+            testDetails.setTeacherName(teacherName);
+            testDetails.setDateTime(date);
+            testDetails.setInstitute(institute);
+            testDetails.setClassLabel(classLabel);
 
-            System.out.println("Index" + testIndex);
+            testname += date.toString();
+            //Save Data
+            DataBaseCommunication.convertJavaToJSON(testDetails, testname);
+
             // Open key map scene
-            Parent root = FXMLLoader.load(getClass().getResource("scenes/keyMap.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("scenes/keyMap.fxml"));
+            Parent root = loader.load();
+            KeyMapController controller = loader.getController();
+            controller.init_create(testDetails);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
@@ -102,19 +115,20 @@ public class CreateNewTestController {
         }
     }
 
+
     private void initialize_arrayList(int ques, int num_students) {
-        DataInstance.getInstance().getTestDetails().get(testIndex).setQuestion(new ArrayList<>());
-        DataInstance.getInstance().getTestDetails().get(testIndex).setKey(new ArrayList<>());
-        DataInstance.getInstance().getTestDetails().get(testIndex).setStudentDetails(new ArrayList<>());
-        DataInstance.getInstance().getTestDetails().get(testIndex).setSubQuestionList(new ArrayList<>());
+        testDetails.setQuestion(new ArrayList<>());
+        testDetails.setKey(new ArrayList<>());
+        testDetails.setStudentDetails(new ArrayList<>());
+        testDetails.setSubQuestionList(new ArrayList<>());
         for (int i = 0; i < ques; i++) {
-            DataInstance.getInstance().getTestDetails().get(testIndex).getQuestion().add(null);
-            DataInstance.getInstance().getTestDetails().get(testIndex).getSubQuestionList().add(null);
-            DataInstance.getInstance().getTestDetails().get(testIndex).getKey().add(new ArrayList<>());
+            testDetails.getQuestion().add(null);
+            testDetails.getSubQuestionList().add(null);
+            testDetails.getKey().add(new ArrayList<>());
         }
 
         for (int i = 0; i < num_students; i++) {
-            DataInstance.getInstance().getTestDetails().get(testIndex).getStudentDetails().add(null);
+            testDetails.getStudentDetails().add(null);
         }
     }
 }

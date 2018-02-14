@@ -1,22 +1,18 @@
 package sample.DataClasses;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class MainDataClass implements Serializable {
-    private ArrayList<TestDetails> testDetails;
+    private static TestDetails instance;
 
     public MainDataClass() {
     }
 
-    public ArrayList<TestDetails> getTestDetails() {
-        return testDetails;
+    public static TestDetails getInstance() {
+        return instance;
     }
 
-    public void setTestDetails(ArrayList<TestDetails> testDetails) {
-        this.testDetails = testDetails;
+    public static void setInstance(TestDetails instance1) {
+        instance = instance1;
     }
-    /*public void addItem(TestDetails details) {
-        testDetails.add(details);
-    }*/
 }
