@@ -3,14 +3,15 @@
 <?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0"
-            prefWidth="749.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sample.Controllers.CreateNewTestController">
+            prefWidth="749.0" stylesheets="@../../layouts/CSS/maincss.css" xmlns="http://javafx.com/javafx/8.0.141"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.CreateNewTestController">
     <children>
-        <AnchorPane prefHeight="584.0" prefWidth="324.0" style="-fx-background-color: #59C7C6;">
+        <AnchorPane prefHeight="584.0" prefWidth="324.0" styleClass="dark-background">
             <children>
                 <Label layoutX="78.0" layoutY="106.0" prefHeight="69.0" prefWidth="190.0" text="New Test"
                        textFill="#eeeded">
@@ -27,58 +28,56 @@
                 <Separator layoutX="48.0" layoutY="298.0" prefWidth="200.0"/>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="324.0" prefHeight="584.0" prefWidth="430.0" style="-fx-background-color: #2C3A47;"
+        <AnchorPane layoutX="324.0" prefHeight="584.0" prefWidth="430.0" styleClass="light-background"
                     stylesheets="@../../layouts/CSS/maincss.css">
             <children>
-                <JFXTextField fx:id="testName_txt" focusColor="#2957e1" labelFloat="true" layoutX="33.0" layoutY="105.0"
-                              prefHeight="33.0" prefWidth="334.0" promptText="Test Name" style="-fx-text-fill: #FFFF;"
+                <JFXTextField fx:id="testName_txt" focusColor="#2957e1" labelFloat="true" layoutX="33.0" layoutY="77.0"
+                              prefHeight="25.0" prefWidth="334.0" promptText="Test Name" style="-fx-text-fill: #FFFF;"
                               unFocusColor="#29475b">
                     <font>
                         <Font name="Segoe UI" size="15.0"/>
                     </font>
                 </JFXTextField>
-                <JFXTextField fx:id="students_txt" focusColor="#2957e1" labelFloat="true" layoutX="33.0" layoutY="172.0"
-                              prefHeight="33.0" prefWidth="334.0" promptText="Number Of Students"
+                <JFXTextField fx:id="students_txt" focusColor="#2957e1" labelFloat="true" layoutX="33.0" layoutY="151.0"
+                              prefHeight="25.0" prefWidth="334.0" promptText="Number Of Students"
                               style="-fx-text-fill: #FFFF;" unFocusColor="#29475b">
                     <font>
                         <Font name="Segoe UI" size="15.0"/>
                     </font>
                 </JFXTextField>
-                <JFXTextField fx:id="question_txt" focusColor="#2957e1" labelFloat="true" layoutX="33.0" layoutY="240.0"
-                              prefHeight="33.0" prefWidth="334.0" promptText="Number Of Question"
+                <JFXTextField fx:id="question_txt" focusColor="#2957e1" labelFloat="true" layoutX="33.0" layoutY="232.0"
+                              prefHeight="25.0" prefWidth="334.0" promptText="Number Of Question"
                               style="-fx-text-fill: #FFF;" unFocusColor="#29475b">
                     <font>
                         <Font name="Segoe UI" size="15.0"/>
                     </font>
                 </JFXTextField>
                 <JFXTextField fx:id="teacherName_txt" focusColor="#2957e1" labelFloat="true" layoutX="33.0"
-                              layoutY="298.0" prefHeight="33.0" prefWidth="334.0" promptText="Teacher Name"
+                              layoutY="313.0" prefHeight="25.0" prefWidth="334.0" promptText="Teacher Name"
                               style="-fx-text-fill: #FFF;" unFocusColor="#29475b">
                     <font>
                         <Font name="Segoe UI" size="15.0"/>
                     </font>
                 </JFXTextField>
-                <JFXDatePicker fx:id="datePicker" defaultColor="#59c7c6" layoutX="38.0" layoutY="512.0"
-                               style="-fx-text-fill: #FFF;"/>
+                <JFXDatePicker fx:id="datePicker" defaultColor="#ffa801" layoutX="44.0" layoutY="535.0"
+                               stylesheets="@../../layouts/CSS/maincss.css"/>
                 <JFXButton fx:id="createTest_btn" layoutX="323.0" layoutY="524.0" onAction="#createTestEvent"
-                           ripplerFill="#c9c2c1"
-                           style="-fx-border-color: #4ecbe1; -fx-border-radius: 2em; -fx-background-radius: 2em;"
-                           text="Create" textFill="#4ecbe1">
+                           ripplerFill="#c9c2c1" text="Create" textFill="#4ecbe1">
                     <font>
                         <Font size="20.0"/>
                     </font>
                 </JFXButton>
                 <FontAwesomeIcon fx:id="btn_close" fill="WHITE" glyphName="CLOSE" layoutX="404.0" layoutY="18.0"
                                  onMouseClicked="#closeEvent" size="20"/>
-                <JFXTextField fx:id="classname" labelFloat="true" layoutX="33.0" layoutY="369.0" prefHeight="25.0"
+                <JFXTextField fx:id="classname" labelFloat="true" layoutX="33.0" layoutY="388.0" prefHeight="25.0"
                               prefWidth="334.0" promptText="Class" styleClass="textfeild"
                               stylesheets="@../../layouts/CSS/maincss.css" unFocusColor="#29475b">
                     <font>
                         <Font name="Segoe UI" size="15.0"/>
                     </font>
                 </JFXTextField>
-                <ComboBox fx:id="institute_name" layoutX="33.0" layoutY="441.0" prefHeight="25.0" prefWidth="334.0"
-                          promptText="Institute Name"/>
+                <JFXComboBox fx:id="institute_name" layoutX="33.0" layoutY="469.0" prefHeight="25.0" prefWidth="334.0"
+                             promptText="Institute Name"/>
             </children>
             <opaqueInsets>
                 <Insets/>

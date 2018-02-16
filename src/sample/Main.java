@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sample.Controllers.KeyMapController;
+import sample.DataClasses.StudentDetails;
 import sample.DataClasses.TestDetails;
 
 import java.time.LocalDate;
@@ -19,9 +19,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("Controllers/scenes/mainWindow.fxml"));
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Controllers/scenes/keyMap.fxml"));
+        loader.setLocation(getClass().getResource("Controllers/scenes/mainWindow.fxml"));
         Parent root = loader.load();
-        KeyMapController controller = loader.getController();
+//        KeyMapController controller = loader.getController();
 
         testDetails = new TestDetails();
         testDetails.setTeacherName("xyz");
@@ -32,7 +32,7 @@ public class Main extends Application {
         testDetails.setNumberOfStudent(2);
         testDetails.setNumberOfQuestion(3);
         initialize_arrayList(3, 2);
-        controller.init_create(testDetails);
+        //controller.init_create(testDetails);
 
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(new Scene(root));
@@ -56,7 +56,29 @@ public class Main extends Application {
         }
 
         for (int i = 0; i < num_students; i++) {
-            testDetails.getStudentDetails().add(null);
+            StudentDetails studentDetails = new StudentDetails();
+            studentDetails.setName("Adarsh");
+            studentDetails.setRollNo("Bca");
+
+            ArrayList<ArrayList<Character>> mr = new ArrayList<>();
+            ArrayList<ArrayList<Integer>> me = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+
+
+                ArrayList<Character> response = new ArrayList<>();
+                ArrayList<Integer> eva = new ArrayList<>();
+                response.add(null);
+                response.add('A');
+                response.add('A');
+                eva.add(1);
+                eva.add(1);
+                eva.add(1);
+                mr.add(response);
+                me.add(eva);
+            }
+            studentDetails.setResponse(mr);
+            studentDetails.setEvaluation(me);
+            testDetails.getStudentDetails().add(studentDetails);
         }
     }
 }

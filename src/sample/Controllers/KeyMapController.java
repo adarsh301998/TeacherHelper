@@ -1,9 +1,11 @@
 package sample.Controllers;
 
+import HelperClasses.ListHelper;
 import HelperClasses.RadioButtonHelper;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.NumberValidator;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -20,6 +24,8 @@ import javafx.stage.Stage;
 import sample.DataClasses.DataBaseCommunication;
 import sample.DataClasses.TestDetails;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,27 +64,71 @@ public class KeyMapController {
     TestDetails testDetails;
 
 
-    public void initialize() {
+    public void initialize() throws FileNotFoundException {
         ques_num_txt.setEditable(true);
+
+
         ques_num_txt.setOnAction(event -> {
             int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
             if (testDetails.getSubQuestionList().get(selectedIndex) != null)
                 sub_ques_txt.setText(String.valueOf(testDetails.getSubQuestionList().get(selectedIndex)));
         });
+        /*FontAwesomeIcon icon = new FontAwesomeIcon();
+        icon.setGlyphName("FOLDER");
+        icon.setStyle("-fx-background-color: #FFF");*/
+        Image image = new Image(new FileInputStream("src//icons//error.png"));
+        NumberValidator validator = new NumberValidator();
+        validator.setMessage("Valid number");
+        validator.setIcon(new ImageView(image));
+        sub_ques_txt.getValidators().add(validator);
+
+        /*sub_ques_txt.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) {
+                    if (!sub_ques_txt.validate()){
+                        proceed_btn.setDisable(true);
+                    }else {
+                        proceed_btn.setDisable(false);
+                    }
+                }
+            }
+        });*/
+        /*sub_ques_txt.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                System.out.println(sub_ques_txt.getText());
+                String s = sub_ques_txt.getText();
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(s);
+                sub_ques_txt.validate();
+                if (matcher.find()){
+
+                    proceed_btn.setDisable(false);
+                }else {
+                    //sub_ques_txt.validate();
+                    proceed_btn.setDisable(true);
+                }
+            }
+        });*/
+
     }
 
 
     @FXML
     void generateRadioButton(ActionEvent event) {
-        if (event.getSource().equals(proceed_btn)) {
+        if (event.getSource().equals(proceed_btn) && sub_ques_txt.validate()) {
             RadioButtonHelper.deselectRadioButton(keymap_gridpane);
             keymap_gridpane.getChildren().clear();
             questionLabel = String.valueOf(ques_num_txt.getSelectionModel().getSelectedItem());
+            if (ques_num_txt.getSelectionModel().getSelectedIndex() == -1) {
+                ques_num_txt.getSelectionModel().selectFirst();
+            }
             int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
-            if (questionLabel == null) {
+            /*
                 questionLabel = (String) ques_num_txt.getItems().get(0);
                 selectedIndex = 0;
-            }
+            }*/
             subQuestions = Integer.parseInt(sub_ques_txt.getText());
 
             // Validation
@@ -86,7 +136,7 @@ public class KeyMapController {
             testDetails.getSubQuestionList().set(selectedIndex, subQuestions);
             toggleGroups = new ToggleGroup[subQuestions];
             try {
-                toggleGroups = RadioButtonHelper.generateRadioButton(keymap_gridpane, subQuestions, 85, toggleGroups, testDetails.getKey().get(selectedIndex));
+                toggleGroups = RadioButtonHelper.generateRadioButton(keymap_gridpane, subQuestions, 75, toggleGroups, testDetails.getKey().get(selectedIndex));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -113,6 +163,11 @@ public class KeyMapController {
     void closeEvent(MouseEvent event) {
         System.exit(0);
     }
+
+    @FXML
+    void openEvent(MouseEvent event) {
+
+    }
     @FXML
     void saveRadioData(ActionEvent event) {
         //getting selected toggle
@@ -128,13 +183,9 @@ public class KeyMapController {
         testDetails.getKey().set(selectedIndex, key);
 
         RadioButtonHelper.deselectRadioButton(keymap_gridpane);
-
+        testDetails.setStudentDetails(ListHelper.keyToStudents(key, testDetails.getStudentDetails(), selectedIndex));
         DataBaseCommunication.convertJavaToJSON(testDetails, testDetails.getTestName());
-
-
         keymap_gridpane.getChildren().clear();
-
-
     }
 
     public void init_create(TestDetails packet) {

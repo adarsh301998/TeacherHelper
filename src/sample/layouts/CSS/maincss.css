@@ -1,16 +1,16 @@
 *{
-    -fx-primary-color:  #2C3A47;
-    -fx-secondary-color:  #59C7C6;
+    -fx-primary-color:  #ffa801;
+    -fx-secondary-color:  #ffc048;
     -fx-white-color: #FFF;
 }
 .dark-background{
     -fx-background-color: -fx-primary-color;
 }
-.bluebackground{
+.light-background{
     -fx-background-color: -fx-secondary-color;
 }
 .button{
-    -fx-border-color: -fx-secondary-color;
+    -fx-border-color: -fx-primary-color;
     -fx-border-radius: 2em;
     -fx-text-fill: -fx-white-color;
 }
@@ -99,4 +99,16 @@
 
     -fx-border-color: -fx-primary-color;
     -fx-border-radius: 2em;
+}
+.jfx-date-picker .jfx-text-field{
+    -jfx-unfocus-color: -fx-primary-color;
+    -jfx-default-color: -fx-primary-color;
+}
+.white-background{
+    -fx-background-color: -fx-color-white;
+
+}
+.icon{
+-fx-fill: -fx-secondary-color;
+
 }

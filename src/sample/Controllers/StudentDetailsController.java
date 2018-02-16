@@ -1,7 +1,25 @@
 package sample.Controllers;
 
+import HelperClasses.RadioButtonHelper;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import sample.DataClasses.DataBaseCommunication;
+import sample.DataClasses.StudentDetails;
+import sample.DataClasses.TestDetails;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentDetailsController {
-    /*@FXML
+    @FXML
     private AnchorPane key_map_main_layout;
 
     @FXML
@@ -38,10 +56,10 @@ public class StudentDetailsController {
     @FXML
     private JFXTextField subQuestionTxt;
 
+    TestDetails testDetails;
     ToggleGroup[] toggleGroups;
     ArrayList<StudentDetails> studentDetails;
     int numberOfQuestion;
-
 
     int studentIndexCount = 0;
     int testIndex;
@@ -52,7 +70,8 @@ public class StudentDetailsController {
         System.exit(0);
     }
 
-    public void initialize() {
+    public void init_create(TestDetails testDetails) {
+        this.testDetails = testDetails;
         List question = DataInstance.getInstance().getTestDetails().get(testIndex).getQuestion();
         testIndex = DataInstance.getInstance().getTestDetails().size();//-1
         numberOfQuestion = question.size();
@@ -66,6 +85,10 @@ public class StudentDetailsController {
         } catch (Exception e) {
             subQuestionTxt.setText("");
         }
+    }
+
+    public void initialize() {
+
     }
 
     @FXML
@@ -165,7 +188,5 @@ public class StudentDetailsController {
         keymap_gridpane.getChildren().removeAll();
 
     }
-
-*/
 }
 

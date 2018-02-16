@@ -1,8 +1,11 @@
 package sample.Controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.NumberValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,14 +13,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sample.DataClasses.DataBaseCommunication;
 import sample.DataClasses.TestDetails;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +43,7 @@ public class CreateNewTestController {
     private JFXDatePicker datePicker;
 
     @FXML
-    private ComboBox<?> institute_name;
+    private JFXComboBox<?> institute_name;
 
     @FXML
     private JFXButton createTest_btn;
@@ -65,11 +69,45 @@ public class CreateNewTestController {
         List combo_box_list = new ArrayList();
         combo_box_list.add("Birla Institute Of Technology");
         institute_name.getItems().addAll(combo_box_list);
+        datePicker.setValue(LocalDate.now());
+        // Adding validations
+        RequiredFieldValidator textValidator1 = new RequiredFieldValidator();
+        RequiredFieldValidator textValidator2 = new RequiredFieldValidator();
+        RequiredFieldValidator textValidator3 = new RequiredFieldValidator();
+
+        NumberValidator numberValidator1 = new NumberValidator();
+        NumberValidator numberValidator2 = new NumberValidator();
+
+        try {
+            Image image = new Image(new FileInputStream("src//icons//error.png"));
+            ImageView imageView = new ImageView(image);
+            textValidator1.setMessage("Cant be empty");
+            textValidator2.setMessage("Cant be empty");
+            textValidator3.setMessage("Cant be empty");
+            numberValidator1.setMessage("Valid number");
+            numberValidator2.setMessage("Valid number");
+            textValidator1.setIcon(imageView);
+            textValidator2.setIcon(imageView);
+            textValidator3.setIcon(imageView);
+            numberValidator1.setIcon(imageView);
+            numberValidator2.setIcon(imageView);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        classname.getValidators().add(textValidator3);
+        teacherName_txt.getValidators().add(textValidator2);
+        students_txt.getValidators().add(numberValidator1);
+        question_txt.getValidators().add(numberValidator2);
+        testName_txt.getValidators().add(textValidator1);
+
+
     }
 
     @FXML
     void createTestEvent(ActionEvent event) throws IOException {
-        if (event.getSource().equals(createTest_btn)) {
+        if (testName_txt.validate())
+            if (event.getSource().equals(createTest_btn) &&
+                    testName_txt.validate() && students_txt.validate() && question_txt.validate() && teacherName_txt.validate() && classname.validate()) {
             String testname = testName_txt.getText();
             int num_student = Integer.parseInt(students_txt.getText());
             int ques = Integer.parseInt(question_txt.getText());
@@ -82,9 +120,7 @@ public class CreateNewTestController {
             initialize_arrayList(ques, num_student);
 
             //Apply some validation
-            if (date == null) {
-                date = LocalDate.now();
-            }
+
             if (institute == null) {
                 institute = institute_name.getItems().get(0).toString();
             }
@@ -101,7 +137,7 @@ public class CreateNewTestController {
             testname += date.toString();
             //Save Data
             DataBaseCommunication.convertJavaToJSON(testDetails, testname);
-
+                saveFileName(testname);
             // Open key map scene
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("scenes/keyMap.fxml"));
@@ -113,6 +149,24 @@ public class CreateNewTestController {
             scene.setFill(Color.TRANSPARENT);
             stage.setScene(scene);
         }
+    }
+
+    private void saveFileName(String testname) {
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src//Tests/testName.txt"));
+            String line;
+            testname += "\n";
+            while ((line = reader.readLine()) != null) {
+                testname += line + "\n";
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src//Tests/testName.txt"));
+            writer.write(testname);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

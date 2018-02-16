@@ -7,17 +7,25 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <AnchorPane fx:id="key_map_main_layout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="515.0" prefWidth="703.0" styleClass="dark-background"
+            minWidth="-Infinity" prefHeight="516.0" prefWidth="769.0" styleClass="light-background"
             stylesheets="@../../layouts/CSS/maincss.css" xmlns="http://javafx.com/javafx/8.0.141"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.KeyMapController">
     <children>
+        <AnchorPane prefHeight="516.0" prefWidth="51.0" styleClass="dark-background" AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="718.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <FontAwesomeIcon fx:id="open_icon" fill="#fffefe" glyphName="FOLDER" layoutX="14.0" layoutY="46.0"
+                                 onMouseClicked="#openEvent" size="2em" styleClass="icon"/>
+            </children>
+        </AnchorPane>
         <AnchorPane prefHeight="515.0" prefWidth="310.0" styleClass="bluebackground"
-                    stylesheets="@../../layouts/CSS/maincss.css">
+                    stylesheets="@../../layouts/CSS/maincss.css" AnchorPane.bottomAnchor="1.0"
+                    AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="409.0" AnchorPane.topAnchor="0.0">
             <children>
                 <JFXComboBox fx:id="ques_num_txt" layoutX="36.0" layoutY="145.0" prefHeight="36.0" prefWidth="246.0"
-                             promptText="Select Question" style="-fx-background-color: #59C7C6;"/>
+                             promptText="Select Question"/>
                 <JFXTextField fx:id="sub_ques_txt" labelFloat="true" layoutX="36.0" layoutY="233.0" prefHeight="36.0"
-                              prefWidth="236.0" promptText="SubQuestiion">
+                              prefWidth="236.0" promptText="SubQuestion">
                     <font>
                         <Font size="18.0"/>
                     </font>
@@ -31,15 +39,17 @@
                         <Font name="Segoe UI" size="32.0"/>
                     </font>
                 </Label>
-                <FontAwesomeIcon fx:id="keymap_close_btn" glyphName="CLOSE" layoutX="276.0" layoutY="18.0"
+                <FontAwesomeIcon fx:id="keymap_close_btn" fill="#fcf6f6" glyphName="CLOSE" layoutX="5.0" layoutY="21.0"
                                  onMouseClicked="#closeEvent" size="2em"/>
             </children>
         </AnchorPane>
-        <JFXButton fx:id="student_response_btn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" layoutX="575.0"
+        <JFXButton fx:id="student_response_btn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" layoutX="619.0"
                    layoutY="480.0" onAction="#studentResponseEvent" text="Student Response"/>
-        <JFXButton fx:id="keymap_save_button" layoutX="330.0" layoutY="480.0" onAction="#saveRadioData"
+        <JFXButton fx:id="keymap_save_button" layoutX="385.0" layoutY="480.0" onAction="#saveRadioData"
                    prefHeight="27.0" prefWidth="124.0" text="Save"/>
-        <AnchorPane fx:id="keymap_anchor_radioMap" layoutX="310.0" prefHeight="475.0" prefWidth="392.0">
+        <AnchorPane fx:id="keymap_anchor_radioMap" layoutX="310.0" prefHeight="475.0" prefWidth="392.0"
+                    AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="7.0"
+                    AnchorPane.topAnchor="0.0">
             <children>
                 <ScrollPane fx:id="scroll_pane" layoutX="14.0" layoutY="14.0" prefHeight="453.0" prefWidth="369.0">
                     <content>
