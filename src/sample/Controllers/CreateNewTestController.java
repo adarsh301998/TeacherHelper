@@ -18,7 +18,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sample.DataClasses.Bus;
 import sample.DataClasses.DataBaseCommunication;
+import sample.DataClasses.StudentDetails;
 import sample.DataClasses.TestDetails;
 
 import java.io.*;
@@ -136,14 +138,19 @@ public class CreateNewTestController {
 
             testname += date.toString();
             //Save Data
-            DataBaseCommunication.convertJavaToJSON(testDetails, testname);
+                DataBaseCommunication.convertJavaToJSON(testDetails);
                 saveFileName(testname);
-            // Open key map scene
+
+
+                // Send data in main bus
+                Bus.setInstance(testDetails);
+                // Open key map scene
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("scenes/keyMap.fxml"));
             Parent root = loader.load();
-            KeyMapController controller = loader.getController();
-            controller.init_create(testDetails);
+            /*KeyMapController controller = loader.getController();
+            controller.init(testDetails);*/
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
@@ -175,14 +182,24 @@ public class CreateNewTestController {
         testDetails.setKey(new ArrayList<>());
         testDetails.setStudentDetails(new ArrayList<>());
         testDetails.setSubQuestionList(new ArrayList<>());
+
         for (int i = 0; i < ques; i++) {
-            testDetails.getQuestion().add(null);
+            testDetails.getQuestion().add(String.valueOf(i + 1));
             testDetails.getSubQuestionList().add(null);
             testDetails.getKey().add(new ArrayList<>());
         }
 
         for (int i = 0; i < num_students; i++) {
-            testDetails.getStudentDetails().add(null);
+            StudentDetails studentDetails = new StudentDetails();
+            studentDetails.setResponse(new ArrayList<>());
+            studentDetails.setEvaluation(new ArrayList<>());
+
+            for (int j = 0; j < ques; j++) {
+                studentDetails.getResponse().add(new ArrayList<>());
+                studentDetails.getEvaluation().add(new ArrayList<>());
+            }
+
+            testDetails.getStudentDetails().add(studentDetails);
         }
     }
 }

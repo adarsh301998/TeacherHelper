@@ -2,10 +2,11 @@ package sample.DataClasses;
 
 import java.io.Serializable;
 
-public class MainDataClass implements Serializable {
+public class Bus implements Serializable {
     private static TestDetails instance;
 
-    public MainDataClass() {
+    private Bus() {
+        instance = new TestDetails();
     }
 
     public static TestDetails getInstance() {

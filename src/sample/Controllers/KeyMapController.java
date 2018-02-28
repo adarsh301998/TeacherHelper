@@ -1,26 +1,31 @@
 package sample.Controllers;
 
+import HelperClasses.DialogPopUp;
 import HelperClasses.ListHelper;
+import HelperClasses.Messages;
 import HelperClasses.RadioButtonHelper;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.jfoenix.validation.NumberValidator;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import sample.DataClasses.Bus;
 import sample.DataClasses.DataBaseCommunication;
 import sample.DataClasses.TestDetails;
 
@@ -45,6 +50,8 @@ public class KeyMapController {
     @FXML
     private FontAwesomeIcon keymap_close_btn;
 
+    boolean saveData = true;
+
 //    @FXML
 //    private AnchorPane keymap_anchorPane;
 
@@ -57,168 +64,251 @@ public class KeyMapController {
     @FXML
     private GridPane keymap_gridpane;
 
+    @FXML
+    private StackPane stackPane;
+
+    @FXML
+    private JFXButton keymap_save_button;
+
     int subQuestions;
     String questionLabel;
     ToggleGroup[] toggleGroups;
     int testIndex;
     TestDetails testDetails;
+    int oldSelectedIndex = -1;
 
 
     public void initialize() throws FileNotFoundException {
+        RadioButtonHelper.gridConstraints(keymap_gridpane, 85);
         ques_num_txt.setEditable(true);
+        keymap_save_button.setDisable(true);
 
-
-        ques_num_txt.setOnAction(event -> {
+        /*ques_num_txt.setOnAction(event -> {
             int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
             if (testDetails.getSubQuestionList().get(selectedIndex) != null)
                 sub_ques_txt.setText(String.valueOf(testDetails.getSubQuestionList().get(selectedIndex)));
-        });
+        });*/
         /*FontAwesomeIcon icon = new FontAwesomeIcon();
         icon.setGlyphName("FOLDER");
         icon.setStyle("-fx-background-color: #FFF");*/
+
+        // Setting up various validation on feilds
         Image image = new Image(new FileInputStream("src//icons//error.png"));
         NumberValidator validator = new NumberValidator();
         validator.setMessage("Valid number");
         validator.setIcon(new ImageView(image));
         sub_ques_txt.getValidators().add(validator);
 
-        /*sub_ques_txt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (!newValue) {
-                    if (!sub_ques_txt.validate()){
-                        proceed_btn.setDisable(true);
-                    }else {
-                        proceed_btn.setDisable(false);
-                    }
-                }
-            }
-        });*/
-        /*sub_ques_txt.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                System.out.println(sub_ques_txt.getText());
-                String s = sub_ques_txt.getText();
-                Pattern pattern = Pattern.compile("\\d+");
-                Matcher matcher = pattern.matcher(s);
-                sub_ques_txt.validate();
-                if (matcher.find()){
 
-                    proceed_btn.setDisable(false);
-                }else {
-                    //sub_ques_txt.validate();
-                    proceed_btn.setDisable(true);
-                }
-            }
-        });*/
-
+        //Doing basic initialization activity
+        testDetails = Bus.getInstance();
+        List ques_list = testDetails.getQuestion();
+        ques_num_txt.getItems().addAll(ques_list);
+        ques_num_txt.getSelectionModel().selectFirst();
+        if (testDetails.getSubQuestionList().get(0) != null) {
+            sub_ques_txt.setText(String.valueOf(testDetails.getSubQuestionList().get(0)));
+            generateRadioButtonOperation(0);
+        }
     }
 
 
     @FXML
     void generateRadioButton(ActionEvent event) {
+
+        /*if (!saveData) {
+            if (oldSelectedIndex!=-1)
+                saveDataOperations(oldSelectedIndex);
+        }F
+*/
         if (event.getSource().equals(proceed_btn) && sub_ques_txt.validate()) {
-            RadioButtonHelper.deselectRadioButton(keymap_gridpane);
-            keymap_gridpane.getChildren().clear();
+
             questionLabel = String.valueOf(ques_num_txt.getSelectionModel().getSelectedItem());
             if (ques_num_txt.getSelectionModel().getSelectedIndex() == -1) {
                 ques_num_txt.getSelectionModel().selectFirst();
             }
             int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
+            oldSelectedIndex = selectedIndex;
             /*
                 questionLabel = (String) ques_num_txt.getItems().get(0);
                 selectedIndex = 0;
             }*/
             subQuestions = Integer.parseInt(sub_ques_txt.getText());
 
-            // Validation
-
             testDetails.getSubQuestionList().set(selectedIndex, subQuestions);
-            toggleGroups = new ToggleGroup[subQuestions];
-            try {
-                toggleGroups = RadioButtonHelper.generateRadioButton(keymap_gridpane, subQuestions, 75, toggleGroups, testDetails.getKey().get(selectedIndex));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 
+            generateRadioButtonOperation(selectedIndex);
         }
+    }
+
+    private void generateRadioButtonOperation(int selectedIndex) {
+        RadioButtonHelper.deselectRadioButton(keymap_gridpane);
+        keymap_gridpane.getChildren().clear();
+        int subQuestions = testDetails.getSubQuestionList().get(selectedIndex);
+        toggleGroups = new ToggleGroup[subQuestions];
+        try {
+            toggleGroups = RadioButtonHelper.generateRadioButton(keymap_gridpane, subQuestions, toggleGroups, testDetails.getKey().get(selectedIndex));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        saveData = false;
+        keymap_save_button.setDisable(false);
+
     }
 
     @FXML
     void studentResponseEvent(ActionEvent event) {
 
-        if (event.getSource().equals(student_response_btn)) {
+        checkSave();
             try {
-                Parent parent = (AnchorPane) FXMLLoader.load(getClass().getResource("scenes/studentDetails.fxml"));
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("scenes/studentDetails.fxml"));
+
+                Parent parent = loader.load();
+//                StudentDetailsController controller = new StudentDetailsController();
+//                controller.init(testDetails);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(parent);
                 stage.setScene(scene);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+
     }
 
     @FXML
     void closeEvent(MouseEvent event) {
-        System.exit(0);
+        if (!saveData) {
+            JFXDialogLayout layout = new JFXDialogLayout();
+            layout.setHeading(new Text("Save"));
+
+            Label label = new Label(Messages.ASK_FOR_SAVING_DATA);
+            label.setFont(new Font("Segoi UI", 20));
+
+            layout.setBody(label);
+
+            JFXButton cancel = new JFXButton(Messages.CANCEL_TEXT);
+            JFXButton savebtn = new JFXButton(Messages.SAVE_TXT);
+            savebtn.setPrefWidth(100);
+            cancel.setPrefWidth(100);
+            cancel.getStyleClass().add("btn-dialog");
+            savebtn.getStyleClass().add("btn-dialog");
+            layout.setActions(cancel, savebtn);
+
+            JFXDialog dialog = new JFXDialog(stackPane, layout, JFXDialog.DialogTransition.CENTER);
+            cancel.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    dialog.close();
+                    System.exit(0);
+                }
+            });
+
+            savebtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    saveRadioData(event);
+                    System.exit(0);
+                }
+            });
+            dialog.show();
+        } else {
+            System.exit(0);
+        }
+
+
     }
 
     @FXML
     void openEvent(MouseEvent event) {
-
+        checkSave();
     }
     @FXML
     void saveRadioData(ActionEvent event) {
         //getting selected toggle
-        ArrayList<Integer> selectedToggles = RadioButtonHelper.getSelectedToggles(toggleGroups);
+
         int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
-        ArrayList<Character> key = new ArrayList<>();
 
-        key = RadioButtonHelper.getSelectedRadio(toggleGroups, selectedToggles);
+        saveDataOperations(selectedIndex);
+    }
 
-        //Settings question number
+    private void saveDataOperations(int selectedIndex) {
+        ArrayList<Integer> selectedToggles = RadioButtonHelper.getSelectedToggles(toggleGroups);
+        ArrayList<Character> key = RadioButtonHelper.getSelectedRadio(toggleGroups, selectedToggles);
+        questionLabel = ques_num_txt.getSelectionModel().getSelectedItem().toString();
 
         testDetails.getQuestion().set(selectedIndex, questionLabel);
         testDetails.getKey().set(selectedIndex, key);
 
         RadioButtonHelper.deselectRadioButton(keymap_gridpane);
-        testDetails.setStudentDetails(ListHelper.keyToStudents(key, testDetails.getStudentDetails(), selectedIndex));
-        DataBaseCommunication.convertJavaToJSON(testDetails, testDetails.getTestName());
+        testDetails.setStudentDetails(ListHelper.keyToStudents(key, testDetails.getStudentDetails(), selectedIndex, testDetails.getSubQuestionList().get(selectedIndex)));
+        DataBaseCommunication.convertJavaToJSON(testDetails);
         keymap_gridpane.getChildren().clear();
+
+        saveData = true;
+        keymap_save_button.setDisable(true);
+
+
+        // Updating question list combo Box
+        List list = testDetails.getQuestion();
+        ques_num_txt.getItems().clear();
+        ques_num_txt.getItems().addAll(list);
+        ques_num_txt.getSelectionModel().select(selectedIndex);
+
+        JFXSnackbar snackbar = new JFXSnackbar(stackPane);
+        snackbar.show(Messages.SAVE_SUCCESSFULL, Messages.TOAST_DURATION);
+
     }
 
-    public void init_create(TestDetails packet) {
+
+    public void init(TestDetails packet) {
         testDetails = packet;
-        List ques_list = new ArrayList<>();
-        ;
-        System.out.println(testDetails.getTeacherName());
-        for (int i = 1; i <= testDetails.getNumberOfQuestion(); i++) {
+        List ques_list = testDetails.getQuestion();
+
+   /*     for (int i = 1; i <= testDetails.getNumberOfQuestion(); i++) {
             ques_list.add(i);
             int j = i - 1;
             testDetails.getQuestion().set(j, String.valueOf(i));
-        }
+        }*/
         ques_num_txt.getItems().addAll(ques_list);
+        ques_num_txt.getSelectionModel().selectFirst();
+        if (testDetails.getSubQuestionList().get(0) != null) {
+            sub_ques_txt.setText(String.valueOf(testDetails.getSubQuestionList().get(0)));
+            generateRadioButtonOperation(0);
+        }
+    }
 
-        int sub_ques = 0;
-        try {
-            sub_ques = testDetails.getSubQuestionList().get(0);
-            sub_ques_txt.setText("" + sub_ques);
-        } catch (Exception e) {
+    @FXML
+    public void showBasicInfo(MouseEvent event) {
+        DialogPopUp.basicInfoDialog(stackPane, testDetails);
+    }
+
+    private void checkSave() {
+
+        if (!saveData) {
+            saveRadioData(new ActionEvent());
+        }
+
+
+    }
+
+    @FXML
+    public void questonChanged(ActionEvent event) {
+        int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
+
+        if (selectedIndex != -1 && testDetails.getSubQuestionList().get(selectedIndex) != null) {
+            sub_ques_txt.setText(String.valueOf(testDetails.getSubQuestionList().get(selectedIndex)));
+        } else {
             sub_ques_txt.setText("");
         }
-    }
-
-    public void init_open(TestDetails packet) {
-        testDetails = packet;
-
-        List list = testDetails.getQuestion();
-        ques_num_txt.getItems().removeAll();
-        ques_num_txt.getItems().addAll(list);
-        sub_ques_txt.setText("" + testDetails.getSubQuestionList().get(0));
 
     }
 
+    @FXML
+    public void openStudentResponse() {
+        studentResponseEvent(new ActionEvent());
+    }
 
 }
 

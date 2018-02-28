@@ -64,7 +64,7 @@ public class MainWindowController {
                 DataInstance.getInstance().getTestDetails().add(testDetails);
             } else {
                 testDetails.setIndex(0);
-                DataInstance.setInstance(new MainDataClass());
+                DataInstance.setInstance(new Bus());
                 DataInstance.getInstance().setTestDetails(new ArrayList<>());
                 DataInstance.getInstance().getTestDetails().add(testDetails);
             }*/

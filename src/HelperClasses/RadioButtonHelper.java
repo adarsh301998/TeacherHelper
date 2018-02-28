@@ -12,15 +12,11 @@ import java.util.ArrayList;
 
 public class RadioButtonHelper {
 
-    public static ToggleGroup[] generateRadioButton(GridPane gridPane, int n, int width, ToggleGroup[] toggleGroups, ArrayList<Character> keyPresent) throws InterruptedException {
-
+    public static ToggleGroup[] generateRadioButton(GridPane gridPane, int n, ToggleGroup[] toggleGroups, ArrayList<Character> selection) throws InterruptedException {
         char[] options = {'A', 'B', 'C', 'D'};
         // Creating option lables
 
-        for (int i = 0; i < 5; i++) {
-            ColumnConstraints columnConstraints = new ColumnConstraints(width);
-            gridPane.getColumnConstraints().add(columnConstraints);
-        }
+
 
         for (int i = 0; i < options.length; i++) {
             Label label = new Label(String.valueOf(options[i]));
@@ -39,9 +35,9 @@ public class RadioButtonHelper {
                 JFXRadioButton radioButton = new JFXRadioButton();
                 radioButton.setUserData(options[j]);
                 // int s,ex;
-           /*     if (!keyPresent.isEmpty()) {
-                    if(keyPresent.get(i-1) != null) {
-                        s = keyPresent.get(i - 1);
+           /*     if (!selection.isEmpty()) {
+                    if(selection.get(i-1) != null) {
+                        s = selection.get(i - 1);
                         if (j == (s % 65)) {
                             radioButton.setSelected(true);
                         }
@@ -53,7 +49,7 @@ public class RadioButtonHelper {
             }
         }
 
-        selectedKey(keyPresent, gridPane);
+        selectedKey(selection, gridPane);
 
         return toggleGroups;
     }
@@ -67,14 +63,14 @@ public class RadioButtonHelper {
                 s = keyprsent.get(i);
                 index = count + (s % 65);
 
-                System.out.println("index  = " + index);
+                // System.out.println("index  = " + index);
                 if (count < key_map.getChildren().size()) {
                     if (key_map.getChildren().get(index) instanceof JFXRadioButton) {
-                        System.out.println("index  = " + index);
+                        //  System.out.println("index  = " + index);
                         JFXRadioButton radioButton = (JFXRadioButton) key_map.getChildren().get(index);
                         radioButton.setSelected(true);
 
-                        System.out.println("Radio" + radioButton.getUserData());
+                        // System.out.println("Radio" + radioButton.getUserData());
                     }
                     count += 5;
                 } else {
@@ -171,7 +167,8 @@ public class RadioButtonHelper {
 
         int j = 0;
         for (int i = 5; i < key_map.getChildren().size(); i++) {
-            System.out.println(i);
+            //
+            // System.out.println(i);
             if (key_map.getChildren().get(i) instanceof JFXRadioButton) {
                 JFXRadioButton r1 = (JFXRadioButton) key_map.getChildren().get(i);
                 r1.setSelected(false);
@@ -185,6 +182,14 @@ public class RadioButtonHelper {
         }
 
 
+    }
+
+
+    public static void gridConstraints(GridPane gridPane, int width) {
+        for (int i = 0; i < 5; i++) {
+            ColumnConstraints columnConstraints = new ColumnConstraints(width);
+            gridPane.getColumnConstraints().add(columnConstraints);
+        }
     }
 
 }

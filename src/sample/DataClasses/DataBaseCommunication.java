@@ -12,10 +12,13 @@ public class DataBaseCommunication {
         mapper = new ObjectMapper();
     }
 
-    public static void convertJavaToJSON(TestDetails object, String filename) {
+    public static void convertJavaToJSON(TestDetails object) {
         try {
             System.out.println(object.getTeacherName());
             String result = mapper.writeValueAsString(object);
+
+            String filename = object.getTestName() + object.getDateTime();
+
             System.out.println("Result" + result);
             BufferedWriter writer = new BufferedWriter(new FileWriter("src//Tests//" + filename + ".json"));
             writer.write(result);

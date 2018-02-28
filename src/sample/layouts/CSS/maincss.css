@@ -2,6 +2,8 @@
     -fx-primary-color:  #ffa801;
     -fx-secondary-color:  #ffc048;
     -fx-white-color: #FFF;
+    -fx-blue : #3498db;
+    -fx-toast-color: #000000;
 }
 .dark-background{
     -fx-background-color: -fx-primary-color;
@@ -71,9 +73,13 @@
 
 .scroll-pane .scroll-bar .increment-arrow,
 .scroll-pane .scrollbar .increment-arrow{
-
     -fx-background-color: transparent;
 }
+
+.scroll-pane .scroll-bar .decrement-arrow{
+    -fx-background-color: transparent;
+}
+
 
 .scroll-pane .scroll-bar:vertical .thumb{
     -fx-background-color: -fx-secondary-color;
@@ -85,6 +91,9 @@
     -fx-background-insets: 2,0,0;
     -fx-background-radius: 2em;
 }
+
+
+
 .backgroundTransparent{
     -fx-background-color: transparent;
 }
@@ -110,5 +119,86 @@
 }
 .icon{
 -fx-fill: -fx-secondary-color;
+
+}
+
+
+
+
+
+.list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -jfx-cell-vertical-margin: 10.0;
+        -jfx-vertical-gap: 10;
+        -fx-pref-width: 300;
+
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: ORANGE;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: ORANGE;
+}
+
+.list-view .list-cell {
+    -fx-background-color: -fx-secondary-color;
+    -fx-text-fill: white;
+}
+
+.list-view .label {
+    -fx-text-fill: white;
+}
+
+.jfx-rippler {
+    -jfx-rippler-fill: GRAY;
+}
+.list-view .scroll-bar:vertical .thumb{
+    -fx-background-color: -fx-secondary-color;
+    -fx-background-insets: 2,0,0;
+    -fx-background-radius: 2em;
+}
+.list-view .scroll-bar:vertical .decrement-button{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+
+}
+.list-view .scroll-bar:vertical .decrement-button{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 0 10 10
+}
+
+.list-view .scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 0em;
+}
+.list-view .scroll-bar .increment-arrow{
+    -fx-background-color: transparent;
+}
+.list-view .scroll-bar .decrement-arrow{
+    -fx-background-color: transparent;
+}
+
+
+
+.btn-dialog {
+
+-fx-background-color: -fx-blue;
+-fx-border-color: -fx-blue;
+-fx-background-radius: 100;
+}
+
+.jfx-snackbar-toast{
+    -fx-text-fill: -fx-white-color;
+}
+
+.jfx-snackbar-content{
+    -fx-background-color: -fx-toast-color;
+    -fx-border-radius: 3em;
+    -fx-background-radius: 5em;
 
 }
