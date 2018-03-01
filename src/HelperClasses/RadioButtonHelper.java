@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -20,13 +19,13 @@ public class RadioButtonHelper {
 
         for (int i = 0; i < options.length; i++) {
             Label label = new Label(String.valueOf(options[i]));
-            label.setTextFill(Color.WHITE);
+            //label.setTextFill(Color.WHITE);
             gridPane.add(label, i + 1, 0);
         }
         // Creating radio button
         for (int i = 1; i <= n; i++) {
             Label label = new Label(i + ".");
-            label.setTextFill(Color.WHITE);
+            //label.setTextFill(Color.WHITE);
 
             gridPane.add(label, 0, i);
 

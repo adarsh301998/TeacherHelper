@@ -6,7 +6,6 @@ import HelperClasses.Messages;
 import HelperClasses.RadioButtonHelper;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.NumberValidator;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,8 +14,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -47,20 +46,18 @@ public class KeyMapController {
     @FXML
     private JFXButton proceed_btn;
 
-    @FXML
-    private FontAwesomeIcon keymap_close_btn;
+    /*@FXML
+    private FontAwesomeIcon keymap_close_btn;*/
 
     boolean saveData = true;
 
-//    @FXML
-//    private AnchorPane keymap_anchorPane;
 
-    @FXML
+    /*@FXML
     ScrollPane scrollPane;
 
     @FXML
     private JFXButton student_response_btn;
-
+*/
     @FXML
     private GridPane keymap_gridpane;
 
@@ -69,6 +66,22 @@ public class KeyMapController {
 
     @FXML
     private JFXButton keymap_save_button;
+
+    @FXML
+    private JFXButton openStudents_btn;
+
+    @FXML
+    private JFXButton openTest_btn;
+
+    @FXML
+    private JFXButton openReport_btn;
+
+    @FXML
+    private JFXButton newTest_btn;
+
+    /*@FXML
+    private JFXButton test_student;*/
+
 
     int subQuestions;
     String questionLabel;
@@ -79,9 +92,30 @@ public class KeyMapController {
 
 
     public void initialize() throws FileNotFoundException {
+
+        final Tooltip openStudent_btn_tooltip = new Tooltip();
+        openStudent_btn_tooltip.setText("Students");
+
+        openStudents_btn.setTooltip(openStudent_btn_tooltip);
+
+
+        final Tooltip openTest_btn_toltip = new Tooltip();
+        openTest_btn_toltip.setText("Open Test");
+        openTest_btn.setTooltip(openTest_btn_toltip);
+
+        final Tooltip newTest_btn_tooltip = new Tooltip();
+        newTest_btn_tooltip.setText("New Test");
+        newTest_btn.setTooltip(newTest_btn_tooltip);
+
+
+        final Tooltip openReport_btn_tooltip = new Tooltip();
+        openReport_btn_tooltip.setText("Open Report");
+        openReport_btn.setTooltip(openReport_btn_tooltip);
+
         RadioButtonHelper.gridConstraints(keymap_gridpane, 85);
         ques_num_txt.setEditable(true);
         keymap_save_button.setDisable(true);
+
 
         /*ques_num_txt.setOnAction(event -> {
             int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
@@ -305,11 +339,93 @@ public class KeyMapController {
 
     }
 
-    @FXML
-    public void openStudentResponse() {
+  /*  @FXML
+    public void openStudentResponse(MouseEvent event) {
         studentResponseEvent(new ActionEvent());
+    }*/
+
+    @FXML
+    public void openEvent(ActionEvent event) {
+
+        /*FXMLLoader loader = new FXMLLoader();
+        Parent root;
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        if(event.getSource() == openStudents_btn) {
+            //open key
+            loader.setLocation(getClass().getResource("scenes/studentDetails.fxml"));
+            //stage.setX(40);
+        }
+        if (event.getSource() == openTest_btn) {
+            //Open test
+            loader.setLocation(getClass().getResource("scenes/openTest.fxml"));
+        }
+        if (event.getSource() == openReport_btn) {
+            //Open report
+        }
+
+        try {
+            root = loader.load();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
     }
 
+    @FXML
+    void openStudentEvent(ActionEvent event) {
+        try {
+            checkSave();
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/studentDetails.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void openTestEvent(ActionEvent event) {
+        try {
+            checkSave();
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/openTest.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void newTestFile(ActionEvent event) {
+        try {
+            checkSave();
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/createNewTest.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+   /* @FXML
+    void testEvent(ActionEvent event) {
+
+        FXMLLoader loader = new FXMLLoader();
+        Parent root;
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        loader.setLocation(getClass().getResource("scenes/studentDetails.fxml"));
+        try {
+            root = loader.load();
+
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+*/
 }
 
 

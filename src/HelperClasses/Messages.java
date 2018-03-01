@@ -8,4 +8,6 @@ public class Messages {
     public static String SAVE_SUCCESSFULL = "Saved Successfully";
     public static int TOAST_DURATION = 5000;
 
+    public static int LIST_DEPTH = 3;
+
 }

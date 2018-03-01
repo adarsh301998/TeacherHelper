@@ -6,10 +6,10 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.controlsfx.control.Notifications;
 import sample.DataClasses.Bus;
 import sample.DataClasses.DataBaseCommunication;
 import sample.DataClasses.StudentDetails;
@@ -50,8 +51,8 @@ public class CreateNewTestController {
     @FXML
     private JFXButton createTest_btn;
 
-    @FXML
-    private FontAwesomeIcon btn_close;
+//    @FXML
+//    private FontAwesomeIcon btn_close;
 
 
     @FXML
@@ -132,7 +133,7 @@ public class CreateNewTestController {
             testDetails.setNumberOfStudent(num_student);
             testDetails.setNumberOfQuestion(ques);
             testDetails.setTeacherName(teacherName);
-            testDetails.setDateTime(date);
+                testDetails.setDateTime(date.toString());
             testDetails.setInstitute(institute);
             testDetails.setClassLabel(classLabel);
 
@@ -140,6 +141,15 @@ public class CreateNewTestController {
             //Save Data
                 DataBaseCommunication.convertJavaToJSON(testDetails);
                 saveFileName(testname);
+                // Sending Notification
+
+                Notifications notifications = Notifications.create()
+                        .title("SuccessFull")
+                        .position(Pos.BASELINE_RIGHT)
+                        .darkStyle()
+                        .text(testDetails.getTestName() + " Created");
+
+                notifications.showInformation();
 
 
                 // Send data in main bus

@@ -11,7 +11,8 @@
     <children>
         <FontAwesomeIcon/>
         <FontAwesomeIcon fx:id="btn_close" fill="#f8f8f8" glyphName="CLOSE" layoutX="677.0" layoutY="22.0"
-                         onMouseClicked="#closeEvent" size="2em"/>
+                         styleClass="close-icon"
+                         onMouseClicked="#closeEvent" size="3em"/>
         <JFXButton fx:id="btn_new" graphicTextGap="20.0" layoutX="87.0" layoutY="134.0" onAction="#handelEvent"
                    prefHeight="78.0" prefWidth="194.0" ripplerFill="#a49a9a" text="New" textFill="#eeeaea">
             <font>

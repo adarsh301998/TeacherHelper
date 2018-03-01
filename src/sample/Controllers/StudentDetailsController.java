@@ -7,7 +7,6 @@ import HelperClasses.RadioButtonHelper;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -37,8 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDetailsController {
-    @FXML
-    private AnchorPane key_map_main_layout;
+   /* @FXML
+    private AnchorPane key_map_main_layout;*/
 
     @FXML
     private JFXComboBox<?> ques_num_txt;
@@ -46,11 +46,11 @@ public class StudentDetailsController {
     @FXML
     private JFXTextField studentNameTxt;
 
-    @FXML
+   /* @FXML
     private JFXButton proceed_btn;
 
     @FXML
-    private FontAwesomeIcon keymap_close_btn;
+    private FontAwesomeIcon keymap_close_btn;*/
 
     @FXML
     private JFXTextField rollNumberTxt;
@@ -58,8 +58,8 @@ public class StudentDetailsController {
     @FXML
     private GridPane keymap_gridpane;
 
-    @FXML
-    private JFXButton student_response_btn;
+//    @FXML
+//    private JFXButton student_response_btn;
 
     @FXML
     private JFXButton keymap_save_button;
@@ -79,6 +79,18 @@ public class StudentDetailsController {
     @FXML
     private BorderPane top_borderPane;
 
+    @FXML
+    private JFXButton openKey_btn;
+
+    @FXML
+    private JFXButton openTest_btn;
+
+    @FXML
+    private JFXButton openReport_btn;
+
+    @FXML
+    private JFXButton newTestFile_btn;
+
 
     @FXML
     private JFXTextField subQuestionTxt;
@@ -94,56 +106,6 @@ public class StudentDetailsController {
     boolean dataSaved = true;
     int oldSelectedIndex = -1;
 
-/*
-    public StudentDetailsController() {
-        *//*FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/studentDetails.fxml"));
-//        loader.setRoot(this);
-//        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException exc) {
-            exc.printStackTrace();
-            // this is pretty much fatal, so:
-            System.exit(1);
-        }*//*
-    }*/
-
-
-    /*public void initialize() {
-     *//*RadioButtonHelper.gridConstraints(keymap_gridpane, 85);
-        ques_num_txt.setEditable(true);
-        keymap_save_button.setDisable(true);
-
-        ques_num_txt.setOnAction(event -> {
-            int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
-            if (testDetails.getSubQuestionList().get(selectedIndex) != null)
-                sub_ques_txt.setText(String.valueOf(testDetails.getSubQuestionList().get(selectedIndex)));
-        })
-        FontAwesomeIcon icon = new FontAwesomeIcon();
-        icon.setGlyphName("FOLDER");
-        icon.setStyle("-fx-background-color: #FFF");
-        Image image = new Image(new FileInputStream("src//icons//error.png"));
-        NumberValidator validator = new NumberValidator();
-        validator.setMessage("Valid number");
-        validator.setIcon(new ImageView(image));
-        subQuestionTxt.getValidators().add(validator);*//*
-        List question = testDetails.getQuestion();
-        //initialize();
-        ques_num_txt.getItems().addAll(question);
-
-        // List question = testDetails.getQuestion();
-        numberOfQuestion = question.size();
-        //ques_num_txt.getItems().addAll(question);
-
-        if (testDetails.getSubQuestionList() != null) {
-            if (testDetails.getSubQuestionList().get(0)!=null)
-                subQuestionTxt.setText(""+testDetails.getSubQuestionList().get(0));
-        }
-
-        loadStudentDetails(0);
-
-        init_StudentList();
-    }*/
     @FXML
     void closeEvent(MouseEvent event) {
 
@@ -188,7 +150,7 @@ public class StudentDetailsController {
 
     }
 
-    public void init(TestDetails testDetails) {
+    /*public void init(TestDetails testDetails) {
         List question = testDetails.getQuestion();
         //initialize();
         ques_num_txt.getItems().addAll(question);
@@ -206,7 +168,7 @@ public class StudentDetailsController {
 
         init_StudentList();
 
-    }
+    }*/
 
     private void loadStudentDetails(int index) {
 //        ques_num_txt.getSelectionModel().selectFirst();
@@ -215,11 +177,33 @@ public class StudentDetailsController {
     }
 
     public void initialize() {
-        System.out.println("Hello world");
+        // System.out.println("Hello world");
         //ques_num_txt = new JFXComboBox<>();
 
         //Getting data from bus
         testDetails = Bus.getInstance();
+
+
+        //Setting up tooltip text
+
+        final Tooltip openStudent_btn_tooltip = new Tooltip();
+        openStudent_btn_tooltip.setText("Key");
+        openKey_btn.setTooltip(openStudent_btn_tooltip);
+
+
+        final Tooltip openTest_btn_toltip = new Tooltip();
+        openTest_btn_toltip.setText("Open Test");
+        openTest_btn.setTooltip(openTest_btn_toltip);
+
+        final Tooltip newTest_btn_tooltip = new Tooltip();
+        newTest_btn_tooltip.setText("New Test");
+        newTestFile_btn.setTooltip(newTest_btn_tooltip);
+
+
+        final Tooltip openReport_btn_tooltip = new Tooltip();
+        openReport_btn_tooltip.setText("Open Report");
+        openReport_btn.setTooltip(openReport_btn_tooltip);
+
 
         RadioButtonHelper.gridConstraints(keymap_gridpane, 85);
         keymap_save_button.setDisable(true);
@@ -317,6 +301,8 @@ public class StudentDetailsController {
                 selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
             }
             oldSelectedIndex = selectedIndex;
+            String quesLabel = (String) ques_num_txt.getSelectionModel().getSelectedItem();
+            testDetails.getQuestion().set(selectedIndex, quesLabel);
             testDetails.getSubQuestionList().set(selectedIndex, sub_ques);
             sub_ques = Integer.parseInt(subQuestionTxt.getText());
             testDetails.getSubQuestionList().set(selectedIndex, sub_ques);
@@ -380,6 +366,11 @@ public class StudentDetailsController {
         JFXSnackbar snackbar = new JFXSnackbar(stackPane);
         snackbar.show(Messages.SAVE_SUCCESSFULL, Messages.TOAST_DURATION);
 
+        // Updating question list combo Box
+        List list = testDetails.getQuestion();
+        ques_num_txt.getItems().clear();
+        ques_num_txt.getItems().addAll(list);
+        ques_num_txt.getSelectionModel().select(selectedIndex);
 
         keymap_save_button.setDisable(true);
         init_StudentList();
@@ -460,7 +451,7 @@ public class StudentDetailsController {
 
         int selectedIndex = ques_num_txt.getSelectionModel().getSelectedIndex();
 
-        if (testDetails.getSubQuestionList().get(selectedIndex) != null) {
+        if (selectedIndex != -1 && testDetails.getSubQuestionList().get(selectedIndex) != null) {
             subQuestionTxt.setText(String.valueOf(testDetails.getSubQuestionList().get(selectedIndex)));
         } else {
             subQuestionTxt.setText("");
@@ -514,6 +505,38 @@ public class StudentDetailsController {
             System.out.println("Something not saved");
             saveRadioData(new ActionEvent());
         }
+    }
+
+
+    @FXML
+    void openEvent(ActionEvent event) {
+
+        FXMLLoader loader = new FXMLLoader();
+        Parent root;
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        checkDataSave();
+        if (event.getSource() == openKey_btn) {
+            //open key
+            loader.setLocation(getClass().getResource("scenes/keyMap.fxml"));
+        }
+        if (event.getSource() == openTest_btn) {
+            //Open test
+            loader.setLocation(getClass().getResource("scenes/openTest.fxml"));
+        }
+        if (event.getSource() == openReport_btn) {
+            //Open report
+        }
+        if (event.getSource() == newTestFile_btn) {
+            loader.setLocation(getClass().getResource("scenes/createNewTest.fxml"));
+        }
+
+        try {
+            root = loader.load();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

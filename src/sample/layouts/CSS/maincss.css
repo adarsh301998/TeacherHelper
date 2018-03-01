@@ -1,34 +1,43 @@
 *{
-    -fx-primary-color:  #ffa801;
-    -fx-secondary-color:  #ffc048;
+// ornage primary #ffa801 secondary #ffc048
+    -fx-primary-color:  #FFF;
+    -fx-secondary-color:  #69539B;
+    -fx-gray-color: EEF1F6;
     -fx-white-color: #FFF;
     -fx-blue : #3498db;
     -fx-toast-color: #000000;
+
+}
+.secondary-color{
+-fx-background-color: -fx-secondary-color;
 }
 .dark-background{
     -fx-background-color: -fx-primary-color;
 }
 .light-background{
-    -fx-background-color: -fx-secondary-color;
+    -fx-background-color: -fx-gray-color;
 }
+
 .button{
-    -fx-border-color: -fx-primary-color;
+    -fx-border-color: -fx-secondary-color;
+    -fx-background-color:-fx-secondary-color;
+    -fx-background-radius: 2em;
     -fx-border-radius: 2em;
     -fx-text-fill: -fx-white-color;
 }
-.textfeild{
-    -fx-text-fill: -fx-white-color;
+.jfx-text-field{
+    -fx-text-fill: -fx-secondary-color;
 }
 .headings{
     -fx-text-fill: -fx-white-color;
 }
 .jfx-combo-box {
-    -fx-background-color: -fx-primary-color;
+    //-fx-background-color: -fx-primary-color;
 }
 .jfx-combo-box.label {
-    -fx-background-color: -fx-secondary-color;
+
     -fx-text-fill: -fx-white-color;
-    -fx-selectedValueLabel-fill: -fx-white-color;
+    -fx-selectedValueLabel-fill: -fx-blue;
 }
 .scroll-pane{
     -fx-background-color: -fx-primary-color;
@@ -119,9 +128,16 @@
 }
 .icon{
 -fx-fill: -fx-secondary-color;
+-fx-size: 3em;
 
 }
+.close-icon{
 
+-fx-fill: -fx-primary-color;
+}
+.tooltip{
+-fx-font-size: 20px;
+}
 
 
 
@@ -136,11 +152,11 @@
 }
 
 .list-view .list-cell:hover {
-    -fx-background-color: ORANGE;
+    -fx-background-color: -fx-blue;
 }
 
 .list-view .list-cell:selected {
-    -fx-background-color: ORANGE;
+    -fx-background-color: -fx-blue;
 }
 
 .list-view .list-cell {
@@ -200,5 +216,15 @@
     -fx-background-color: -fx-toast-color;
     -fx-border-radius: 3em;
     -fx-background-radius: 5em;
+
+}
+
+.panelButtonColor{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+
+}
+.tittlePaneBackground{
+    -fx-background-color: -fx-secondary-color;
 
 }

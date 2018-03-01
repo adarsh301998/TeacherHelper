@@ -39,7 +39,10 @@ public class Main extends Application {
         //controller.init_create(testDetails);
         //controller.init(testDetails);
 
+
         primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setX(60);
+        primaryStage.setY(60);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

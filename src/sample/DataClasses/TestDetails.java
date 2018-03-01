@@ -1,6 +1,5 @@
 package sample.DataClasses;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TestDetails {
@@ -8,7 +7,7 @@ public class TestDetails {
     private String teacherName;
     private String testName;
     private String institute;
-    private LocalDate dateTime;
+    private String dateTime;
     private int numberOfQuestion;
     private int numberOfStudent;
     private ArrayList<StudentDetails> studentDetails;
@@ -70,7 +69,7 @@ public class TestDetails {
         this.institute = institute;
     }
 
-    public void setDateTime(LocalDate dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -106,7 +105,7 @@ public class TestDetails {
         return institute;
     }
 
-    public LocalDate getDateTime() {
+    public String getDateTime() {
         return dateTime;
     }
 
