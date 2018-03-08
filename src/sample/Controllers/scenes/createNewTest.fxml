@@ -6,10 +6,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.*?>
+<StackPane fx:id="stackPane" stylesheets="@../../layouts/CSS/maincss.css" xmlns="http://javafx.com/javafx/8.0.141"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.CreateNewTestController">
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0"
-            prefWidth="749.0" stylesheets="@../../layouts/CSS/maincss.css" xmlns="http://javafx.com/javafx/8.0.141"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.CreateNewTestController">
+            prefWidth="749.0">
     <children>
         <AnchorPane prefHeight="584.0" prefWidth="324.0" styleClass="secondary-color">
             <children>
@@ -58,7 +60,7 @@
                         <Font name="Segoe UI" size="15.0"/>
                     </font>
                 </JFXTextField>
-                <JFXDatePicker fx:id="datePicker" defaultColor="#69539b" layoutX="44.0" layoutY="535.0"
+                <JFXDatePicker fx:id="datePicker" layoutX="44.0" layoutY="535.0"
                                stylesheets="@../../layouts/CSS/maincss.css"/>
                 <JFXButton fx:id="createTest_btn" layoutX="323.0" layoutY="524.0" onAction="#createTestEvent"
                            ripplerFill="#c9c2c1" text="Create" textFill="#4ecbe1">
@@ -83,3 +85,4 @@
         </AnchorPane>
     </children>
 </AnchorPane>
+</StackPane>

@@ -91,7 +91,7 @@ public class DialogPopUp {
         key_btn.setPrefWidth(100);
         key_btn.getStyleClass().add("btn-dialog");
 
-        JFXButton report_btn = new JFXButton("Report");
+        JFXButton report_btn = new JFXButton("report");
         report_btn.setPrefWidth(100);
         report_btn.getStyleClass().add("btn-dialog");
 
@@ -105,6 +105,37 @@ public class DialogPopUp {
 
 
         dialog.show();
+    }
+
+    public static void closeAlert(StackPane stackPane) {
+
+
+        Label label = new Label("Are you sure you want to exit");
+        label.setFont(new Font("Segoi UI", 15));
+
+        JFXDialogLayout layout = new JFXDialogLayout();
+
+        VBox vBox = new VBox(label);
+        vBox.setSpacing(20);
+        layout.setBody(vBox);
+
+        JFXButton yes_btn = new JFXButton("Yes");
+        yes_btn.setPrefWidth(100);
+        yes_btn.getStyleClass().add("btn-dialog");
+
+        JFXButton cancel_btn = new JFXButton("Cancel");
+        cancel_btn.setPrefWidth(100);
+        cancel_btn.getStyleClass().add("btn-dialog");
+
+        layout.setActions(yes_btn, cancel_btn);
+
+        JFXDialog dialog = new JFXDialog(stackPane, layout, JFXDialog.DialogTransition.CENTER);
+        yes_btn.setOnAction(e -> System.exit(0));
+        cancel_btn.setOnAction(e -> dialog.close());
+
+
+        dialog.show();
+
     }
 
     private void openNewFrame(ActionEvent e, JFXButton student_btn, JFXButton key_btn, JFXButton report_btn, TestDetails testDetails) {
@@ -136,6 +167,14 @@ public class DialogPopUp {
         }
         if (e.getSource() == report_btn) {
             //Open report frame
+            loader.setLocation(getClass().getResource("../sample/Controllers/scenes/reportOptions.fxml"));
+            try {
+                parent = loader.load();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
         }
     }
 

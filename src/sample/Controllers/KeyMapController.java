@@ -109,7 +109,7 @@ public class KeyMapController {
 
 
         final Tooltip openReport_btn_tooltip = new Tooltip();
-        openReport_btn_tooltip.setText("Open Report");
+        openReport_btn_tooltip.setText("Open report");
         openReport_btn.setTooltip(openReport_btn_tooltip);
 
         RadioButtonHelper.gridConstraints(keymap_gridpane, 85);
@@ -248,10 +248,8 @@ public class KeyMapController {
             });
             dialog.show();
         } else {
-            System.exit(0);
+            DialogPopUp.closeAlert(stackPane);
         }
-
-
     }
 
     @FXML
@@ -408,6 +406,19 @@ public class KeyMapController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void openTestReport(ActionEvent event) {
+        try {
+            checkSave();
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/reportOptions.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
    /* @FXML

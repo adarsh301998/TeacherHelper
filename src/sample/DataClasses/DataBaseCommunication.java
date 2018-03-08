@@ -15,6 +15,7 @@ public class DataBaseCommunication {
     public static void convertJavaToJSON(TestDetails object) {
         try {
             System.out.println(object.getTeacherName());
+
             String result = mapper.writeValueAsString(object);
 
             String filename = object.getTestName() + object.getDateTime();

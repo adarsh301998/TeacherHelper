@@ -18,7 +18,7 @@
         <AnchorPane layoutX="66.0" layoutY="29.0" prefHeight="515.0" prefWidth="310.0" styleClass="light-background"
                     stylesheets="@../../layouts/CSS/maincss.css">
             <children>
-                <JFXComboBox fx:id="ques_num_txt" editable="true" labelFloat="true" layoutX="32.0" layoutY="71.0"
+                <JFXComboBox fx:id="ques_num_txt" editable="true" layoutX="32.0" layoutY="71.0"
                              onAction="#questionChanged" prefHeight="36.0" prefWidth="246.0"
                              promptText="Select Question"/>
                 <JFXTextField fx:id="studentNameTxt" labelFloat="true" layoutX="37.0" layoutY="166.0" prefHeight="36.0"
@@ -72,7 +72,8 @@
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="newTestFile_btn" layoutX="4.0" layoutY="183.0" prefHeight="48.0"
+                        <JFXButton onAction="#openEvent" fx:id="newTestFile_btn" layoutX="4.0" layoutY="183.0"
+                                   prefHeight="48.0"
                                    prefWidth="54.0" styleClass="panelButtonColor" text="  ">
                             <graphic>
                                 <FontAwesomeIcon glyphName="FILE" size="3em" styleClass="icon"/>

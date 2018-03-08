@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.*?>
+<StackPane fx:id="stack_pane" stylesheets="@../../layouts/CSS/maincss.css" xmlns="http://javafx.com/javafx/8.0.141"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.ReportOptionController">
+    <AnchorPane prefHeight="400.0" prefWidth="600.0">
+        <children>
+            <AnchorPane fx:id="titlePane" layoutY="-1.0" prefHeight="30.0" prefWidth="600.0"
+                        styleClass="tittlePaneBackground" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                        AnchorPane.topAnchor="-1.0">
+                <children>
+                    <FontAwesomeIcon fx:id="close_btn" glyphName="CLOSE" layoutX="575.0" layoutY="27.0"
+                                     onMouseClicked="#closeEvent" size="3em" styleClass="close-icon"
+                                     AnchorPane.rightAnchor="0.7142848968505859" AnchorPane.topAnchor="0.0"/>
+                    <Label fx:id="reportOption" layoutX="14.0" layoutY="11.0" onMouseClicked="#reportOptionClicked"
+                           styleClass="titlePaneHeading" text="Report Option" AnchorPane.leftAnchor="5.0"
+                           AnchorPane.topAnchor="2.0"/>
+                </children>
+            </AnchorPane>
+            <VBox fx:id="navigationLayout" layoutY="32.0" prefHeight="371.0" prefWidth="57.0" spacing="20.0"
+                  styleClass="dark-background" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="35.0">
+                <children>
+                    <JFXButton fx:id="open_btn" onAction="#handelNavigationOpenEvent" prefHeight="35.0" prefWidth="67.0"
+                               styleClass="navigationButton" text=" ">
+                        <graphic>
+                            <FontAwesomeIcon glyphName="FOLDER" size="3em"/>
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton fx:id="student_btn" ellipsisString=" " onAction="#handelNavigationOpenEvent"
+                               prefHeight="35.0" prefWidth="67.0" styleClass="navigationButton" text=" ">
+                        <graphic>
+                            <FontAwesomeIcon glyphName="USER" size="3em" styleClass="icon"/>
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton fx:id="key_btn" ellipsisString=" " onAction="#handelNavigationOpenEvent"
+                               prefHeight="35.0" prefWidth="67.0" styleClass="navigationButton" text=" ">
+                        <graphic>
+                            <FontAwesomeIcon glyphName="KEY" size="3em" styleClass="icon"/>
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton fx:id="newTest_btn" onAction="#handelNavigationOpenEvent" prefHeight="35.0"
+                               prefWidth="67.0" styleClass="navigationButton" text=" ">
+                        <graphic>
+                            <FontAwesomeIcon glyphName="FILE" size="3em" styleClass="icon"/>
+                        </graphic>
+                    </JFXButton>
+                </children>
+            </VBox>
+            <ScrollPane layoutX="67.0" layoutY="35.0" prefHeight="371.0" prefWidth="534.0">
+                <content>
+                    <VBox fx:id="vbox_optionLayout" alignment="CENTER" prefHeight="364.0" prefWidth="509.0"
+                          spacing="20.0">
+                        <children>
+                            <JFXButton fx:id="studentResponse_btn" onAction="#openReportOption"
+                                       styleClass="reportButton" text="Student Response"/>
+                            <JFXButton fx:id="distractors_btn" onAction="#openReportOption" styleClass="reportButton"
+                                       text="Distractors"/>
+                        </children>
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </children>
+    </AnchorPane>
+</StackPane>

@@ -18,7 +18,7 @@ public class RadioButtonHelper {
 
 
         for (int i = 0; i < options.length; i++) {
-            Label label = new Label(String.valueOf(options[i]));
+            Label label = new Label("      " + String.valueOf(options[i]));
             //label.setTextFill(Color.WHITE);
             gridPane.add(label, i + 1, 0);
         }

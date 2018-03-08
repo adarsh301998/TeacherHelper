@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<StackPane fx:id="stackPane" prefHeight="441.0" prefWidth="778.0" stylesheets="@../../../layouts/CSS/maincss.css"
+           xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="sample.Controllers.ReportControllers.DistractorController">
+    <children>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <AnchorPane prefHeight="44.0" prefWidth="1014.0" styleClass="tittlePaneBackground">
+                    <children>
+                        <FontAwesomeIcon fx:id="close_btn" glyphName="CLOSE" layoutX="742.0" layoutY="27.0"
+                                         onMouseClicked="#closeEvent" size="3em" styleClass="close-icon"
+                                         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                        <JFXButton fx:id="back_btn" layoutX="6.0" layoutY="11.0" onAction="#backEvent" prefHeight="42.0"
+                                   prefWidth="58.0" styleClass="navigationButton" text=" " AnchorPane.leftAnchor="0.0"
+                                   AnchorPane.topAnchor="0.0">
+                            <graphic>
+                                <ImageView fitHeight="34.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../icons/back.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </JFXButton>
+                        <Label fx:id="titlepane_Label" layoutX="48.0" layoutY="7.0" onMouseClicked="#showBasicInfo"
+                               prefHeight="30.0" prefWidth="119.0" styleClass="titlePaneHeading" text="Distractor"/>
+                    </children>
+                </AnchorPane>
+                <JFXListView fx:id="listView" layoutX="11.0" layoutY="52.0" minWidth="989.0" prefHeight="383.0"
+                             prefWidth="989.0"/>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

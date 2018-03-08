@@ -70,7 +70,7 @@
                 <JFXButton fx:id="openTest_btn" ellipsisString=" " onAction="#openTestEvent" prefHeight="48.0"
                            prefWidth="60.0" styleClass="panelButtonColor">
                     <graphic>
-                        <FontAwesomeIcon fx:id="open_icon" fill="#fffefe" glyphName="FOLDER" onMouseClicked="#openEvent"
+                        <FontAwesomeIcon fx:id="open_icon" fill="#fffefe" glyphName="FOLDER"
                                          size="3em" styleClass="icon"/>
                     </graphic>
                 </JFXButton>
@@ -86,7 +86,7 @@
                         <FontAwesomeIcon glyphName="FILE" size="3em" styleClass="icon"/>
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="openReport_btn" onAction="#openEvent" prefHeight="62.0" prefWidth="53.0"
+                <JFXButton fx:id="openReport_btn" onAction="#openTestReport" prefHeight="62.0" prefWidth="53.0"
                            styleClass="panelButtonColor" text=" ">
                     <graphic>
                         <ImageView fitHeight="37.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">

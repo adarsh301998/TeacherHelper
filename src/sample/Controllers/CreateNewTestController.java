@@ -1,5 +1,6 @@
 package sample.Controllers;
 
+import HelperClasses.DialogPopUp;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -16,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
@@ -56,6 +58,8 @@ public class CreateNewTestController {
 
 
     @FXML
+    private StackPane stackPane;
+    @FXML
     private JFXTextField classname;
 
     // public static TestDetails testDetails;
@@ -64,7 +68,7 @@ public class CreateNewTestController {
 
     @FXML
     void closeEvent(MouseEvent event) {
-        System.exit(0);
+        DialogPopUp.closeAlert(stackPane);
     }
 
     public void initialize() {

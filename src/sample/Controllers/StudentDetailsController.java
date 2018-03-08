@@ -147,6 +147,8 @@ public class StudentDetailsController {
             System.exit(0);
         }
 
+        DialogPopUp.closeAlert(stackPane);
+
 
     }
 
@@ -201,7 +203,7 @@ public class StudentDetailsController {
 
 
         final Tooltip openReport_btn_tooltip = new Tooltip();
-        openReport_btn_tooltip.setText("Open Report");
+        openReport_btn_tooltip.setText("Open report");
         openReport_btn.setTooltip(openReport_btn_tooltip);
 
 
@@ -511,10 +513,13 @@ public class StudentDetailsController {
     @FXML
     void openEvent(ActionEvent event) {
 
+        checkDataSave();
+//        NavigationHelper navigationHelper = new NavigationHelper();
+//        navigationHelper.loadFrame(event, openTest_btn,null,openKey_btn,openReport_btn,newTestFile_btn);
         FXMLLoader loader = new FXMLLoader();
         Parent root;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        checkDataSave();
+
         if (event.getSource() == openKey_btn) {
             //open key
             loader.setLocation(getClass().getResource("scenes/keyMap.fxml"));
@@ -525,6 +530,7 @@ public class StudentDetailsController {
         }
         if (event.getSource() == openReport_btn) {
             //Open report
+            loader.setLocation(getClass().getResource("scenes/reportOptions.fxml"));
         }
         if (event.getSource() == newTestFile_btn) {
             loader.setLocation(getClass().getResource("scenes/createNewTest.fxml"));
@@ -536,7 +542,6 @@ public class StudentDetailsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 

@@ -1,13 +1,17 @@
 *{
 // ornage primary #ffa801 secondary #ffc048
+// Secondary #69539B
+//primary
     -fx-primary-color:  #FFF;
-    -fx-secondary-color:  #69539B;
+    -fx-secondary-color:  #2d3436;
     -fx-gray-color: EEF1F6;
     -fx-white-color: #FFF;
     -fx-blue : #3498db;
     -fx-toast-color: #000000;
+    -fx-selected-color: #c8d6e5;
 
 }
+
 .secondary-color{
 -fx-background-color: -fx-secondary-color;
 }
@@ -37,7 +41,7 @@
 .jfx-combo-box.label {
 
     -fx-text-fill: -fx-white-color;
-    -fx-selectedValueLabel-fill: -fx-blue;
+    -fx-selectedValueLabel-fill: -fx-selected-color;
 }
 .scroll-pane{
     -fx-background-color: -fx-primary-color;
@@ -122,6 +126,9 @@
     -jfx-unfocus-color: -fx-primary-color;
     -jfx-default-color: -fx-primary-color;
 }
+.jfx-date-picker{
+-jfx-default-color: -fx-secondary-color;
+}
 .white-background{
     -fx-background-color: -fx-color-white;
 
@@ -138,6 +145,21 @@
 .tooltip{
 -fx-font-size: 20px;
 }
+.reportButton {
+-fx-font-family: "Century Gothic";
+-fx-font-size: 25px;
+
+}
+.titlePaneHeading{
+-fx-text-fill: -fx-white-color;
+-fx-font-size: 20;
+-fx-font-family: "Segoi UI";
+
+}
+.navigationButton{
+-fx-background-color: transparent;
+-fx-border-color: transparent;
+}
 
 
 
@@ -152,11 +174,11 @@
 }
 
 .list-view .list-cell:hover {
-    -fx-background-color: -fx-blue;
+    -fx-background-color: -fx-selected-color;
 }
 
 .list-view .list-cell:selected {
-    -fx-background-color: -fx-blue;
+    -fx-background-color: -fx-selected-color;
 }
 
 .list-view .list-cell {
@@ -172,6 +194,11 @@
     -jfx-rippler-fill: GRAY;
 }
 .list-view .scroll-bar:vertical .thumb{
+    -fx-background-color: -fx-secondary-color;
+    -fx-background-insets: 2,0,0;
+    -fx-background-radius: 2em;
+}
+.list-view .scroll-bar:horizontal .thumb{
     -fx-background-color: -fx-secondary-color;
     -fx-background-insets: 2,0,0;
     -fx-background-radius: 2em;
@@ -203,8 +230,8 @@
 
 .btn-dialog {
 
--fx-background-color: -fx-blue;
--fx-border-color: -fx-blue;
+-fx-background-color: -fx-secondary-color;
+-fx-border-color: -fx-secondary-color;
 -fx-background-radius: 100;
 }
 
@@ -228,3 +255,104 @@
     -fx-background-color: -fx-secondary-color;
 
 }
+
+//Table View
+.table-view{
+   -fx-background-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+/* Spaltenköpfe
+    Struktur column-header-background -> column-header */
+
+.table-view .column-header-background{
+    -fx-background-color: -fx-secondary-color;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: -fx-secondary-color;
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-gray-color;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-primary-color;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0; /* 0 */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -fx-selected-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: transparent;
+}
+.table-view .scroll-bar:vertical .thumb{
+    -fx-background-color: -fx-secondary-color;
+    -fx-background-insets: 2,0,0;
+    -fx-background-radius: 2em;
+}
+.table-view .scroll-bar:horizontal .thumb{
+    -fx-background-color: -fx-secondary-color;
+    -fx-background-insets: 2,0,0;
+    -fx-background-radius: 2em;
+}
+
+
+
+.table-view > .virtual-flow > .scroll-bar > .increment-button,
+.table-view > .virtual-flow > .scroll-bar > .decrement-button {
+    -fx-opacity: 0;
+}
+
+//bar chart
+.axis {
+    -fx-font-size: 2em;
+    -fx-tick-label-fill: #914800;
+    -fx-font-family: Tahoma;
+    -fx-tick-length: 15;
+    -fx-minor-tick-length: 10;
+}
+
+.axis-label {
+   -fx-text-fill: #462300;
+
+}
+
+.axis-tick-mark {
+    -fx-stroke: #637040;
+    -fx-stroke-width: 3;
+}
+.axis-minor-tick-mark {
+    -fx-stroke: #859656;
+}
+.chart-legend {
+   -fx-background-color:  transparent;
+   -fx-padding: 20px;
+}
+

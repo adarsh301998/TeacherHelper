@@ -10,4 +10,7 @@ public class Messages {
 
     public static int LIST_DEPTH = 3;
 
+    public static int SHOW_STUDENT_RESPONSE = 1;
+    public static int SHOW_STUDENT_EVALUATION = 0;
+
 }

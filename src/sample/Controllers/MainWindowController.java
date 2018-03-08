@@ -1,5 +1,6 @@
 package sample.Controllers;
 
+import HelperClasses.DialogPopUp;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,6 +36,9 @@ public class MainWindowController {
     @FXML
     private AnchorPane rootScene;
 
+    @FXML
+    private StackPane stackPane;
+
 
     @FXML
     public void initialize() {
@@ -42,7 +47,7 @@ public class MainWindowController {
 
     @FXML
     void closeEvent(MouseEvent event) {
-        System.exit(0);
+        DialogPopUp.closeAlert(stackPane);
     }
 
     @FXML
