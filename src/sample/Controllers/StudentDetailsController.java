@@ -144,10 +144,9 @@ public class StudentDetailsController {
             });
             dialog.show();
         } else {
-            System.exit(0);
+            DialogPopUp.closeAlert(stackPane);
         }
 
-        DialogPopUp.closeAlert(stackPane);
 
 
     }
@@ -185,6 +184,8 @@ public class StudentDetailsController {
         //Getting data from bus
         testDetails = Bus.getInstance();
 
+        //Restrict invalid input in radio button
+        keymap_gridpane.setDisable(true);
 
         //Setting up tooltip text
 
@@ -313,12 +314,8 @@ public class StudentDetailsController {
             dataSaved = false;
             keymap_save_button.setDisable(false);
 
-            //Initialize evaluation and response
-
-            if (testDetails.getStudentDetails().get(studentIndexCount).getResponse() == null) {
-
-            }
-
+            //Allow user to edit user response
+            keymap_gridpane.setDisable(false);
 
         }
     }

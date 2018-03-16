@@ -7,13 +7,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<StackPane fx:id="stackPane" prefHeight="441.0" prefWidth="778.0" stylesheets="@../../../layouts/CSS/maincss.css"
+<StackPane fx:id="stackPane" prefHeight="441.0" prefWidth="1205.0" stylesheets="@../../../layouts/CSS/maincss.css"
            xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="sample.Controllers.ReportControllers.DistractorController">
     <children>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+        <AnchorPane prefHeight="441.0" prefWidth="1198.0">
             <children>
-                <AnchorPane prefHeight="44.0" prefWidth="1014.0" styleClass="tittlePaneBackground">
+                <AnchorPane prefHeight="44.0" prefWidth="1014.0" styleClass="tittlePaneBackground"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <FontAwesomeIcon fx:id="close_btn" glyphName="CLOSE" layoutX="742.0" layoutY="27.0"
                                          onMouseClicked="#closeEvent" size="3em" styleClass="close-icon"
@@ -34,7 +35,8 @@
                     </children>
                 </AnchorPane>
                 <JFXListView fx:id="listView" layoutX="11.0" layoutY="52.0" minWidth="989.0" prefHeight="383.0"
-                             prefWidth="989.0"/>
+                             prefWidth="1192.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="10.0"
+                             AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="52.0"/>
             </children>
         </AnchorPane>
     </children>

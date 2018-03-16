@@ -58,7 +58,15 @@
                             <JFXButton fx:id="studentResponse_btn" onAction="#openReportOption"
                                        styleClass="reportButton" text="Student Response"/>
                             <JFXButton fx:id="distractors_btn" onAction="#openReportOption" styleClass="reportButton"
-                                       text="Distractors"/>
+                                       text="Options Corelations"/>
+                            <JFXButton fx:id="totalMarksBarChart_btn" onAction="#openReportOption"
+                                       styleClass="reportButton"
+                                       text="Total Marks Chart"/>
+                            <JFXButton fx:id="binaryCorelation_btn" onAction="#openReportOption"
+                                       styleClass="reportButton"
+                                       text="Binary Corelations"/>
+
+
                         </children>
                     </VBox>
                 </content>

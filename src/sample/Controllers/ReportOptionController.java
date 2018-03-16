@@ -58,6 +58,12 @@ public class ReportOptionController {
     @FXML
     private StackPane stack_pane;
 
+    @FXML
+    private JFXButton totalMarksBarChart_btn;
+
+    @FXML
+    private JFXButton binaryCorelation_btn;
+
     TestDetails testDetails;
     NavigationHelper navigationHelper;
 
@@ -100,6 +106,7 @@ public class ReportOptionController {
             frame = "scenes/studentDetails.fxml";
         }
 
+
         // navigationHelper.loadFile(event, frame);
         openFrame(frame, event);
 
@@ -113,6 +120,12 @@ public class ReportOptionController {
         }
         if (event.getSource() == distractors_btn) {
             frame = "scenes/report/distractor.fxml";
+        }
+        if (event.getSource() == totalMarksBarChart_btn) {
+            frame = "scenes/report/totalMarksBarChart.fxml";
+        }
+        if (event.getSource() == binaryCorelation_btn) {
+            frame = "scenes/report/binaryCorelations.fxml";
         }
 
         openFrame(frame, event);

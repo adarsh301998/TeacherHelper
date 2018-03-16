@@ -11,10 +11,16 @@ public class ListGenerationHelper {
 
     public static TestDetails testDetails = Bus.getInstance();
 
+
+    private static void updateTestDetails() {
+        testDetails = Bus.getInstance();
+    }
     // 1-1 1-2 1-3
     //working
     public static ArrayList<String> questionList() {
 
+        updateTestDetails();
+        System.out.println("test name = " + testDetails.getTestName());
         ArrayList<String> questionList = new ArrayList<>();
         for (int i = 0; i < testDetails.getQuestion().size(); i++) {
             String q = testDetails.getQuestion().get(i);
@@ -34,20 +40,23 @@ public class ListGenerationHelper {
     //student response(ABCD) in single list
     // tested
     public static List<List<Character>> studentResponseInList() {
+        updateTestDetails();
         List<List<Character>> studentResponse = new ArrayList<>();
         for (int i = 0; i < testDetails.getNumberOfStudent(); i++) {
 
             StudentDetails student = testDetails.getStudentDetails().get(i);
-            //Addding all response in one list
+            //Adding all response in one list
             ArrayList<Character> eachStudentResponse = new ArrayList<>();
             if (student.getResponse() != null) {
                 for (int j = 0; j < testDetails.getNumberOfQuestion(); j++) {
-                    for (int x = 0; x < testDetails.getSubQuestionList().get(j); x++) {
-                        Character r = student.getResponse().get(j).get(x);
-                        if (r == null) {
-                            eachStudentResponse.add(' ');
-                        } else {
-                            eachStudentResponse.add(r);
+                    if (testDetails.getSubQuestionList().get(j) != null) {
+                        for (int x = 0; x < testDetails.getSubQuestionList().get(j); x++) {
+                            Character r = student.getResponse().get(j).get(x);
+                            if (r == null) {
+                                eachStudentResponse.add(' ');
+                            } else {
+                                eachStudentResponse.add(r);
+                            }
                         }
                     }
 
@@ -64,6 +73,7 @@ public class ListGenerationHelper {
     //student Evaluation(1 and 0) in single list
     // tested
     public static List<List<Integer>> studentEvaluationInList() {
+        updateTestDetails();
         List<List<Integer>> studentResponse = new ArrayList<>();
         for (int i = 0; i < testDetails.getNumberOfStudent(); i++) {
 
@@ -72,11 +82,13 @@ public class ListGenerationHelper {
             ArrayList<Integer> eachStudentResponse = new ArrayList<>();
             if (student.getResponse() != null) {
                 for (int j = 0; j < testDetails.getNumberOfQuestion(); j++) {
-                    for (int x = 0; x < testDetails.getSubQuestionList().get(j); x++) {
-                        if (student.getEvaluation().get(j).get(x) == null) {
-                            eachStudentResponse.add(0);
-                        } else {
-                            eachStudentResponse.add(student.getEvaluation().get(j).get(x));
+                    if (testDetails.getSubQuestionList().get(j) != null) {
+                        for (int x = 0; x < testDetails.getSubQuestionList().get(j); x++) {
+                            if (student.getEvaluation().get(j).get(x) == null) {
+                                eachStudentResponse.add(0);
+                            } else {
+                                eachStudentResponse.add(student.getEvaluation().get(j).get(x));
+                            }
                         }
                     }
 
@@ -91,10 +103,30 @@ public class ListGenerationHelper {
         return studentResponse;
     }
 
+
+    //student total score
+    public static List<Integer> studentsTotalMarks() {
+        updateTestDetails();
+        List<List<Integer>> studentEvalutionList = studentEvaluationInList();
+        List<Integer> sum = new ArrayList<>();
+        for (int i = 0; i < studentEvalutionList.size(); i++) {
+            List<Integer> temp = studentEvalutionList.get(i);
+            int s = 0;
+            // Calculating sum for each student
+            for (int j = 0; j < temp.size(); j++) {
+                s += temp.get(j);
+            }
+            sum.add(s);
+
+        }
+
+        return sum;
+    }
+
     //generate student roll number list
     // tested
     public static ArrayList<String> studentRollNumberList() {
-
+        updateTestDetails();
         ArrayList<String> rollNumbers = new ArrayList<>();
 
         for (int i = 0; i < testDetails.getNumberOfStudent(); i++) {
@@ -114,6 +146,7 @@ public class ListGenerationHelper {
     //add student response with roll number
     // data form [[A B C D][A B C D]]
     public static List<List<String>> rollNumberAndResponseList() {
+        updateTestDetails();
         List<List<Character>> studentResponse = studentResponseInList();
         ArrayList<String> rollNumbers = studentRollNumberList();
         List<List<String>> combineList = new ArrayList<>();
@@ -138,6 +171,7 @@ public class ListGenerationHelper {
     //Evaluation and roll number Combine
     //Data form  [[1 0 1 0][1 1 1]] one row represent each student
     public static List<List<String>> rollNumberAndEvaluationList() {
+        updateTestDetails();
         List<List<Integer>> studentEvaluation = studentEvaluationInList();
         ArrayList<String> rollNumbers = studentRollNumberList();
         List<List<String>> combineList = new ArrayList<>();
@@ -163,7 +197,7 @@ public class ListGenerationHelper {
     //get number reponse in of eachQuestion for each option
     //tested
     public static ArrayList<ArrayList<Integer>> allStudentResponseForEachOptionList() {
-
+        updateTestDetails();
         ArrayList<ArrayList<Integer>> count = new ArrayList<>();
         List<List<Character>> studentResponse = studentResponseInList();
 
@@ -195,6 +229,22 @@ public class ListGenerationHelper {
         return count;
 
     }
+
+    public static ArrayList<Character> getKeyList() {
+        updateTestDetails();
+        ArrayList<Character> key = new ArrayList<>();
+        ArrayList<ArrayList<Character>> keyList = testDetails.getKey();
+
+        for (int i = 0; i < keyList.size(); i++) {
+
+            key.addAll(keyList.get(i));
+        }
+
+        return key;
+    }
+
+
+
 
 
 }

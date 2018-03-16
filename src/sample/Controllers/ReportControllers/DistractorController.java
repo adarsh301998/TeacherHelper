@@ -1,5 +1,6 @@
 package sample.Controllers.ReportControllers;
 
+import Analysis.Distractors;
 import HelperClasses.ChartHelper;
 import HelperClasses.DialogPopUp;
 import HelperClasses.ListGenerationHelper;
@@ -55,14 +56,20 @@ public class DistractorController {
 
     private void insertDataInListView() {
 
-        ArrayList<String> studentRollNumbers = ListGenerationHelper.studentRollNumberList();
+        ArrayList<String> quesyionLabels = ListGenerationHelper.questionList();
         ArrayList<ArrayList<Integer>> studentResponseEachQues = ListGenerationHelper.allStudentResponseForEachOptionList();
-        ArrayList<ArrayList<Integer>> distractor = getDistractorsList(studentResponseEachQues);
+        ArrayList<ArrayList<Double>> distractor = getDistractorsList(studentResponseEachQues);
+        ArrayList<Character> keyList = ListGenerationHelper.getKeyList();
 
-        for (int i = 0; i < studentRollNumbers.size(); i++) {
 
-            Label rollNumber = new Label(studentRollNumbers.get(i));
-            rollNumber.setFont(new Font("Segoi UI", 30));
+        for (int i = 0; i < quesyionLabels.size(); i++) {
+
+            Label rollNumber = new Label(quesyionLabels.get(i));
+            rollNumber.setFont(new Font("Segoi UI", 20));
+
+            Label keyLabel = new Label("Key : " + keyList.get(i));
+            keyLabel.setFont(new Font("Segoi UI", 20));
+            keyLabel.setStyle("-fx-text-fill: #27ae60");
 
             GridPane gridLayout = getGridLayout(studentResponseEachQues.get(i), distractor.get(i));
 
@@ -70,7 +77,7 @@ public class DistractorController {
 
             BarChart barChart = ChartHelper.distrcatorChart(studentResponseEachQues.get(i), distractor.get(i));
 
-            HBox hBox = new HBox(rollNumber, (Node) gridLayout, barChart);
+            HBox hBox = new HBox(rollNumber, keyLabel, gridLayout, barChart);
             hBox.setSpacing(100);
 
             listView.getItems().add(hBox);
@@ -80,7 +87,7 @@ public class DistractorController {
 
     }
 
-    private GridPane getGridLayout(ArrayList<Integer> studentResponseEachQues, ArrayList<Integer> distractor) {
+    private GridPane getGridLayout(ArrayList<Integer> studentResponseEachQues, ArrayList<Double> distractor) {
         GridPane gridPane = new GridPane();
         gridPane.setPadding(new Insets(5, 5, 5, 5));
         ArrayList<String> arrayList = new ArrayList<>();
@@ -90,39 +97,51 @@ public class DistractorController {
         arrayList.add(" C ");
         arrayList.add(" D ");
         gridPane.setGridLinesVisible(true);
+        int labelFontSize = 20;
+        // Creating row for options
         for (int i = 0; i < arrayList.size(); i++) {
             Label label = new Label(arrayList.get(i));
-            label.setFont(new Font("Segoi UI", 30));
+            label.setFont(new Font("Segoi UI", labelFontSize));
             gridPane.add(label, i, 0);
         }
-        Label label = new Label(" Response ");
-        label.setFont(new Font("Segoi UI", 30));
+
+
+        Label label = new Label(" Response Count ");
+        label.setFont(new Font("Segoi UI", labelFontSize));
+        label.setStyle("-fx-text-fill: #F1602C");
+
         gridPane.add(label, 0, 1);
 
-        Label label2 = new Label(" Distractor ");
-        label2.setFont(new Font("Segoi UI", 30));
+        Label label2 = new Label(" Corelation ");
+        label2.setFont(new Font("Segoi UI", labelFontSize));
+        label2.setStyle("-fx-text-fill: #E3AF5D");
         gridPane.add(label2, 0, 2);
 
         for (int i = 0; i < studentResponseEachQues.size(); i++) {
             // adding student response
             Label label1 = new Label(" " + studentResponseEachQues.get(i) + " ");
-            label1.setFont(new Font("Segoi UI", 30));
+            label1.setFont(new Font("Segoi UI", labelFontSize));
+            label1.setStyle("-fx-text-fill: #F1602C");
             gridPane.add(label1, i + 1, 1);
 
             //adding distractors
             Label label3 = new Label(" " + distractor.get(i) + " ");
-            label3.setFont(new Font("Segoi UI", 30));
+            label3.setFont(new Font("Segoi UI", labelFontSize));
+            label3.setStyle("-fx-text-fill: #E3AF5D");
             gridPane.add(label3, i + 1, 2);
         }
+
 
 
         return gridPane;
     }
 
-    private ArrayList<ArrayList<Integer>> getDistractorsList(ArrayList<ArrayList<Integer>> studentResponseEachQues) {
+    private ArrayList<ArrayList<Double>> getDistractorsList(ArrayList<ArrayList<Integer>> studentResponseEachQues) {
 
 
-        return studentResponseEachQues;
+        ArrayList<ArrayList<Double>> distrcatorsList = Distractors.getDistactors();
+
+        return distrcatorsList;
     }
 
     @FXML

@@ -53,6 +53,7 @@ public class DisplayStudentResponseController {
 
     public void initialize() {
         testDetails = Bus.getInstance();
+
         //Create table
         /*ListGenerationHelper.questionList();
         ListGenerationHelper.studentResponseInList();
@@ -66,7 +67,7 @@ public class DisplayStudentResponseController {
         List<String> questionLabels = ListGenerationHelper.questionList();
         questionLabels.add(0, "RollNo.");
         TableViewHelper.insertDataInColumnDistractor(tableView, questionLabels);
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
         //Adding rows
         insertRow(ListGenerationHelper.rollNumberAndResponseList());

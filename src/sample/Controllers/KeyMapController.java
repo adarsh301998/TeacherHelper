@@ -143,9 +143,12 @@ public class KeyMapController {
             sub_ques_txt.setText(String.valueOf(testDetails.getSubQuestionList().get(0)));
             generateRadioButtonOperation(0);
         }
+
+        //Restrict user to enter in radio button without validation
+        keymap_gridpane.setDisable(true);
     }
 
-
+    //Prooced button
     @FXML
     void generateRadioButton(ActionEvent event) {
 
@@ -171,6 +174,8 @@ public class KeyMapController {
             testDetails.getSubQuestionList().set(selectedIndex, subQuestions);
 
             generateRadioButtonOperation(selectedIndex);
+            //Allow user to edit user response
+            keymap_gridpane.setDisable(false);
         }
     }
 

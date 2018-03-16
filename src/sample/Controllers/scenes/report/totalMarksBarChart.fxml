@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<StackPane fx:id="stackPane" prefHeight="600.0" prefWidth="974.0" stylesheets="@../../../layouts/CSS/maincss.css"
+           xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="sample.Controllers.ReportControllers.TotalMarksBarChartController">
+    <children>
+        <AnchorPane prefHeight="480.0" prefWidth="974.0">
+            <children>
+                <AnchorPane layoutX="26.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0"
+                            styleClass="tittlePaneBackground" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <children>
+                        <FontAwesomeIcon fx:id="close_btn" glyphName="CLOSE" layoutX="68.0" layoutY="18.0"
+                                         onMouseClicked="#closeEvent" size="3em" styleClass="close-icon"
+                                         AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="0.0"
+                                         AnchorPane.topAnchor="0.0"/>
+                        <JFXButton fx:id="back_btn" layoutX="6.0" layoutY="-8.0" onAction="#backEvent" prefHeight="45.0"
+                                   prefWidth="40.0" text=" " AnchorPane.leftAnchor="0.0">
+                            <graphic>
+                                <ImageView fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../icons/back.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </JFXButton>
+                        <Label fx:id="titlePaneHeading" layoutX="73.0" layoutY="3.0" onMouseClicked="#displayBasicInfo"
+                               styleClass="titlePaneHeading" text="Total Marks Chart" AnchorPane.leftAnchor="73.0"
+                               AnchorPane.topAnchor="3.0"/>
+                    </children>
+                </AnchorPane>
+                <ScrollPane layoutX="7.0" layoutY="48.0" prefHeight="549.0" prefWidth="958.0"
+                            AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="9.0"
+                            AnchorPane.topAnchor="48.0">
+                    <content>
+                        <VBox fx:id="vbox" prefHeight="492.0" prefWidth="102.0"/>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

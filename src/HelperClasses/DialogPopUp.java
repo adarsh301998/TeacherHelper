@@ -91,7 +91,7 @@ public class DialogPopUp {
         key_btn.setPrefWidth(100);
         key_btn.getStyleClass().add("btn-dialog");
 
-        JFXButton report_btn = new JFXButton("report");
+        JFXButton report_btn = new JFXButton("Report");
         report_btn.setPrefWidth(100);
         report_btn.getStyleClass().add("btn-dialog");
 
