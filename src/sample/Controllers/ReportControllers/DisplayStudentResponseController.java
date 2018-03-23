@@ -66,7 +66,7 @@ public class DisplayStudentResponseController {
         //Adding Columns
         List<String> questionLabels = ListGenerationHelper.questionList();
         questionLabels.add(0, "RollNo.");
-        TableViewHelper.insertDataInColumnDistractor(tableView, questionLabels);
+        TableViewHelper.insertDataInColumn(tableView, questionLabels);
         tableView.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
         //Adding rows
@@ -77,7 +77,7 @@ public class DisplayStudentResponseController {
 
         // Inserting rows
         tableView.getItems().clear();
-        TableViewHelper.insertDataInRowDistractor(tableView, displayList);
+        TableViewHelper.insertDataInRow(tableView, displayList);
 
     }
 

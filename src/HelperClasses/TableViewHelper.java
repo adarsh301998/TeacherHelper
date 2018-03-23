@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TableViewHelper {
 
-    public static void insertDataInColumnDistractor(TableView<ObservableList<String>> tableView, List<String> columnNames) {
+    public static void insertDataInColumn(TableView<ObservableList<String>> tableView, List<String> columnNames) {
         for (int i = 0; i < columnNames.size(); i++) {
             final int finalIdx = i;
             TableColumn<ObservableList<String>, String> column = new TableColumn<>(
@@ -26,7 +26,7 @@ public class TableViewHelper {
         }
     }
 
-    public static void insertDataInRowDistractor(TableView<ObservableList<String>> tableView, List<List<String>> arrayLists) {
+    public static void insertDataInRow(TableView<ObservableList<String>> tableView, List<List<String>> arrayLists) {
 
         for (int i = 0; i < arrayLists.size(); i++) {
             tableView.getItems().add(
@@ -35,8 +35,6 @@ public class TableViewHelper {
                     )
             );
         }
-
-
     }
 
 }

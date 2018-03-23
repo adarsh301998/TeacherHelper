@@ -16,11 +16,16 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ChartHelper {
 
+    static int index = 0, index2 = 0;
     public static BarChart distrcatorChart(ArrayList<Integer> response, ArrayList<Double> distractor) {
+
+        index = 0;
+        index2 = 0;
 
         CategoryAxis x = new CategoryAxis();
         x.setCategories(FXCollections.<String>observableArrayList(Arrays.asList("A", "B", "C", "D")));
@@ -37,16 +42,19 @@ public class ChartHelper {
         option.add("C");
         option.add("D");
 
+        ArrayList<Double> scalledResponse = scalingBar(response);
+
         // Series for response
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
-        series1.setName("Response");
+        series1.setName(Constants.RESPONSE);
         for (int i = 0; i < option.size(); i++) {
-            final XYChart.Data<String, Number> data = new XYChart.Data(option.get(i), response.get(i));
+            final XYChart.Data<String, Number> data = new XYChart.Data(option.get(i), scalledResponse.get(i));
             data.nodeProperty().addListener(new ChangeListener<Node>() {
                 @Override
                 public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newValue) {
                     if (newValue != null) {
-                        displayLabelForData(data);
+                        displayLabelForScalledChartData(data, String.valueOf(response.get(index)));
+                        index++;
                     }
                 }
             });
@@ -56,14 +64,15 @@ public class ChartHelper {
 
         //Series for distrcators
         XYChart.Series<String, Number> series2 = new XYChart.Series<>();
-        series2.setName("Distractor");
+        series2.setName(Constants.CORRELATION);
         for (int i = 0; i < option.size(); i++) {
             final XYChart.Data<String, Number> data = new XYChart.Data(option.get(i), distractor.get(i));
             data.nodeProperty().addListener(new ChangeListener<Node>() {
                 @Override
                 public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newValue) {
                     if (newValue != null) {
-                        displayLabelForData(data);
+                        displayLabelForScalledChartData(data, String.valueOf(distractor.get(index2)));
+                        index2++;
                     }
                 }
             });
@@ -72,8 +81,8 @@ public class ChartHelper {
 
 
         barChart.getData().addAll(series1, series2);
-        barChart.setPrefHeight(300);
-        barChart.setPrefWidth(400);
+        barChart.setPrefHeight(Constants.OPTION_CORRELATION_BAR_CHART_HEIGHT);
+        barChart.setPrefWidth(Constants.OPTION_CORRELATION_BAR_CHART_WIDTH);
         //barChart.setStyle("-fx-background-color: #3498db");
 
         return barChart;
@@ -119,8 +128,6 @@ public class ChartHelper {
         //barChart.setStyle("-fx-background-color: #3498db");
 
         return barChart;
-
-
     }
 
     public static BarChart binaryDistractorChart() {
@@ -134,13 +141,13 @@ public class ChartHelper {
         x.setLabel("Questions");
 
         NumberAxis y = new NumberAxis();
-        y.setLabel("Distractors");
+        //y.setLabel("Distractors");
 
         BarChart<String, Number> barChart = new BarChart<>(x, y);
 
         // Series for response
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
-        series1.setName("Corelations");
+        series1.setName(Constants.CORRELATION);
         for (int i = 0; i < distractors.size(); i++) {
             final XYChart.Data<String, Number> data = new XYChart.Data(quesList.get(i), distractors.get(i));
             data.nodeProperty().addListener(new ChangeListener<Node>() {
@@ -182,6 +189,9 @@ public class ChartHelper {
             public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
                 dataText.setLayoutX(Math.round(newValue.getMinX() + newValue.getWidth() / 2 - dataText.prefWidth(-1) / 2));
                 long y = Math.round(newValue.getMinY() - dataText.prefHeight(-1) * 0.5);
+                if (dataText.getText().charAt(0) == '-') {
+                    y = Math.round(newValue.getMaxY() + dataText.prefHeight(-1));
+                }
                 dataText.setLayoutY(y);
             }
         });
@@ -209,10 +219,8 @@ public class ChartHelper {
                 dataText.setLayoutX(Math.round(newValue.getMinX() + newValue.getWidth() / 2 - dataText.prefWidth(-1) / 2));
                 long y = Math.round(newValue.getMinY());
                 if (text.charAt(0) == '-') {
-                    // Adding displacement when y = center
-                    double val = Math.abs(Double.valueOf(text));
-                    double displacement = (val * 4.0) * 100.0;
-                    y += displacement;
+                    // getting y coordinates in case of minus sign
+                    y = Math.round(newValue.getMaxY() + newValue.getWidth() / 2);
                 }
                 dataText.setLayoutY(y);
             }
@@ -220,6 +228,26 @@ public class ChartHelper {
 
 
     }
+
+    private static ArrayList<Double> scalingBar(ArrayList<Integer> response) {
+
+        int max = Collections.max(response);
+        max += 10;
+
+        ArrayList<Double> list = new ArrayList<>();
+
+        for (int i = 0; i < response.size(); i++) {
+
+            double d = (double) response.get(i) / max;
+            list.add(d);
+
+        }
+
+        return list;
+
+
+    }
+
 
 
 }

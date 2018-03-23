@@ -1,6 +1,7 @@
 package sample.Controllers.ReportControllers;
 
 import HelperClasses.ChartHelper;
+import HelperClasses.Constants;
 import HelperClasses.DialogPopUp;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -37,6 +38,8 @@ public class BinaryCorelationController {
     private VBox vbox;
 
     public void initialize() {
+
+        titlePaneHeading.setText(Constants.CORRELATION);
 
         BarChart<String, Number> binaryCorelationChart = ChartHelper.binaryDistractorChart();
 

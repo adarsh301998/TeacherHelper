@@ -62,6 +62,9 @@ public class ReportOptionController {
     private JFXButton totalMarksBarChart_btn;
 
     @FXML
+    private JFXButton guttFile_btn;
+
+    @FXML
     private JFXButton binaryCorelation_btn;
 
     TestDetails testDetails;
@@ -126,6 +129,9 @@ public class ReportOptionController {
         }
         if (event.getSource() == binaryCorelation_btn) {
             frame = "scenes/report/binaryCorelations.fxml";
+        }
+        if (event.getSource() == guttFile_btn) {
+            frame = "scenes/report/gutt_file.fxml";
         }
 
         openFrame(frame, event);

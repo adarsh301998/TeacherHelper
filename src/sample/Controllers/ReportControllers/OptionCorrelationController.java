@@ -2,6 +2,7 @@ package sample.Controllers.ReportControllers;
 
 import Analysis.Distractors;
 import HelperClasses.ChartHelper;
+import HelperClasses.Constants;
 import HelperClasses.DialogPopUp;
 import HelperClasses.ListGenerationHelper;
 import com.jfoenix.controls.JFXButton;
@@ -11,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import sample.DataClasses.Bus;
@@ -28,7 +31,7 @@ import sample.DataClasses.TestDetails;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DistractorController {
+public class OptionCorrelationController {
     @FXML
     private FontAwesomeIcon close_btn;
 
@@ -47,6 +50,7 @@ public class DistractorController {
     TestDetails testDetails;
 
     public void initialize() {
+        titlepane_Label.setText(Constants.CORRELATION);
         testDetails = Bus.getInstance();
         //Create tables Here
         listView.setExpanded(true);
@@ -67,17 +71,21 @@ public class DistractorController {
             Label rollNumber = new Label(quesyionLabels.get(i));
             rollNumber.setFont(new Font("Segoi UI", 20));
 
-            Label keyLabel = new Label("Key : " + keyList.get(i));
-            keyLabel.setFont(new Font("Segoi UI", 20));
-            keyLabel.setStyle("-fx-text-fill: #27ae60");
-
             GridPane gridLayout = getGridLayout(studentResponseEachQues.get(i), distractor.get(i));
 
             //GridPane gridLayout = getGridLayout(studentResponseEachQues);
 
-            BarChart barChart = ChartHelper.distrcatorChart(studentResponseEachQues.get(i), distractor.get(i));
 
-            HBox hBox = new HBox(rollNumber, keyLabel, gridLayout, barChart);
+            BarChart barChart = ChartHelper.distrcatorChart(studentResponseEachQues.get(i), distractor.get(i));
+            Label keyLabel = new Label("Key : " + keyList.get(i));
+            keyLabel.setFont(new Font("Segoi UI", 20));
+            keyLabel.setStyle("-fx-text-fill: #27ae60");
+            //keyLabel.setStyle("-fx-background-color: #FFFF");
+
+            VBox chartAndKeyBox = new VBox(keyLabel, barChart);
+            chartAndKeyBox.setSpacing(10);
+            chartAndKeyBox.setAlignment(Pos.CENTER);
+            HBox hBox = new HBox(rollNumber, gridLayout, chartAndKeyBox);
             hBox.setSpacing(100);
 
             listView.getItems().add(hBox);
@@ -112,7 +120,7 @@ public class DistractorController {
 
         gridPane.add(label, 0, 1);
 
-        Label label2 = new Label(" Corelation ");
+        Label label2 = new Label(Constants.CORRELATION + " ");
         label2.setFont(new Font("Segoi UI", labelFontSize));
         label2.setStyle("-fx-text-fill: #E3AF5D");
         gridPane.add(label2, 0, 2);

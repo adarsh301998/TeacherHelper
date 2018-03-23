@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import sample.DataClasses.StudentDetails;
 import sample.DataClasses.TestDetails;
 
@@ -40,7 +39,7 @@ public class Main extends Application {
         //controller.init(testDetails);
 
 
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        // primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setX(60);
         primaryStage.setY(60);
         primaryStage.setScene(new Scene(root));

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <StackPane fx:id="stackPane" prefHeight="441.0" prefWidth="1205.0" stylesheets="@../../../layouts/CSS/maincss.css"
            xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="sample.Controllers.ReportControllers.DistractorController">
+           fx:controller="sample.Controllers.ReportControllers.OptionCorrelationController">
     <children>
         <AnchorPane prefHeight="441.0" prefWidth="1198.0">
             <children>

@@ -20,7 +20,6 @@ public class ListGenerationHelper {
     public static ArrayList<String> questionList() {
 
         updateTestDetails();
-        System.out.println("test name = " + testDetails.getTestName());
         ArrayList<String> questionList = new ArrayList<>();
         for (int i = 0; i < testDetails.getQuestion().size(); i++) {
             String q = testDetails.getQuestion().get(i);
@@ -244,7 +243,44 @@ public class ListGenerationHelper {
     }
 
 
+    public static List<List<String>> guttArrayToList(int[][] guttArray, int[] quesSum) {
+
+        List<List<String>> guttList = new ArrayList<>();
+        List<String> roollnumbers = studentRollNumberList();
+
+        for (int i = 0; i < guttArray.length; i++) {
+
+            List<String> subList = new ArrayList<>();
+            subList.add(roollnumbers.get(guttArray[i][0]));
+            for (int j = 1; j < guttArray[0].length; j++) {
+                subList.add(String.valueOf(guttArray[i][j]));
+            }
+
+            guttList.add(subList);
+        }
+        List<String> subList = new ArrayList<>();
+        subList.add("Total");
+
+        for (int i = quesSum.length - 1; i >= 0; i--) {
+            subList.add(String.valueOf(quesSum[i]));
+        }
+        subList.add("");
+        guttList.add(subList);
 
 
+        return guttList;
+
+    }
+
+    //Sorting according to maximum number 1 in the give question
+    public static List<String> sortedQuestion(int[] quesIndex) {
+        List<String> sortedList = new ArrayList<>();
+        List<String> queslist = questionList();
+
+        for (int i = 0; i < quesIndex.length; i++) {
+            sortedList.add(queslist.get(quesIndex[i]));
+        }
+        return sortedList;
+    }
 
 }

@@ -1,8 +1,8 @@
 package sample.Controllers;
 
+import HelperClasses.Constants;
 import HelperClasses.DialogPopUp;
 import HelperClasses.ListHelper;
-import HelperClasses.Messages;
 import HelperClasses.RadioButtonHelper;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.NumberValidator;
@@ -222,13 +222,13 @@ public class KeyMapController {
             JFXDialogLayout layout = new JFXDialogLayout();
             layout.setHeading(new Text("Save"));
 
-            Label label = new Label(Messages.ASK_FOR_SAVING_DATA);
+            Label label = new Label(Constants.ASK_FOR_SAVING_DATA);
             label.setFont(new Font("Segoi UI", 20));
 
             layout.setBody(label);
 
-            JFXButton cancel = new JFXButton(Messages.CANCEL_TEXT);
-            JFXButton savebtn = new JFXButton(Messages.SAVE_TXT);
+            JFXButton cancel = new JFXButton(Constants.CANCEL_TEXT);
+            JFXButton savebtn = new JFXButton(Constants.SAVE_TXT);
             savebtn.setPrefWidth(100);
             cancel.setPrefWidth(100);
             cancel.getStyleClass().add("btn-dialog");
@@ -294,7 +294,7 @@ public class KeyMapController {
         ques_num_txt.getSelectionModel().select(selectedIndex);
 
         JFXSnackbar snackbar = new JFXSnackbar(stackPane);
-        snackbar.show(Messages.SAVE_SUCCESSFULL, Messages.TOAST_DURATION);
+        snackbar.show(Constants.SAVE_SUCCESSFULL, Constants.TOAST_DURATION);
 
     }
 

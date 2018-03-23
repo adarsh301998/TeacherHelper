@@ -1,8 +1,8 @@
 package sample.Controllers;
 
+import HelperClasses.Constants;
 import HelperClasses.DialogPopUp;
 import HelperClasses.ListHelper;
-import HelperClasses.Messages;
 import HelperClasses.RadioButtonHelper;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.NumberValidator;
@@ -113,13 +113,13 @@ public class StudentDetailsController {
             JFXDialogLayout layout = new JFXDialogLayout();
             layout.setHeading(new Text("Save"));
 
-            Label label = new Label(Messages.ASK_FOR_SAVING_DATA);
+            Label label = new Label(Constants.ASK_FOR_SAVING_DATA);
             label.setFont(new Font("Segoi UI", 20));
 
             layout.setBody(label);
 
-            JFXButton cancel = new JFXButton(Messages.CANCEL_TEXT);
-            JFXButton savebtn = new JFXButton(Messages.SAVE_TXT);
+            JFXButton cancel = new JFXButton(Constants.CANCEL_TEXT);
+            JFXButton savebtn = new JFXButton(Constants.SAVE_TXT);
             savebtn.setPrefWidth(100);
             cancel.setPrefWidth(100);
             cancel.getStyleClass().add("btn-dialog");
@@ -363,7 +363,7 @@ public class StudentDetailsController {
         saveDataOperations(selectedIndex);
 
         JFXSnackbar snackbar = new JFXSnackbar(stackPane);
-        snackbar.show(Messages.SAVE_SUCCESSFULL, Messages.TOAST_DURATION);
+        snackbar.show(Constants.SAVE_SUCCESSFULL, Constants.TOAST_DURATION);
 
         // Updating question list combo Box
         List list = testDetails.getQuestion();
@@ -395,7 +395,7 @@ public class StudentDetailsController {
             dataSaved = true;
 
 //            JFXSnackbar snackbar = new JFXSnackbar(stackPane);
-//            snackbar.show(Messages.SAVE_SUCCESSFULL, Messages.TOAST_DURATION);
+//            snackbar.show(Constants.SAVE_SUCCESSFULL, Constants.TOAST_DURATION);
 
             init_StudentList();
 
@@ -413,7 +413,7 @@ public class StudentDetailsController {
             displayBasicStudentInfo(studentIndexCount);
         } else {
             JFXSnackbar snackbar = new JFXSnackbar(stackPane);
-            snackbar.show("No more students are available", Messages.TOAST_DURATION);
+            snackbar.show("No more students are available", Constants.TOAST_DURATION);
             //studentIndexCount = 0;
         }
 

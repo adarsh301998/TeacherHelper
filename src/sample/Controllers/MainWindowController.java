@@ -1,7 +1,7 @@
 package sample.Controllers;
 
+import HelperClasses.Constants;
 import HelperClasses.DialogPopUp;
-import HelperClasses.Messages;
 import HelperClasses.ReaderHelper;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
@@ -196,7 +196,7 @@ public class MainWindowController {
         if (event.getSource() == btn_open) {
             if (!ReaderHelper.testPresent()) {
                 JFXSnackbar snackbar = new JFXSnackbar();
-                snackbar.show("Nothing to open", Messages.TOAST_DURATION);
+                snackbar.show("Nothing to open", Constants.TOAST_DURATION);
             } else {
 
                 loader.setLocation(getClass().getResource("scenes/openTest.fxml"));

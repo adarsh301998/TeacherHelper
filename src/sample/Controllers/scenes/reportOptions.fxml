@@ -65,6 +65,9 @@
                             <JFXButton fx:id="binaryCorelation_btn" onAction="#openReportOption"
                                        styleClass="reportButton"
                                        text="Binary Corelations"/>
+                            <JFXButton fx:id="guttFile_btn" onAction="#openReportOption"
+                                       styleClass="reportButton"
+                                       text="Gutt Table"/>
 
 
                         </children>
