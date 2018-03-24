@@ -4,74 +4,32 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<StackPane fx:id="stackPane" prefHeight="516.0" prefWidth="753.0" stylesheets="@../../layouts/CSS/maincss.css"
-           xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="sample.Controllers.KeyMapController">
-
-    <AnchorPane fx:id="key_map_main_layout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                minWidth="-Infinity" prefHeight="516.0" prefWidth="839.0" styleClass="light-background">
-    <children>
-        <AnchorPane layoutX="57.0" layoutY="25.0" prefHeight="494.0" prefWidth="321.0" styleClass="bluebackground"
-                    stylesheets="@../../layouts/CSS/maincss.css" AnchorPane.bottomAnchor="-3.0"
-                    AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="461.0" AnchorPane.topAnchor="25.0">
-            <children>
-                <JFXComboBox fx:id="ques_num_txt" layoutX="36.0" layoutY="145.0" onAction="#questonChanged"
-                             prefHeight="36.0" prefWidth="246.0" promptText="Select Question"/>
-                <JFXTextField fx:id="sub_ques_txt" labelFloat="true" layoutX="37.0" layoutY="246.0" prefHeight="36.0"
-                              prefWidth="236.0" promptText="SubQuestion">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </JFXTextField>
-                <JFXButton fx:id="proceed_btn" layoutX="194.0" layoutY="343.0" onAction="#generateRadioButton"
-                           prefHeight="36.0" prefWidth="93.0" styleClass="darkborder"
-                           stylesheets="@../../layouts/CSS/maincss.css" text="Proceed"/>
-                <Label layoutX="50.0" layoutY="54.0" onMouseClicked="#showBasicInfo" prefHeight="62.0" prefWidth="219.0"
-                       text="Key Map" textFill="WHITE">
-                    <font>
-                        <Font name="Segoe UI" size="51.0"/>
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
-        <JFXButton fx:id="keymap_save_button" layoutX="385.0" layoutY="480.0" onAction="#saveRadioData"
-                   prefHeight="27.0" prefWidth="124.0" text="Save"/>
-        <AnchorPane fx:id="keymap_anchor_radioMap" layoutX="310.0" layoutY="27.0" prefHeight="449.0" prefWidth="392.0"
-                    AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="7.0"
-                    AnchorPane.topAnchor="22.0">
-            <children>
-                <ScrollPane fx:id="scroll_pane" layoutX="14.0" layoutY="14.0" prefHeight="436.0" prefWidth="435.0">
-                    <content>
-                        <AnchorPane prefHeight="457.0" prefWidth="447.0" styleClass="light-background">
-                            <children>
-                                <GridPane fx:id="keymap_gridpane" prefHeight="-Infinity" prefWidth="-Infinity"
-                                          styleClass="dark-background" stylesheets="@../../layouts/CSS/maincss.css"
-                                          vgap="20.0">
-
-                                </GridPane>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </ScrollPane>
-            </children>
-        </AnchorPane>
-        <AnchorPane prefHeight="25.0" prefWidth="839.0" styleClass="tittlePaneBackground">
+<StackPane fx:id="stackPane" style="-fx-background-color: -fx-gray-color" styleClass="stack-pane"
+           stylesheets="@../../layouts/CSS/maincss.css" xmlns="http://javafx.com/javafx/8.0.141"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.KeyMapController">
+    <BorderPane style="-fx-background-color: -fx-gray-color">
+        <top>
+            <AnchorPane prefHeight="25.0" prefWidth="839.0" styleClass="tittlePaneBackground"
+                        BorderPane.alignment="CENTER">
             <children>
                 <FontAwesomeIcon fx:id="keymap_close_btn" fill="#fcf6f6" glyphName="CLOSE" layoutX="820.0"
-                                 layoutY="21.0" onMouseClicked="#closeEvent" size="2em"/>
+                                 layoutY="21.0" onMouseClicked="#closeEvent" size="2em" AnchorPane.rightAnchor="0.0"
+                                 AnchorPane.topAnchor="0.0"/>
             </children>
         </AnchorPane>
-        <VBox layoutY="25.0" prefHeight="494.0" prefWidth="68.0" spacing="20.0" styleClass="dark-background">
+        </top>
+        <left>
+            <VBox prefHeight="494.0" prefWidth="68.0" spacing="20.0" styleClass="dark-background"
+                  BorderPane.alignment="CENTER_LEFT">
             <children>
                 <JFXButton fx:id="openTest_btn" ellipsisString=" " onAction="#openTestEvent" prefHeight="48.0"
                            prefWidth="60.0" styleClass="panelButtonColor">
                     <graphic>
-                        <FontAwesomeIcon fx:id="open_icon" fill="#fffefe" glyphName="FOLDER"
-                                         size="3em" styleClass="icon"/>
+                        <FontAwesomeIcon fx:id="open_icon" fill="#fffefe" glyphName="FOLDER" size="3em"
+                                         styleClass="icon"/>
                     </graphic>
                 </JFXButton>
                 <JFXButton fx:id="openStudents_btn" onAction="#openStudentEvent" prefHeight="48.0" prefWidth="60.0"
@@ -89,15 +47,108 @@
                 <JFXButton fx:id="openReport_btn" onAction="#openTestReport" prefHeight="62.0" prefWidth="53.0"
                            styleClass="panelButtonColor" text=" ">
                     <graphic>
-                        <ImageView fitHeight="37.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="71.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../icons/report2.png"/>
+                                <Image url="@../../../icons/report3.png"/>
                             </image>
                         </ImageView>
                     </graphic>
                 </JFXButton>
             </children>
         </VBox>
-    </children>
-</AnchorPane>
+        </left>
+        <center>
+
+
+            <AnchorPane fx:id="key_map_main_layout" styleClass="light-background" BorderPane.alignment="CENTER">
+                <children>
+                    <ScrollPane AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                AnchorPane.topAnchor="0.0">
+                        <content>
+                            <AnchorPane styleClass="light-background">
+                                <children>
+
+                                    <AnchorPane layoutX="57.0" layoutY="29.0" prefHeight="400.0" prefWidth="313.0"
+                                                styleClass="bluebackground" stylesheets="@../../layouts/CSS/maincss.css"
+                                                AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="57.0"
+                                                AnchorPane.rightAnchor="751.0" AnchorPane.topAnchor="29.0">
+                                        <children>
+                                            <JFXComboBox fx:id="ques_num_txt" layoutX="36.0" layoutY="145.0"
+                                                         onAction="#questonChanged" prefHeight="36.0" prefWidth="246.0"
+                                                         promptText="Select Question"/>
+                                            <JFXTextField fx:id="sub_ques_txt" labelFloat="true" layoutX="37.0"
+                                                          layoutY="246.0" prefHeight="36.0" prefWidth="236.0"
+                                                          promptText="SubQuestion">
+                                                <font>
+                                                    <Font size="18.0"/>
+                                                </font>
+                                            </JFXTextField>
+                                            <JFXButton fx:id="proceed_btn" graphicTextGap="30.0" layoutX="37.0"
+                                                       layoutY="330.0" onAction="#generateRadioButton" prefHeight="46.0"
+                                                       prefWidth="244.0" styleClass="buttonsize"
+                                                       stylesheets="@../../layouts/CSS/maincss.css" text="Proceed">
+                                                <graphic>
+                                                    <ImageView fitHeight="50.0" fitWidth="85.0" pickOnBounds="true"
+                                                               preserveRatio="true">
+                                                        <image>
+                                                            <Image url="@../../../icons/proceed.png"/>
+                                                        </image>
+                                                    </ImageView>
+                                                </graphic>
+                                            </JFXButton>
+                                            <Label layoutX="35.0" layoutY="24.0" onMouseClicked="#showBasicInfo"
+                                                   prefHeight="72.0" prefWidth="261.0" text="Key Map"
+                                                   textFill="#2d3436">
+                                                <font>
+                                                    <Font name="Segoe UI" size="60.0"/>
+                                                </font>
+                                            </Label>
+                                            <JFXButton fx:id="keymap_save_button" graphicTextGap="30.0" layoutX="36.0"
+                                                       layoutY="423.0" onAction="#saveRadioData" prefHeight="46.0"
+                                                       prefWidth="244.0" styleClass="buttonsize" text="Save">
+                                                <graphic>
+                                                    <ImageView fitHeight="40.0" fitWidth="85.0" pickOnBounds="true"
+                                                               preserveRatio="true">
+                                                        <image>
+                                                            <Image url="@../../../icons/save.png"/>
+                                                        </image>
+                                                    </ImageView>
+                                                </graphic>
+                                            </JFXButton>
+                                        </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="keymap_anchor_radioMap" layoutX="310.0" layoutY="27.0"
+                                                prefHeight="554.0" prefWidth="476.0" AnchorPane.bottomAnchor="150.0"
+                                                AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="275.0"
+                                                AnchorPane.topAnchor="22.0">
+                                        <children>
+                                            <ScrollPane fx:id="scroll_pane" layoutX="14.0" layoutY="14.0"
+                                                        prefHeight="538.0" prefWidth="462.0">
+                                                <content>
+                                                    <AnchorPane prefHeight="521.0" prefWidth="440.0"
+                                                                styleClass="light-background">
+                                                        <children>
+                                                            <GridPane fx:id="keymap_gridpane" prefHeight="-Infinity"
+                                                                      prefWidth="-Infinity" styleClass="dark-background"
+                                                                      stylesheets="@../../layouts/CSS/maincss.css"
+                                                                      vgap="20.0">
+
+                                                            </GridPane>
+                                                        </children>
+                                                    </AnchorPane>
+                                                </content>
+                                            </ScrollPane>
+                                        </children>
+                                    </AnchorPane>
+
+
+                                </children>
+
+                            </AnchorPane>
+                        </content>
+                    </ScrollPane>
+                </children>
+            </AnchorPane>
+        </center>
+    </BorderPane>
 </StackPane>

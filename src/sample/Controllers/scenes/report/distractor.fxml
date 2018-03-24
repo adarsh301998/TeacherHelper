@@ -7,11 +7,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<StackPane fx:id="stackPane" prefHeight="441.0" prefWidth="1205.0" stylesheets="@../../../layouts/CSS/maincss.css"
+<StackPane fx:id="stackPane" styleClass="stack-pane" stylesheets="@../../../layouts/CSS/maincss.css"
            xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="sample.Controllers.ReportControllers.OptionCorrelationController">
     <children>
-        <AnchorPane prefHeight="441.0" prefWidth="1198.0">
+        <AnchorPane styleClass="light-background">
             <children>
                 <AnchorPane prefHeight="44.0" prefWidth="1014.0" styleClass="tittlePaneBackground"
                             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

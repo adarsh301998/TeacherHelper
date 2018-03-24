@@ -9,18 +9,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<StackPane fx:id="stack_pane" stylesheets="@../../../layouts/CSS/maincss.css" xmlns="http://javafx.com/javafx/8.0.141"
-           xmlns:fx="http://javafx.com/fxml/1"
+<StackPane fx:id="stack_pane" styleClass="stack-pane" stylesheets="@../../../layouts/CSS/maincss.css"
+           xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="sample.Controllers.ReportControllers.DisplayStudentResponseController">
-    <AnchorPane prefHeight="400.0" prefWidth="741.0">
+    <AnchorPane styleClass="light-background">
         <children>
             <AnchorPane prefHeight="49.0" prefWidth="746.0" styleClass="tittlePaneBackground"
                         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <children>
                     <FontAwesomeIcon fx:id="close_btn" glyphName="CLOSE" layoutX="717.0" layoutY="32.0"
-                                     onMouseClicked="#closeEvent" size="3em" styleClass="close-icon"/>
+                                     onMouseClicked="#closeEvent" size="3em" styleClass="close-icon"
+                                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                     <JFXButton fx:id="back_btn" layoutX="7.0" layoutY="3.0" onAction="#backFrameEvent" prefHeight="29.0"
-                               prefWidth="62.0" text=" ">
+                               prefWidth="62.0" text=" " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="3.0">
                         <graphic>
                             <ImageView fitHeight="32.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -30,17 +31,19 @@
                         </graphic>
                     </JFXButton>
                     <Label fx:id="studentResponseLabel" layoutX="69.0" layoutY="9.0"
-                           onMouseClicked="#displayBasicTestInfo" styleClass="titlePaneHeading"
-                           text="Student Response"/>
+                           onMouseClicked="#displayBasicTestInfo" styleClass="titlePaneHeading" text="Student Response"
+                           AnchorPane.leftAnchor="69.0" AnchorPane.topAnchor="9.0"/>
                 </children>
             </AnchorPane>
-            <JFXToggleButton fx:id="binaryToggle" layoutX="230.0" layoutY="49.0" onAction="#toggleActionEvent"
-                             text="Binary Information">
+            <JFXToggleButton fx:id="binaryToggle" layoutY="40.0" onAction="#toggleActionEvent" text="Binary Information"
+                             AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
                 <font>
                     <Font name="Segoe UI" size="24.0"/>
                 </font>
             </JFXToggleButton>
-            <TableView fx:id="tableView" layoutX="44.0" layoutY="126.0" prefHeight="267.0" prefWidth="680.0"/>
+            <TableView fx:id="tableView" layoutX="-1.0" layoutY="95.0" prefHeight="504.0" prefWidth="1000.0"
+                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                       AnchorPane.topAnchor="95.0"/>
         </children>
     </AnchorPane>
 </StackPane>
