@@ -2,46 +2,73 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<StackPane fx:id="stackPane" styleClass="light-background" stylesheets="@../../layouts/CSS/maincss.css"
+<StackPane fx:id="stackPane" stylesheets="@../../layouts/CSS/maincss.css" styleClass="stack-pane"
            xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="sample.Controllers.MainWindowController">
-    <AnchorPane fx:id="rootScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="1234.0"
-                styleClass="light-background">
+    <AnchorPane fx:id="rootScene" styleClass="light-background">
     <children>
-        <BorderPane layoutX="268.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane layoutX="0.0" layoutY="0.0"
+                    styleClass="tittlePaneBackground" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0">
+            <children>
+                <Label fx:id="titlePaneHeading" layoutX="108.0" layoutY="3.0"
+                       styleClass="titlePaneHeading" text="Home" AnchorPane.leftAnchor="100.0"
+                       AnchorPane.topAnchor="3.0">
+                    <font>
+                        <Font size="30.0"/>
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <ImageView layoutX="3" layoutY="100" fitWidth="500" fitHeight="400" preserveRatio="true">
+
+            <image>
+                <Image url="@../../../icons/largehome2.png"/>
+            </image>
+
+        </ImageView>
+        <BorderPane layoutX="500.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+
+            </top>
             <center>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0"
                       BorderPane.alignment="CENTER">
+
                     <children>
+
                         <JFXButton fx:id="btn_new" alignment="CENTER" graphicTextGap="20.0" onAction="#handelEvent"
-                                   prefHeight="78.0" prefWidth="194.0" ripplerFill="#a49a9a" text="New"
+                                   prefHeight="120.0" prefWidth="299.0" ripplerFill="#a49a9a" text="New"
                                    textFill="#eeeaea">
                             <font>
                                 <Font name="Bell MT" size="33.0"/>
                             </font>
                             <graphic>
-                                <FontAwesomeIcon fill="WHITE" glyphName="FILE"/>
+                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../icons/addnew.png"/>
+                                    </image>
+                                </ImageView>
                             </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="btn_open" graphicTextGap="20.0" onAction="#handelEvent" prefHeight="78.0"
-                                   prefWidth="194.0" ripplerFill="#a49a9a" text="Open" textFill="#eeeaea">
+                        <JFXButton fx:id="btn_open" graphicTextGap="20.0" onAction="#handelEvent" prefHeight="120.0"
+                                   prefWidth="292.0" ripplerFill="#a49a9a" text="Open" textFill="#eeeaea">
                             <font>
                                 <Font name="Bell MT" size="33.0"/>
                             </font>
                             <graphic>
-                                <FontAwesomeIcon fill="WHITE" glyphName="FOLDER"/>
+                                <FontAwesomeIcon fill="WHITE" glyphName="FOLDER" size="4em"/>
                             </graphic>
                         </JFXButton>
                     </children>
                 </VBox>
             </center>
-            <top>
-                <FontAwesomeIcon fx:id="btn_close" fill="#f8f8f8" glyphName="CLOSE" onMouseClicked="#closeEvent"
-                                 size="3em" styleClass="close-icon" BorderPane.alignment="CENTER"/>
-            </top>
         </BorderPane>
     </children>
 

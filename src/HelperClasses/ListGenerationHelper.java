@@ -35,6 +35,18 @@ public class ListGenerationHelper {
 
     }
 
+    //Small question list
+    // ex Q1 Q2 Q3
+    public static ArrayList<String> smallSizeQuestionList() {
+        ArrayList<String> ques = questionList();
+        ArrayList<String> sortQues = new ArrayList<>();
+        for (int i = 0; i < ques.size(); i++) {
+            int t = i + 1;
+            sortQues.add("Q" + t);
+        }
+        return sortQues;
+    }
+
 
     //student response(ABCD) in single list
     // tested
@@ -282,5 +294,6 @@ public class ListGenerationHelper {
         }
         return sortedList;
     }
+
 
 }

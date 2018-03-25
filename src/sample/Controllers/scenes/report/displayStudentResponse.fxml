@@ -2,14 +2,13 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXToggleButton?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<StackPane fx:id="stack_pane" styleClass="stack-pane" stylesheets="@../../../layouts/CSS/maincss.css"
+<StackPane fx:id="stackPane" styleClass="stack-pane" stylesheets="@../../../layouts/CSS/maincss.css"
            xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="sample.Controllers.ReportControllers.DisplayStudentResponseController">
     <AnchorPane styleClass="light-background">
@@ -17,33 +16,43 @@
             <AnchorPane prefHeight="49.0" prefWidth="746.0" styleClass="tittlePaneBackground"
                         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <children>
-                    <FontAwesomeIcon fx:id="close_btn" glyphName="CLOSE" layoutX="717.0" layoutY="32.0"
-                                     onMouseClicked="#closeEvent" size="3em" styleClass="close-icon"
-                                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                    <JFXButton fx:id="back_btn" layoutX="7.0" layoutY="3.0" onAction="#backFrameEvent" prefHeight="29.0"
-                               prefWidth="62.0" text=" " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="3.0">
+
+                    <JFXButton fx:id="back_btn" layoutX="7.0" onAction="#backFrameEvent" prefHeight="29.0"
+                               prefWidth="62.0" styleClass="navigationButton" text=" " AnchorPane.leftAnchor="0.0"
+                               AnchorPane.topAnchor="3.0">
                         <graphic>
-                            <ImageView fitHeight="32.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                            <ImageView fitHeight="33.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
                                     <Image url="@../../../../icons/back.png"/>
                                 </image>
                             </ImageView>
                         </graphic>
                     </JFXButton>
-                    <Label fx:id="studentResponseLabel" layoutX="69.0" layoutY="9.0"
+                    <Label fx:id="studentResponseLabel" layoutX="108.0" layoutY="3.0"
                            onMouseClicked="#displayBasicTestInfo" styleClass="titlePaneHeading" text="Student Response"
-                           AnchorPane.leftAnchor="69.0" AnchorPane.topAnchor="9.0"/>
+                           AnchorPane.leftAnchor="108.0" AnchorPane.topAnchor="3.0">
+                        <font>
+                            <Font size="30.0"/>
+                        </font>
+
+                    </Label>
                 </children>
             </AnchorPane>
-            <JFXToggleButton fx:id="binaryToggle" layoutY="40.0" onAction="#toggleActionEvent" text="Binary Information"
-                             AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
+            <JFXToggleButton fx:id="binaryToggle" layoutX="14.0" layoutY="77.0" onAction="#toggleActionEvent"
+                             text="Binary Information" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="77.0">
                 <font>
                     <Font name="Segoe UI" size="24.0"/>
                 </font>
             </JFXToggleButton>
-            <TableView fx:id="tableView" layoutX="-1.0" layoutY="95.0" prefHeight="504.0" prefWidth="1000.0"
+            <TableView fx:id="tableView" layoutX="0.0" layoutY="136.0" prefHeight="464.0" prefWidth="1234.0"
                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                       AnchorPane.topAnchor="95.0"/>
+                       AnchorPane.topAnchor="136.0"/>
+            <JFXToggleButton fx:id="contractTableToggle" layoutX="400.0" layoutY="77.0" onAction="#contractTableEvent"
+                             text="Contract">
+                <font>
+                    <Font name="Segoe UI" size="24.0"/>
+                </font>
+            </JFXToggleButton>
         </children>
     </AnchorPane>
 </StackPane>

@@ -8,7 +8,6 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -21,10 +20,11 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.BaseClasses.MainBaseController;
 import sample.DataClasses.Bus;
 import sample.DataClasses.DataBaseCommunication;
 import sample.DataClasses.StudentDetails;
@@ -36,7 +36,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDetailsController {
+public class StudentDetailsController extends MainBaseController {
    /* @FXML
     private AnchorPane key_map_main_layout;*/
 
@@ -72,12 +72,9 @@ public class StudentDetailsController {
 
     @FXML
     private JFXListView<VBox> student_listView;
-
+/*
     @FXML
-    private StackPane stackPane;
-
-    @FXML
-    private BorderPane top_borderPane;
+    private BorderPane top_borderPane;*/
 
     @FXML
     private JFXButton openKey_btn;
@@ -89,7 +86,7 @@ public class StudentDetailsController {
     private JFXButton openReport_btn;
 
     @FXML
-    private JFXButton newTestFile_btn;
+    private JFXButton newTest_btn;
 
 
     @FXML
@@ -106,7 +103,7 @@ public class StudentDetailsController {
     boolean dataSaved = true;
     int oldSelectedIndex = -1;
 
-    @FXML
+    /*@FXML
     void closeEvent(MouseEvent event) {
 
         if (!dataSaved) {
@@ -149,7 +146,7 @@ public class StudentDetailsController {
 
 
 
-    }
+    }*/
 
     /*public void init(TestDetails testDetails) {
         List question = testDetails.getQuestion();
@@ -178,6 +175,8 @@ public class StudentDetailsController {
     }
 
     public void initialize() {
+        checkMaximize();
+        setTollTip();
         // System.out.println("Hello world");
         //ques_num_txt = new JFXComboBox<>();
 
@@ -200,7 +199,7 @@ public class StudentDetailsController {
 
         final Tooltip newTest_btn_tooltip = new Tooltip();
         newTest_btn_tooltip.setText("New Test");
-        newTestFile_btn.setTooltip(newTest_btn_tooltip);
+        newTest_btn.setTooltip(newTest_btn_tooltip);
 
 
         final Tooltip openReport_btn_tooltip = new Tooltip();
@@ -513,7 +512,7 @@ public class StudentDetailsController {
         checkDataSave();
 //        NavigationHelper navigationHelper = new NavigationHelper();
 //        navigationHelper.loadFrame(event, openTest_btn,null,openKey_btn,openReport_btn,newTestFile_btn);
-        FXMLLoader loader = new FXMLLoader();
+        /*FXMLLoader loader = new FXMLLoader();
         Parent root;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -529,7 +528,7 @@ public class StudentDetailsController {
             //Open report
             loader.setLocation(getClass().getResource("scenes/reportOptions.fxml"));
         }
-        if (event.getSource() == newTestFile_btn) {
+        if (event.getSource() == newTest_btn) {
             loader.setLocation(getClass().getResource("scenes/createNewTest.fxml"));
         }
 
@@ -538,7 +537,7 @@ public class StudentDetailsController {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 

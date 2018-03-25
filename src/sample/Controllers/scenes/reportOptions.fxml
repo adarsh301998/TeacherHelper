@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 <StackPane fx:id="stack_pane" styleClass="stack-pane" stylesheets="@../../layouts/CSS/maincss.css"
            xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="sample.Controllers.ReportOptionController">
@@ -15,12 +16,24 @@
             <AnchorPane fx:id="titlePane" prefHeight="30.0" styleClass="tittlePaneBackground"
                         BorderPane.alignment="CENTER">
                 <children>
-                    <FontAwesomeIcon fx:id="close_btn" glyphName="CLOSE" layoutX="575.0" layoutY="27.0"
-                                     onMouseClicked="#closeEvent" size="3em" styleClass="close-icon"
-                                     AnchorPane.rightAnchor="0.7142848968505859" AnchorPane.topAnchor="0.0"/>
-                    <Label fx:id="reportOption" layoutX="14.0" layoutY="11.0" onMouseClicked="#reportOptionClicked"
-                           styleClass="titlePaneHeading" text="Report Option" AnchorPane.leftAnchor="5.0"
-                           AnchorPane.topAnchor="2.0"/>
+                    <JFXButton fx:id="home_btn" layoutX="14.0" layoutY="13.0" onAction="#homeEvent"
+                               styleClass="navigationButton" text=" " AnchorPane.leftAnchor="0.0"
+                               AnchorPane.topAnchor="0.0">
+                        <graphic>
+                            <ImageView fitHeight="40.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../icons/home.png"/>
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </JFXButton>
+                    <Label fx:id="reportOption" layoutX="108.0" layoutY="3.0" onMouseClicked="#reportOptionClicked"
+                           styleClass="titlePaneHeading" text="Report Option" AnchorPane.leftAnchor="108.0"
+                           AnchorPane.topAnchor="3.0">
+                        <font>
+                            <Font size="30.0"/>
+                        </font>
+                    </Label>
                 </children>
             </AnchorPane>
         </top>
@@ -28,26 +41,26 @@
             <VBox fx:id="navigationLayout" prefHeight="371.0" prefWidth="57.0" spacing="20.0"
                   styleClass="dark-background" BorderPane.alignment="CENTER">
                 <children>
-                    <JFXButton fx:id="open_btn" onAction="#handelNavigationOpenEvent" prefHeight="35.0" prefWidth="67.0"
+                    <JFXButton fx:id="openTest_btn" onAction="#navigationActionEvent" prefHeight="35.0" prefWidth="67.0"
                                styleClass="navigationButton" text=" ">
                         <graphic>
                             <FontAwesomeIcon glyphName="FOLDER" size="3em"/>
                         </graphic>
                     </JFXButton>
-                    <JFXButton fx:id="student_btn" ellipsisString=" " onAction="#handelNavigationOpenEvent"
+                    <JFXButton fx:id="openStudents_btn" ellipsisString=" " onAction="#navigationActionEvent"
                                prefHeight="35.0" prefWidth="67.0" styleClass="navigationButton" text=" ">
                         <graphic>
                             <FontAwesomeIcon glyphName="USER" size="3em" styleClass="icon"/>
                         </graphic>
                     </JFXButton>
-                    <JFXButton fx:id="key_btn" ellipsisString=" " onAction="#handelNavigationOpenEvent"
+                    <JFXButton fx:id="openKey_btn" ellipsisString=" " onAction="#navigationActionEvent"
                                prefHeight="35.0" prefWidth="67.0" styleClass="navigationButton" text=" ">
                         <graphic>
                             <FontAwesomeIcon glyphName="KEY" size="3em" styleClass="icon"/>
                         </graphic>
                     </JFXButton>
-                    <JFXButton fx:id="newTest_btn" onAction="#handelNavigationOpenEvent" prefHeight="35.0"
-                               prefWidth="67.0" styleClass="navigationButton" text=" ">
+                    <JFXButton fx:id="newTest_btn" onAction="#navigationActionEvent" prefHeight="35.0" prefWidth="67.0"
+                               styleClass="navigationButton" text=" ">
                         <graphic>
                             <FontAwesomeIcon glyphName="FILE" size="3em" styleClass="icon"/>
                         </graphic>
@@ -58,68 +71,85 @@
         <center>
             <ScrollPane prefHeight="371.0" prefWidth="534.0" BorderPane.alignment="CENTER">
                 <content>
-                    <VBox fx:id="vbox_optionLayout" alignment="CENTER" prefHeight="549.0" prefWidth="1158.0"
-                          spacing="20.0">
+                    <AnchorPane>
                         <children>
-                            <JFXButton fx:id="studentResponse_btn" onAction="#openReportOption"
-                                       styleClass="reportButton" text="Student Response">
-                                <graphic>
-                                    <ImageView fitHeight="61.0" fitWidth="90.0" pickOnBounds="true"
-                                               preserveRatio="true">
-                                        <image>
-                                            <Image url="@../../../icons/studentgroup.png"/>
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </JFXButton>
-                            <JFXButton fx:id="distractors_btn" onAction="#openReportOption" styleClass="reportButton"
-                                       text="Options Corelations">
-                                <graphic>
-                                    <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
-                                               preserveRatio="true">
-                                        <image>
-                                            <Image url="@../../../icons/abcd4.png"/>
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </JFXButton>
-                            <JFXButton fx:id="totalMarksBarChart_btn" onAction="#openReportOption"
-                                       styleClass="reportButton" text="Total Marks Chart">
-                                <graphic>
-                                    <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
-                                               preserveRatio="true">
-                                        <image>
-                                            <Image url="@../../../icons/barcharticon.png"/>
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </JFXButton>
-                            <JFXButton fx:id="binaryCorelation_btn" onAction="#openReportOption"
-                                       styleClass="reportButton" text="Binary Corelations">
-                                <graphic>
-                                    <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
-                                               preserveRatio="true">
-                                        <image>
-                                            <Image url="@../../../icons/102.png"/>
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </JFXButton>
-                            <JFXButton fx:id="guttFile_btn" onAction="#openReportOption" styleClass="reportButton"
-                                       text="Gutt Table">
-                                <graphic>
-                                    <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
-                                               preserveRatio="true">
-                                        <image>
-                                            <Image url="@../../../icons/table.png"/>
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </JFXButton>
+                            <ImageView fitHeight="400" fitWidth="500" layoutX="50" layoutY="10">
+                                <image>
+                                    <Image url="@../../../icons/reportlarge.png"/>
+                                </image>
+                            </ImageView>
+
+                            <VBox fx:id="vbox_optionLayout" alignment="CENTER" layoutX="350" layoutY="3"
+                                  prefHeight="549.0" prefWidth="900.0" spacing="20.0">
+                                <children>
+                                    <JFXButton fx:id="studentResponse_btn" graphicTextGap="50.0"
+                                               onAction="#openReportOption" prefHeight="200" prefWidth="500"
+                                               styleClass="reportButton" text="Student Response">
+                                        <graphic>
+                                            <ImageView fitHeight="61.0" fitWidth="90.0" pickOnBounds="true"
+                                                       preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../icons/studentgroup.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="distractors_btn" graphicTextGap="50.0"
+                                               onAction="#openReportOption" prefHeight="200" prefWidth="500"
+                                               styleClass="reportButton" text="Options Corelations">
+                                        <graphic>
+                                            <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
+                                                       preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../icons/abcd4.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="totalMarksBarChart_btn" graphicTextGap="50.0"
+                                               onAction="#openReportOption" prefHeight="200" prefWidth="500"
+                                               styleClass="reportButton" text="Total Marks Chart">
+                                        <graphic>
+                                            <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
+                                                       preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../icons/barcharticon.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="binaryCorelation_btn" graphicTextGap="50.0"
+                                               onAction="#openReportOption" prefHeight="200" prefWidth="500"
+                                               styleClass="reportButton" text="Binary Corelations">
+                                        <graphic>
+                                            <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
+                                                       preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../icons/102.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="guttFile_btn" graphicTextGap="120.0" onAction="#openReportOption"
+                                               prefHeight="200" prefWidth="500" styleClass="reportButton"
+                                               text="Gutt Table">
+                                        <graphic>
+                                            <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
+                                                       preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../icons/table.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </JFXButton>
+
+
+                                </children>
+                            </VBox>
 
 
                         </children>
-                    </VBox>
+                    </AnchorPane>
                 </content>
             </ScrollPane>
         </center>

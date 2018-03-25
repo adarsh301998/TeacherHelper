@@ -12,39 +12,56 @@
            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.KeyMapController">
     <BorderPane style="-fx-background-color: -fx-gray-color">
         <top>
-            <AnchorPane prefHeight="25.0" prefWidth="839.0" styleClass="tittlePaneBackground"
+            <AnchorPane prefHeight="40.0" prefWidth="839.0" styleClass="tittlePaneBackground"
                         BorderPane.alignment="CENTER">
-            <children>
-                <FontAwesomeIcon fx:id="keymap_close_btn" fill="#fcf6f6" glyphName="CLOSE" layoutX="820.0"
-                                 layoutY="21.0" onMouseClicked="#closeEvent" size="2em" AnchorPane.rightAnchor="0.0"
-                                 AnchorPane.topAnchor="0.0"/>
-            </children>
-        </AnchorPane>
+                <children>
+                    <JFXButton fx:id="home_btn" layoutX="14.0" layoutY="13.0" onAction="#homeEvent"
+                               styleClass="navigationButton" text=" " AnchorPane.leftAnchor="0.0"
+                               AnchorPane.topAnchor="0.0">
+                        <graphic>
+                            <ImageView fitHeight="40.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../icons/home.png"/>
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </JFXButton>
+
+                    <Label layoutX="135.0" layoutY="3.0" onMouseClicked="#showBasicInfo" prefHeight="40.0"
+                           prefWidth="261.0" text="Key Map" textFill="#FFFF">
+                        <font>
+                            <Font name="Segoe UI" size="30.0"/>
+                        </font>
+                    </Label>
+
+
+                </children>
+            </AnchorPane>
         </top>
         <left>
             <VBox prefHeight="494.0" prefWidth="68.0" spacing="20.0" styleClass="dark-background"
                   BorderPane.alignment="CENTER_LEFT">
             <children>
-                <JFXButton fx:id="openTest_btn" ellipsisString=" " onAction="#openTestEvent" prefHeight="48.0"
+                <JFXButton fx:id="openTest_btn" ellipsisString=" " onAction="#navigationActionEvent" prefHeight="48.0"
                            prefWidth="60.0" styleClass="panelButtonColor">
                     <graphic>
                         <FontAwesomeIcon fx:id="open_icon" fill="#fffefe" glyphName="FOLDER" size="3em"
                                          styleClass="icon"/>
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="openStudents_btn" onAction="#openStudentEvent" prefHeight="48.0" prefWidth="60.0"
+                <JFXButton fx:id="openStudents_btn" onAction="#navigationActionEvent" prefHeight="48.0" prefWidth="60.0"
                            styleClass="panelButtonColor" text="  ">
                     <graphic>
                         <FontAwesomeIcon glyphName="USER" size="3em" styleClass="icon" text=""/>
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="newTest_btn" onAction="#newTestFile" prefHeight="48.0" prefWidth="54.0"
+                <JFXButton fx:id="newTest_btn" onAction="#navigationActionEvent" prefHeight="48.0" prefWidth="54.0"
                            styleClass="panelButtonColor" text="  ">
                     <graphic>
                         <FontAwesomeIcon glyphName="FILE" size="3em" styleClass="icon"/>
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="openReport_btn" onAction="#openTestReport" prefHeight="62.0" prefWidth="53.0"
+                <JFXButton fx:id="openReport_btn" onAction="#navigationActionEvent" prefHeight="62.0" prefWidth="53.0"
                            styleClass="panelButtonColor" text=" ">
                     <graphic>
                         <ImageView fitHeight="71.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
@@ -57,15 +74,14 @@
             </children>
         </VBox>
         </left>
+
         <center>
-
-
-            <AnchorPane fx:id="key_map_main_layout" styleClass="light-background" BorderPane.alignment="CENTER">
+            <AnchorPane styleClass="light-background" BorderPane.alignment="CENTER">
                 <children>
                     <ScrollPane AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                                 AnchorPane.topAnchor="0.0">
                         <content>
-                            <AnchorPane styleClass="light-background">
+                            <AnchorPane fx:id="anchorPaneResize" styleClass="light-background">
                                 <children>
 
                                     <AnchorPane layoutX="57.0" layoutY="29.0" prefHeight="400.0" prefWidth="313.0"
@@ -96,13 +112,7 @@
                                                     </ImageView>
                                                 </graphic>
                                             </JFXButton>
-                                            <Label layoutX="35.0" layoutY="24.0" onMouseClicked="#showBasicInfo"
-                                                   prefHeight="72.0" prefWidth="261.0" text="Key Map"
-                                                   textFill="#2d3436">
-                                                <font>
-                                                    <Font name="Segoe UI" size="60.0"/>
-                                                </font>
-                                            </Label>
+
                                             <JFXButton fx:id="keymap_save_button" graphicTextGap="30.0" layoutX="36.0"
                                                        layoutY="423.0" onAction="#saveRadioData" prefHeight="46.0"
                                                        prefWidth="244.0" styleClass="buttonsize" text="Save">

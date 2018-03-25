@@ -2,8 +2,10 @@ package sample;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sample.DataClasses.StudentDetails;
 import sample.DataClasses.TestDetails;
@@ -13,6 +15,27 @@ import java.util.ArrayList;
 public class Main extends Application {
 
     TestDetails testDetails;
+
+    public static Stage stage;
+
+    public Screen screen = Screen.getPrimary();
+
+    Rectangle2D bounds = screen.getVisualBounds();
+
+    public double screenXmin = bounds.getMinX();
+
+    public double screenYmin = bounds.getMinY();
+
+    public double screenMaxWidth = bounds.getWidth();
+
+    public double screenMaxHeight = bounds.getHeight();
+
+    public double screenMinimunWidth = 1234.0;
+
+    public double ScreenMinimunHeight = 600.0;
+
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("Controllers/scenes/mainWindow.fxml"));
@@ -30,6 +53,7 @@ public class Main extends Application {
         Bus.setInstance(testDetails);
 */
 
+        stage = primaryStage;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Controllers/scenes/mainWindow.fxml"));
         Parent root = loader.load();
@@ -40,10 +64,39 @@ public class Main extends Application {
 
 
         // primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setX(60);
-        primaryStage.setY(60);
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+
+        screen = Screen.getPrimary();
+
+        bounds = screen.getVisualBounds();
+
+        screenXmin = bounds.getMinX();
+
+        screenYmin = bounds.getMinY();
+
+        screenMaxWidth = bounds.getWidth();
+
+        screenMaxHeight = bounds.getHeight();
+
+        stage.maximizedProperty().addListener((ov, minimumSize, maximumSize) -> {
+
+            if (maximumSize) {
+                stage.setX(screenXmin);
+                stage.setX(screenYmin);
+                stage.setWidth(screenMaxWidth);
+                stage.setHeight(screenMaxHeight);
+
+            }
+            if (minimumSize) {
+                stage.setX(60);
+                stage.setY(60);
+                stage.setWidth(screenMinimunWidth);
+                stage.setHeight(ScreenMinimunHeight);
+            }
+        });
+
+
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
 
@@ -90,5 +143,12 @@ public class Main extends Application {
             studentDetails.setEvaluation(me);
             testDetails.getStudentDetails().add(studentDetails);
         }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        System.out.println("Hello");
+
     }
 }

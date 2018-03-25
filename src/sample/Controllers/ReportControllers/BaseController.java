@@ -12,29 +12,22 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import sample.BaseClasses.TableBase;
 import sample.DataClasses.Bus;
 
 import java.io.IOException;
 
-public class BaseController {
+public class BaseController extends TableBase {
 
     @FXML
-    private StackPane stackPane;
+    public StackPane stackPane;
 
     @FXML
-    private JFXButton back_btn;
+    public JFXButton back_btn;
 
     @FXML
-    private Label titlePaneHeading;
+    public Label titlePaneHeading;
 
-    @FXML
-    private JFXButton minimizeButton;
-
-    @FXML
-    private JFXButton maximizeButton;
-
-    @FXML
-    private JFXButton closeButton;
 
     @FXML
     void displayBasicInfo(MouseEvent event) {
@@ -55,15 +48,7 @@ public class BaseController {
             }
 
         }
-        if (event.getSource() == minimizeButton) {
 
-        }
-        if (event.getSource() == maximizeButton) {
-
-        }
-        if (event.getSource() == closeButton) {
-            DialogPopUp.closeAlert(stackPane);
-        }
 
     }
 

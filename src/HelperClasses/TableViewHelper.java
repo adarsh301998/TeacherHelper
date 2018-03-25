@@ -11,6 +11,7 @@ import java.util.List;
 public class TableViewHelper {
 
     public static void insertDataInColumn(TableView<ObservableList<String>> tableView, List<String> columnNames) {
+        tableView.getColumns().clear();
         for (int i = 0; i < columnNames.size(); i++) {
             final int finalIdx = i;
             TableColumn<ObservableList<String>, String> column = new TableColumn<>(

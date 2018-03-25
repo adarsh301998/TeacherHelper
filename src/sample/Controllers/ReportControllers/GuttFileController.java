@@ -4,16 +4,10 @@ import HelperClasses.ArrayHelper;
 import HelperClasses.GuttSortingHelper;
 import HelperClasses.ListGenerationHelper;
 import HelperClasses.TableViewHelper;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.TableView;
 
 import java.util.List;
 
 public class GuttFileController extends BaseController {
-
-    @FXML
-    private TableView<ObservableList<String>> tableView;
 
     public void initialize() {
 

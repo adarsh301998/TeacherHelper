@@ -4,26 +4,25 @@ import HelperClasses.Constants;
 import HelperClasses.DialogPopUp;
 import HelperClasses.ListHelper;
 import HelperClasses.RadioButtonHelper;
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.NumberValidator;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import sample.BaseClasses.MainBaseController;
 import sample.DataClasses.Bus;
 import sample.DataClasses.DataBaseCommunication;
 import sample.DataClasses.TestDetails;
@@ -36,7 +35,7 @@ import java.util.List;
 
 //import sample.DataClasses.DataInstance;
 
-public class KeyMapController {
+public class KeyMapController extends MainBaseController {
     @FXML
     private JFXComboBox<?> ques_num_txt;
 
@@ -46,8 +45,6 @@ public class KeyMapController {
     @FXML
     private JFXButton proceed_btn;
 
-    /*@FXML
-    private FontAwesomeIcon keymap_close_btn;*/
 
     boolean saveData = true;
 
@@ -61,23 +58,11 @@ public class KeyMapController {
     @FXML
     private GridPane keymap_gridpane;
 
-    @FXML
-    private StackPane stackPane;
 
     @FXML
     private JFXButton keymap_save_button;
 
-    @FXML
-    private JFXButton openStudents_btn;
 
-    @FXML
-    private JFXButton openTest_btn;
-
-    @FXML
-    private JFXButton openReport_btn;
-
-    @FXML
-    private JFXButton newTest_btn;
 
     /*@FXML
     private JFXButton test_student;*/
@@ -92,6 +77,9 @@ public class KeyMapController {
 
 
     public void initialize() throws FileNotFoundException {
+
+        checkMaximize();
+        setTollTip();
 
         final Tooltip openStudent_btn_tooltip = new Tooltip();
         openStudent_btn_tooltip.setText("Students");
@@ -151,6 +139,7 @@ public class KeyMapController {
     //Prooced button
     @FXML
     void generateRadioButton(ActionEvent event) {
+
 
         /*if (!saveData) {
             if (oldSelectedIndex!=-1)
@@ -216,51 +205,51 @@ public class KeyMapController {
 
     }
 
-    @FXML
-    void closeEvent(MouseEvent event) {
-        if (!saveData) {
-            JFXDialogLayout layout = new JFXDialogLayout();
-            layout.setHeading(new Text("Save"));
+    /*    @FXML
+        void closeEvent(MouseEvent event) {
+            if (!saveData) {
+                JFXDialogLayout layout = new JFXDialogLayout();
+                layout.setHeading(new Text("Save"));
 
-            Label label = new Label(Constants.ASK_FOR_SAVING_DATA);
-            label.setFont(new Font("Segoi UI", 20));
+                Label label = new Label(Constants.ASK_FOR_SAVING_DATA);
+                label.setFont(new Font("Segoi UI", 20));
 
-            layout.setBody(label);
+                layout.setBody(label);
 
-            JFXButton cancel = new JFXButton(Constants.CANCEL_TEXT);
-            JFXButton savebtn = new JFXButton(Constants.SAVE_TXT);
-            savebtn.setPrefWidth(100);
-            cancel.setPrefWidth(100);
-            cancel.getStyleClass().add("btn-dialog");
-            savebtn.getStyleClass().add("btn-dialog");
-            layout.setActions(cancel, savebtn);
+                JFXButton cancel = new JFXButton(Constants.CANCEL_TEXT);
+                JFXButton savebtn = new JFXButton(Constants.SAVE_TXT);
+                savebtn.setPrefWidth(100);
+                cancel.setPrefWidth(100);
+                cancel.getStyleClass().add("btn-dialog");
+                savebtn.getStyleClass().add("btn-dialog");
+                layout.setActions(cancel, savebtn);
 
-            JFXDialog dialog = new JFXDialog(stackPane, layout, JFXDialog.DialogTransition.CENTER);
-            cancel.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    dialog.close();
-                    System.exit(0);
-                }
-            });
+                JFXDialog dialog = new JFXDialog(stackPane, layout, JFXDialog.DialogTransition.CENTER);
+                cancel.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog.close();
+                        System.exit(0);
+                    }
+                });
 
-            savebtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    saveRadioData(event);
-                    System.exit(0);
-                }
-            });
-            dialog.show();
-        } else {
-            DialogPopUp.closeAlert(stackPane);
-        }
-    }
-
+                savebtn.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        saveRadioData(event);
+                        System.exit(0);
+                    }
+                });
+                dialog.show();
+            } else {
+                DialogPopUp.closeAlert(stackPane);
+            }
+        }*/
+/*
     @FXML
     void openEvent(MouseEvent event) {
         checkSave();
-    }
+    }*/
     @FXML
     void saveRadioData(ActionEvent event) {
         //getting selected toggle

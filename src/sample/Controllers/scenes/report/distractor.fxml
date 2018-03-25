@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,9 +15,7 @@
                 <AnchorPane prefHeight="44.0" prefWidth="1014.0" styleClass="tittlePaneBackground"
                             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <FontAwesomeIcon fx:id="close_btn" glyphName="CLOSE" layoutX="742.0" layoutY="27.0"
-                                         onMouseClicked="#closeEvent" size="3em" styleClass="close-icon"
-                                         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
                         <JFXButton fx:id="back_btn" layoutX="6.0" layoutY="11.0" onAction="#backEvent" prefHeight="42.0"
                                    prefWidth="58.0" styleClass="navigationButton" text=" " AnchorPane.leftAnchor="0.0"
                                    AnchorPane.topAnchor="0.0">
@@ -30,13 +27,14 @@
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Label fx:id="titlepane_Label" layoutX="48.0" layoutY="7.0" onMouseClicked="#showBasicInfo"
-                               prefHeight="30.0" prefWidth="119.0" styleClass="titlePaneHeading" text="Distractor"/>
+                        <Label fx:id="titlepane_Label" layoutX="108.0" layoutY="3.0" onMouseClicked="#showBasicInfo"
+                               styleClass="titlePaneHeading" text="Correlation">
+                        </Label>
                     </children>
                 </AnchorPane>
-                <JFXListView fx:id="listView" layoutX="11.0" layoutY="52.0" minWidth="989.0" prefHeight="383.0"
+                <JFXListView fx:id="listView" layoutX="11.0" layoutY="70.0" minWidth="989.0" prefHeight="383.0"
                              prefWidth="1192.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="10.0"
-                             AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="52.0"/>
+                             AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0"/>
             </children>
         </AnchorPane>
     </children>

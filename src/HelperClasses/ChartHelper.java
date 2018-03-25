@@ -220,7 +220,7 @@ public class ChartHelper {
                 long y = Math.round(newValue.getMinY());
                 if (text.charAt(0) == '-') {
                     // getting y coordinates in case of minus sign
-                    y = Math.round(newValue.getMaxY() + newValue.getWidth() / 2);
+                    y = Math.round(newValue.getMaxY() + (newValue.getWidth() - 40) / 2);
                 }
                 dataText.setLayoutY(y);
             }

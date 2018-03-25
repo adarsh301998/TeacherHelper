@@ -2,7 +2,10 @@
 
 <?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <StackPane fx:id="stackPane" style="-fx-background-color: #2d3436;" styleClass="stack-pane"
@@ -13,12 +16,16 @@
             <center>
                 <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <content>
-                        <VBox alignment="CENTER" prefHeight="582.0" prefWidth="1213.0" spacing="30.0"
-                              styleClass="secondary-color">
+                        <AnchorPane fx:id="anchorPaneResize">
+                            <children>
+                                <VBox alignment="CENTER" prefHeight="582.0" prefWidth="1213.0" spacing="30.0"
+                                      styleClass="secondary-color" AnchorPane.bottomAnchor="0.0"
+                                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                      AnchorPane.topAnchor="0.0">
                             <children>
                                 <VBox prefHeight="514.0" prefWidth="413.0" spacing="40.0" styleClass="light-background">
                                     <VBox.margin>
-                                        <Insets left="400.0" right="400.0"/>
+                                        <Insets bottom="10.0" left="100.0" right="100.0"/>
                                     </VBox.margin>
                                     <children>
                                         <JFXTextField fx:id="testName_txt" focusColor="#2957e1" labelFloat="true"
@@ -83,14 +90,23 @@
                                                 <Insets left="20.0" right="20.0"/>
                                             </VBox.margin>
                                         </JFXDatePicker>
-                                        <JFXButton fx:id="createTest_btn" onAction="#createTestEvent"
-                                                   ripplerFill="#c9c2c1" text="Create" textFill="#4ecbe1">
+                                        <JFXButton fx:id="createTest_btn" graphicTextGap="30.0"
+                                                   onAction="#createTestEvent" ripplerFill="#c9c2c1" text="Create"
+                                                   textFill="#4ecbe1">
                                             <font>
                                                 <Font size="20.0"/>
                                             </font>
                                             <VBox.margin>
-                                                <Insets left="150.0"/>
+                                                <Insets bottom="10.0" left="10.0"/>
                                             </VBox.margin>
+                                            <graphic>
+                                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true"
+                                                           preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../../../icons/create.png"/>
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
                                         </JFXButton>
                                     </children>
                                 </VBox>
@@ -101,9 +117,38 @@
 
 
                         </VBox>
+
+                            </children>
+                        </AnchorPane>
+
+
                     </content>
                 </ScrollPane>
             </center>
+            <top>
+                <AnchorPane prefHeight="51.0" prefWidth="1234.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <JFXButton fx:id="home_btn" layoutX="14.0" layoutY="13.0" onAction="#homeEvent"
+                                   styleClass="navigationButton" text=" " AnchorPane.leftAnchor="0.0"
+                                   AnchorPane.topAnchor="0.0">
+                            <graphic>
+                                <ImageView fitHeight="40.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../icons/home.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </JFXButton>
+                        <Label layoutX="108.0" layoutY="3.0" text="Create New Test" textFill="#fcfcfc"
+                               AnchorPane.leftAnchor="108.0" AnchorPane.topAnchor="3.0">
+                            <font>
+                                <Font name="Segoe UI" size="29.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </top>
+
         </BorderPane>
     </children>
 </StackPane>

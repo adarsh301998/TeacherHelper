@@ -48,7 +48,6 @@ public class MainWindowController {
     @FXML
     private StackPane stackPane;
 
-
     @FXML
     public void initialize() {
 

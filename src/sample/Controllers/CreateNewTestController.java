@@ -17,10 +17,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
+import sample.BaseClasses.MainBaseController;
 import sample.DataClasses.Bus;
 import sample.DataClasses.DataBaseCommunication;
 import sample.DataClasses.StudentDetails;
@@ -31,7 +31,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateNewTestController {
+public class CreateNewTestController extends MainBaseController {
     @FXML
     private JFXTextField testName_txt;
 
@@ -56,9 +56,6 @@ public class CreateNewTestController {
 //    @FXML
 //    private FontAwesomeIcon btn_close;
 
-
-    @FXML
-    private StackPane stackPane;
     @FXML
     private JFXTextField classname;
 
@@ -72,6 +69,7 @@ public class CreateNewTestController {
     }
 
     public void initialize() {
+        checkMaximize();
         testDetails = new TestDetails();
         List combo_box_list = new ArrayList();
         combo_box_list.add("Birla Institute Of Technology");
@@ -106,6 +104,8 @@ public class CreateNewTestController {
         students_txt.getValidators().add(numberValidator1);
         question_txt.getValidators().add(numberValidator2);
         testName_txt.getValidators().add(textValidator1);
+
+        setTollTip();
 
 
     }

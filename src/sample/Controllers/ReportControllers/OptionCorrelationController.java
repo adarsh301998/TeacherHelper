@@ -75,7 +75,7 @@ public class OptionCorrelationController {
 
             //GridPane gridLayout = getGridLayout(studentResponseEachQues);
 
-
+            gridLayout.setAlignment(Pos.CENTER);
             BarChart barChart = ChartHelper.distrcatorChart(studentResponseEachQues.get(i), distractor.get(i));
             Label keyLabel = new Label("Key : " + keyList.get(i));
             keyLabel.setFont(new Font("Segoi UI", 20));
