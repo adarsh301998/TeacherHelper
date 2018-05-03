@@ -71,7 +71,7 @@
         <center>
             <ScrollPane prefHeight="371.0" prefWidth="534.0" BorderPane.alignment="CENTER">
                 <content>
-                    <AnchorPane>
+                    <AnchorPane styleClass="light-background" fx:id="anchorPaneResize">
                         <children>
                             <ImageView fitHeight="400" fitWidth="500" layoutX="50" layoutY="10">
                                 <image>
@@ -106,9 +106,9 @@
                                             </ImageView>
                                         </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="totalMarksBarChart_btn" graphicTextGap="50.0"
-                                               onAction="#openReportOption" prefHeight="200" prefWidth="500"
-                                               styleClass="reportButton" text="Total Marks Chart">
+                                    <JFXButton fx:id="barCharts_btn" graphicTextGap="120.0" onAction="#openReportOption"
+                                               prefHeight="200" prefWidth="500" styleClass="reportButton"
+                                               text="Bar Charts">
                                         <graphic>
                                             <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
                                                        preserveRatio="true">
@@ -138,6 +138,19 @@
                                                        preserveRatio="true">
                                                 <image>
                                                     <Image url="@../../../icons/table.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </JFXButton>
+
+                                    <JFXButton fx:id="mciIndex_btn" graphicTextGap="120.0" onAction="#openReportOption"
+                                               prefHeight="200" prefWidth="500" styleClass="reportButton"
+                                               text="MCI Index">
+                                        <graphic>
+                                            <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
+                                                       preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../icons/scatterchart.png"/>
                                                 </image>
                                             </ImageView>
                                         </graphic>

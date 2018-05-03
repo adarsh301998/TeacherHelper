@@ -11,17 +11,22 @@ public class GuttSortingHelper {
         return quesSortedIndex;
     }
 
+
+    //Sorting Question Score
     public static int[] getQuesSum() {
         Arrays.sort(returnQuesSum);
         return returnQuesSum;
     }
 
+
+    /*
+     * Sorting [student Index, Evaluation, student total marks]
+     * */
     public static int[][] getSortedArray(int[][] array) {
 
         int r = array.length;
         int c = array[0].length;
         int marksIndex = array[0].length - 1;
-        int rowChangetemp[] = new int[c];
 
         int rowSortedArray[][] = new int[r][c];
 
@@ -76,19 +81,18 @@ public class GuttSortingHelper {
             System.out.println(quesSortedIndex[i]);
         }
 
-        System.out.println("After sorting");
+        /*System.out.println("After sorting");
         for (int i = 0; i < columnSorted.length; i++) {
             for (int j = 0; j < columnSorted[0].length; j++) {
                 System.out.print(columnSorted[i][j] + " ");
             }
             System.out.println();
         }
-
+*/
         return columnSorted;
     }
 
     private static int getMaxQuesSum(int ar[]) {
-
         int max = ar[0];
         int maxIndex = 0;
         for (int i = 0; i < ar.length; i++) {
@@ -117,4 +121,6 @@ public class GuttSortingHelper {
         return maxIndex;
     }
 
+
 }
+

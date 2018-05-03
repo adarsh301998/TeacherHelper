@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import sample.Main;
 
 import java.io.IOException;
@@ -42,6 +43,7 @@ public class MainBaseController extends Main {
 
     @FXML
     public JFXButton newTest_btn;
+
 
     public MainBaseController() {
         stage.maximizedProperty().addListener((ov, minimumSize, maximumSize) -> {
@@ -82,7 +84,7 @@ public class MainBaseController extends Main {
             } else {
 
                 anchorPaneResize.setPrefWidth(screenMinimunWidth);
-                anchorPaneResize.setPrefHeight(ScreenMinimunHeight);
+                anchorPaneResize.setPrefHeight(screenMinimunHeight);
             }
         }
 
@@ -110,6 +112,14 @@ public class MainBaseController extends Main {
             scene = ScenesLocations.KEY_SCENE;
 
         loadFrame(scene);
+
+    }
+
+    public Font getSegoiFontSyle(int size) {
+
+        Font font = new Font("Segoi UI", size);
+
+        return font;
 
     }
 

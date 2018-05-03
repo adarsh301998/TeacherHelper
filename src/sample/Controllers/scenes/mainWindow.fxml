@@ -6,12 +6,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 <StackPane fx:id="stackPane" stylesheets="@../../layouts/CSS/maincss.css" styleClass="stack-pane"
            xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="sample.Controllers.MainWindowController">
     <AnchorPane fx:id="rootScene" styleClass="light-background">
     <children>
+        <MediaView fx:id="mediaView">
+
+
+        </MediaView>
+
         <AnchorPane layoutX="0.0" layoutY="0.0"
                     styleClass="tittlePaneBackground" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0">
@@ -25,7 +31,7 @@
                 </Label>
             </children>
         </AnchorPane>
-        <ImageView layoutX="3" layoutY="100" fitWidth="500" fitHeight="400" preserveRatio="true">
+        <ImageView layoutX="3" layoutY="100" fitWidth="100" fitHeight="100" preserveRatio="true">
 
             <image>
                 <Image url="@../../../icons/largehome2.png"/>

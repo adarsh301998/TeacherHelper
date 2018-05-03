@@ -10,6 +10,29 @@
     -fx-toast-color: #000000;
     -fx-selected-color: #c8d6e5;
 }
+.root {
+-fx-background-color: -fx-gray-color;
+}
+
+/*
+Tab pane design
+*/
+
+.tab {
+-fx-pref-width: 350;
+-fx-pref-height: 60;
+-fx-background-color : -fx-secondary-color;
+}
+.tab-header-background {
+-fx-background-color: -fx-secondary-color;
+}
+.button:hover{
+-fx-background-color: -fx-selected-color;
+-fx-border-color: transparent;
+}
+
+/* Tab pane design end*/
+
 .button:hover{
 -fx-background-color: -fx-selected-color;
 -fx-border-color: transparent;

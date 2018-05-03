@@ -9,6 +9,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sample.DataClasses.StudentDetails;
 import sample.DataClasses.TestDetails;
+import sample.FolderHelpers.FolderHelper;
 
 import java.util.ArrayList;
 
@@ -32,12 +33,14 @@ public class Main extends Application {
 
     public double screenMinimunWidth = 1234.0;
 
-    public double ScreenMinimunHeight = 600.0;
+    public double screenMinimunHeight = 600.0;
 
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //Creating neccesary folder
+        FolderHelper.createFolder();
         //Parent root = FXMLLoader.load(getClass().getResource("Controllers/scenes/mainWindow.fxml"));
 
         /*testDetails = new TestDetails();
@@ -90,7 +93,7 @@ public class Main extends Application {
                 stage.setX(60);
                 stage.setY(60);
                 stage.setWidth(screenMinimunWidth);
-                stage.setHeight(ScreenMinimunHeight);
+                stage.setHeight(screenMinimunHeight);
             }
         });
 

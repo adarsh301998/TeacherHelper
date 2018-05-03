@@ -14,6 +14,9 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import sample.DataClasses.StudentDetails;
 import sample.DataClasses.TestDetails;
@@ -49,6 +52,9 @@ public class MainWindowController {
     private StackPane stackPane;
 
     @FXML
+    MediaView mediaView;
+
+    @FXML
     public void initialize() {
 
         //Create test for test
@@ -56,6 +62,31 @@ public class MainWindowController {
         //TestDetails testDetails = createTest();
         //Bus.setInstance(testDetails);
         //DataBaseCommunication.convertJavaToJSON(testDetails);
+
+
+        String path = getClass().getResource("../../video/mainbackground.mp4").toString();
+
+        Thread backgroundThread = new Thread(() -> {
+
+            Media media = new Media(path);
+
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+            mediaPlayer.setRate(1.5f);
+
+            mediaView.setSmooth(true);
+            mediaView.setPreserveRatio(false);
+
+            mediaView.fitWidthProperty().bind(stackPane.widthProperty());
+            mediaView.fitHeightProperty().bind(stackPane.heightProperty());
+
+            mediaView.setMediaPlayer(mediaPlayer);
+            mediaPlayer.play();
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+        });
+
+        backgroundThread.start();
 
     }
 

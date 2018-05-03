@@ -35,6 +35,21 @@ public class ListGenerationHelper {
 
     }
 
+    public static ArrayList<String> getStudentsName() {
+        updateTestDetails();
+        ArrayList<String> studentNames = new ArrayList<>();
+        ArrayList<StudentDetails> studentDetails = testDetails.getStudentDetails();
+        for (int i = 0; i < studentDetails.size(); i++) {
+            StudentDetails studentDetail = studentDetails.get(i);
+            if (studentDetail == null) {
+                studentNames.add("");
+            } else {
+                studentNames.add(studentDetail.getName());
+            }
+        }
+        return studentNames;
+    }
+
     //Small question list
     // ex Q1 Q2 Q3
     public static ArrayList<String> smallSizeQuestionList() {
@@ -255,15 +270,16 @@ public class ListGenerationHelper {
     }
 
 
-    public static List<List<String>> guttArrayToList(int[][] guttArray, int[] quesSum) {
-
+    public static List<List<String>> guttArrayToList(int[][] guttArray) {
+        //creating rows to add into table
         List<List<String>> guttList = new ArrayList<>();
-        List<String> roollnumbers = studentRollNumberList();
+        List<String> rollNumberList = studentRollNumberList();
+        int[] quesSum = guttArray[guttArray.length - 1];
 
-        for (int i = 0; i < guttArray.length; i++) {
+        for (int i = 1; i < guttArray.length - 1; i++) {
 
             List<String> subList = new ArrayList<>();
-            subList.add(roollnumbers.get(guttArray[i][0]));
+            subList.add(rollNumberList.get(guttArray[i][0]));
             for (int j = 1; j < guttArray[0].length; j++) {
                 subList.add(String.valueOf(guttArray[i][j]));
             }
@@ -273,7 +289,7 @@ public class ListGenerationHelper {
         List<String> subList = new ArrayList<>();
         subList.add("Total");
 
-        for (int i = quesSum.length - 1; i >= 0; i--) {
+        for (int i = 1; i < quesSum.length - 1; i++) {
             subList.add(String.valueOf(quesSum[i]));
         }
         subList.add("");
@@ -285,15 +301,58 @@ public class ListGenerationHelper {
     }
 
     //Sorting according to maximum number 1 in the give question
-    public static List<String> sortedQuestion(int[] quesIndex) {
-        List<String> sortedList = new ArrayList<>();
+    public static List<String> getCorrospondingQuestionNumber(int[] quesIndex) {
+        List<String> quesNumberListFromIndex = new ArrayList<>();
         List<String> queslist = questionList();
 
-        for (int i = 0; i < quesIndex.length; i++) {
-            sortedList.add(queslist.get(quesIndex[i]));
+        for (int i = 1; i < quesIndex.length - 1; i++) {
+            quesNumberListFromIndex.add(queslist.get(quesIndex[i]));
         }
-        return sortedList;
+        return quesNumberListFromIndex;
     }
 
 
+    //Question score
+    public static List<Integer> getQuestionScore() {
+
+        List<Integer> score = new ArrayList<>();
+        List<List<Integer>> evaluation = studentEvaluationInList();
+        for (int i = 0; i < evaluation.get(0).size(); i++) {
+            int sum = 0;
+            for (List<Integer> integers : evaluation) {
+                sum += integers.get(i);
+            }
+            score.add(sum);
+        }
+        return score;
+    }
+
+    //Difficulty level of question
+    public static List<Double> getQuestionDifficultyLevel() {
+        List<Integer> quesScore = getQuestionScore();
+        int numberOfStudent = testDetails.getNumberOfStudent();
+        List<Double> quesDifficultyList = new ArrayList<>();
+        for (Integer integer : quesScore) {
+
+            double ratio = (double) integer / numberOfStudent;
+
+            double d = 1.0 - ratio;
+            quesDifficultyList.add(d);
+        }
+
+        return quesDifficultyList;
+    }
+
+    public static ArrayList<Integer> integerListToArrayList(List<Integer> integers) {
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.addAll(integers);
+        return arrayList;
+    }
+
+    public static ArrayList<Double> doubleListToArrayList(List<Double> doubles) {
+        ArrayList<Double> arrayList = new ArrayList<>();
+        arrayList.addAll(doubles);
+        return arrayList;
+    }
 }

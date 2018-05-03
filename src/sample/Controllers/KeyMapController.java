@@ -78,6 +78,7 @@ public class KeyMapController extends MainBaseController {
 
     public void initialize() throws FileNotFoundException {
 
+        //To set anchorPaneSize to maximum
         checkMaximize();
         setTollTip();
 

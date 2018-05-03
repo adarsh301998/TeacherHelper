@@ -120,8 +120,9 @@ public class Distractors {
 
     }
 
-    private static double standardDeviation() {
+    public static double standardDeviation() {
 
+        studentTotalMarks = ListGenerationHelper.studentsTotalMarks();
         int sum = 0;
         int n = studentTotalMarks.size();
         for (int i = 0; i < n; i++) {

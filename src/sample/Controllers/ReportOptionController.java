@@ -53,7 +53,7 @@ public class ReportOptionController extends MainBaseController {
     private StackPane stack_pane;
 
     @FXML
-    private JFXButton totalMarksBarChart_btn;
+    private JFXButton barCharts_btn;
 
     @FXML
     private JFXButton guttFile_btn;
@@ -61,6 +61,8 @@ public class ReportOptionController extends MainBaseController {
     @FXML
     private JFXButton binaryCorelation_btn;
 
+    @FXML
+    JFXButton mciIndex_btn;
     TestDetails testDetails;
     NavigationHelper navigationHelper;
 
@@ -82,14 +84,17 @@ public class ReportOptionController extends MainBaseController {
         if (event.getSource() == distractors_btn) {
             frame = "scenes/report/distractor.fxml";
         }
-        if (event.getSource() == totalMarksBarChart_btn) {
-            frame = "scenes/report/totalMarksBarChart.fxml";
+        if (event.getSource() == barCharts_btn) {
+            frame = "scenes/report/barCharts.fxml";
         }
         if (event.getSource() == binaryCorelation_btn) {
             frame = "scenes/report/binaryCorelations.fxml";
         }
         if (event.getSource() == guttFile_btn) {
             frame = "scenes/report/gutt_file.fxml";
+        }
+        if (event.getSource() == mciIndex_btn) {
+            frame = "scenes/report/mciIndex.fxml";
         }
 
         loadFrame(frame);

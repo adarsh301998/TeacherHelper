@@ -1,5 +1,6 @@
 package HelperClasses;
 
+
 import Analysis.Distractors;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -8,16 +9,12 @@ import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class ChartHelper {
 
@@ -31,7 +28,7 @@ public class ChartHelper {
         x.setCategories(FXCollections.<String>observableArrayList(Arrays.asList("A", "B", "C", "D")));
         x.setLabel("Options");
 
-        NumberAxis y = new NumberAxis();
+        NumberAxis y = new NumberAxis(-1, 1, .5);
         y.setLabel("Response");
 
         BarChart<String, Number> barChart = new BarChart<>(x, y);
@@ -90,26 +87,22 @@ public class ChartHelper {
     }
 
 
-    public static BarChart totalMarksBarChar() {
-
-        ArrayList<String> studentRollNumbers = ListGenerationHelper.studentRollNumberList();
-
-        List<Integer> studentTotalMarksList = ListGenerationHelper.studentsTotalMarks();
+    public static BarChart getIntegerBarChart(ArrayList<String> xArrayList, ArrayList<Integer> yArrayList, String xLabel, String yLabel, String seriesLabel, double lowerBound, double upperBound, double unitTick) {
 
         CategoryAxis x = new CategoryAxis();
-        x.setCategories(FXCollections.<String>observableArrayList(studentRollNumbers));
-        x.setLabel("Roll Numbers");
+        x.setCategories(FXCollections.<String>observableArrayList(xArrayList));
+        x.setLabel(xLabel);
 
-        NumberAxis y = new NumberAxis();
-        y.setLabel("Marks");
+        NumberAxis y = new NumberAxis(lowerBound, upperBound, unitTick);
+        y.setLabel(yLabel);
 
         BarChart<String, Number> barChart = new BarChart<>(x, y);
 
         // Series for response
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
-        series1.setName("Total Marks");
-        for (int i = 0; i < studentTotalMarksList.size(); i++) {
-            final XYChart.Data<String, Number> data = new XYChart.Data(studentRollNumbers.get(i), studentTotalMarksList.get(i));
+        series1.setName(seriesLabel);
+        for (int i = 0; i < yArrayList.size(); i++) {
+            final XYChart.Data<String, Number> data = new XYChart.Data(xArrayList.get(i), yArrayList.get(i));
             data.nodeProperty().addListener(new ChangeListener<Node>() {
                 @Override
                 public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newValue) {
@@ -122,13 +115,51 @@ public class ChartHelper {
         }
 
         barChart.getData().addAll(series1);
-        double prefWidth = (studentTotalMarksList.size() * 100.0) * (3.0 / 4.0);
+        double prefWidth = (yArrayList.size() * 100.0) * (1.0 / 2.0);
+        barChart.setPrefHeight(Constants.INTEGER_BAR_CHART_HEIGHT);
+        barChart.setPrefWidth(prefWidth);
+        //barChart.setStyle("-fx-background-color: #3498db");
+
+        return barChart;
+    }
+
+
+    public static BarChart getDoubleBarChart(ArrayList<String> xArrayList, ArrayList<Double> yArrayList, String xLabel, String yLabel, String seriesLabel, double lowerBound, double upperBound, double tickUnit) {
+
+        CategoryAxis x = new CategoryAxis();
+        x.setCategories(FXCollections.<String>observableArrayList(xArrayList));
+        x.setLabel(xLabel);
+
+        NumberAxis y = new NumberAxis(lowerBound, upperBound, tickUnit);
+        y.setLabel(yLabel);
+
+        BarChart<String, Number> barChart = new BarChart<>(x, y);
+
+        // Series for response
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+        series1.setName(seriesLabel);
+        for (int i = 0; i < yArrayList.size(); i++) {
+            final XYChart.Data<String, Number> data = new XYChart.Data(xArrayList.get(i), yArrayList.get(i));
+            data.nodeProperty().addListener(new ChangeListener<Node>() {
+                @Override
+                public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newValue) {
+                    if (newValue != null) {
+                        displayLabelForData(data);
+                    }
+                }
+            });
+            series1.getData().add(data);
+        }
+
+        barChart.getData().addAll(series1);
+        double prefWidth = (yArrayList.size() * 100.0) * (1.0 / 2.0);
         barChart.setPrefHeight(450);
         barChart.setPrefWidth(prefWidth);
         //barChart.setStyle("-fx-background-color: #3498db");
 
         return barChart;
     }
+
 
     public static BarChart binaryDistractorChart() {
 
@@ -196,7 +227,6 @@ public class ChartHelper {
             }
         });
 
-
     }
 
     private static void displayLabelForScalledChartData(XYChart.Data<String, Number> data, String text) {
@@ -232,7 +262,7 @@ public class ChartHelper {
     private static ArrayList<Double> scalingBar(ArrayList<Integer> response) {
 
         int max = Collections.max(response);
-        max += 10;
+        max += 1;
 
         ArrayList<Double> list = new ArrayList<>();
 
@@ -246,6 +276,49 @@ public class ChartHelper {
         return list;
 
 
+    }
+
+    public static ScatterChart<Number, Number> getScatterChart(ArrayList<Double> mciArrayList, ArrayList<String> rollNumbers, ArrayList<Double> studentPercent) {
+
+        NumberAxis xAxis = new NumberAxis(0, 1.2, .3);
+        NumberAxis yAxis = new NumberAxis(0, 100, 10);
+
+        System.out.println(xAxis.getValueForDisplay(10));
+
+
+        ScatterChart<Number, Number> scatterChart = new ScatterChart<>(xAxis, yAxis);
+
+        XYChart.Series series = new XYChart.Series();
+        series.setName("MCI Index");
+        for (int i = 0; i < mciArrayList.size(); i++) {
+
+            XYChart.Data data = new XYChart.Data(mciArrayList.get(i), studentPercent.get(i));
+            final int index = i;
+            data.nodeProperty().addListener(new ChangeListener() {
+                @Override
+                public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                    if (newValue != null) {
+                        displayLabelForScalledChartData(data, rollNumbers.get(index));
+                    }
+                }
+            });
+
+
+            series.getData().add(data);
+        }
+
+        scatterChart.getData().add(series);
+
+        return scatterChart;
+
+
+    }
+
+    public static double calculateRelativePositionInChart(double upperBoundInAxis, double lengthOfAxis, double value) {
+        //Remove space required by number labels Axis
+        lengthOfAxis -= Constants.LABEL_SPACE_IN_AXIS;
+        double calPos = (value * lengthOfAxis) / upperBoundInAxis;
+        return calPos;
     }
 
 

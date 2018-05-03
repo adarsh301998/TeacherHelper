@@ -1,29 +1,15 @@
 package sample.Controllers.ReportControllers;
 
 import HelperClasses.ChartHelper;
-import HelperClasses.DialogPopUp;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import sample.DataClasses.Bus;
 
-import java.io.IOException;
-
-public class BinaryCorelationController {
-    @FXML
-    private StackPane stackPane;
+public class BinaryCorelationController extends BaseController {
 
     @FXML
     private FontAwesomeIcon close_btn;
@@ -38,6 +24,10 @@ public class BinaryCorelationController {
     private VBox vbox;
 
     public void initialize() {
+        anchorPaneResize.setPrefWidth(screenMinimunWidth);
+        anchorPaneResize.setPrefHeight(screenMinimunHeight);
+        anchorPaneResize.setPrefHeight(screenMinimunHeight);
+        checkMaximize();
 
         BarChart<String, Number> binaryCorelationChart = ChartHelper.binaryDistractorChart();
 
@@ -49,7 +39,7 @@ public class BinaryCorelationController {
 
     }
 
-    @FXML
+    /*@FXML
     void backEvent(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../scenes/reportOptions.fxml"));
@@ -70,5 +60,5 @@ public class BinaryCorelationController {
     @FXML
     void displayBasicInfo(MouseEvent event) {
         DialogPopUp.basicInfoDialog(stackPane, Bus.getInstance());
-    }
+    }*/
 }

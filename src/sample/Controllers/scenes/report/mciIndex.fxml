@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<StackPane stylesheets="@../../../layouts/CSS/maincss.css" fx:id="stackPane" xmlns="http://javafx.com/javafx/8.0.141"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.ReportControllers.MciIndexController">
+    <AnchorPane prefHeight="600.0" prefWidth="1234.0">
+        <children>
+            <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                        AnchorPane.topAnchor="0.0">
+                <content>
+                    <AnchorPane fx:id="anchorPaneResize" prefHeight="594.0" prefWidth="1227.0"
+                                styleClass="light-background">
+                        <children>
+                            <AnchorPane prefHeight="40.0" prefWidth="839.0" styleClass="tittlePaneBackground"
+                                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                        AnchorPane.topAnchor="0.0">
+                                <children>
+                                    <JFXButton fx:id="back_btn" layoutX="14.0" layoutY="13.0" onAction="#titlePaneEvent"
+                                               styleClass="navigationButton" text=" " AnchorPane.leftAnchor="0.0"
+                                               AnchorPane.topAnchor="0.0">
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="36.0" pickOnBounds="true"
+                                                       preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../../icons/back.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </JFXButton>
+
+                                    <Label onMouseClicked="#displayBasicInfo" layoutX="135.0" layoutY="13.0"
+                                           prefHeight="40.0" prefWidth="261.0" text="MCI Index" textFill="#FFFF">
+                                        <font>
+                                            <Font name="Segoe UI" size="30.0"/>
+                                        </font>
+                                    </Label>
+
+
+                                </children>
+                            </AnchorPane>
+                        </children>
+                    </AnchorPane>
+                </content>
+            </ScrollPane>
+        </children>
+    </AnchorPane>
+</StackPane>

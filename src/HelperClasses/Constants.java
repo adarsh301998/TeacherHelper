@@ -8,6 +8,7 @@ public class Constants {
     public static String SAVE_SUCCESSFULL = "Saved Successfully";
     public static String CORRELATION = "Correlation";
     public static String RESPONSE = "Response";
+    public static String BROWN_TEXT_FILL = "-fx-text-fill: #A0522D";
 
 
 
@@ -17,7 +18,18 @@ public class Constants {
     public static int OPTION_CORRELATION_BAR_CHART_WIDTH = 700;
     public static int OPTION_CORRELATION_BAR_CHART_HEIGHT = 500;
 
+    public static int STANDARD_FONT_SIZE = 30;
+    public static int VBOX_STANDARD_SPACING = 20;
+
     public static int SHOW_STUDENT_RESPONSE = 1;
     public static int SHOW_STUDENT_EVALUATION = 0;
+
+    public static final int INTEGER_BAR_CHART_HEIGHT = 450;
+
+    public static final int STROKE_WIDTH = 3;
+
+    public static final int LABEL_SPACE_IN_AXIS = 135;
+    public static final int CHART_TOP_GAP = 15;
+
 
 }

@@ -13,4 +13,26 @@ public class BaseHelper {
     }
 
 
+    public int getMaxRawScore() {
+        return ListGenerationHelper.questionList().size();
+    }
+
+    public int getNumberOfStudent() {
+        updateTestDetails();
+        return testDetails.getNumberOfStudent();
+    }
+
+    public static int getMaxRawScoreStaticMethod() {
+        return ListGenerationHelper.questionList().size();
+    }
+
+    public static int getNumberOfStudentStaticMethod() {
+        updateTestDetails();
+        return testDetails.getNumberOfStudent();
+    }
+
+    public static int getItemMaxScore() {
+        updateTestDetails();
+        return testDetails.getNumberOfStudent();
+    }
 }
