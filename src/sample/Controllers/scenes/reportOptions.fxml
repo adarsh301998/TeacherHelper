@@ -155,6 +155,19 @@
                                             </ImageView>
                                         </graphic>
                                     </JFXButton>
+                                    <JFXButton fx:id="questionCorrelation_btn" graphicTextGap="30.0"
+                                               onAction="#openReportOption"
+                                               prefHeight="200" prefWidth="500" styleClass="reportButton"
+                                               text="Question Correlation">
+                                        <graphic>
+                                            <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true"
+                                                       preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../icons/question.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </JFXButton>
 
 
                                 </children>

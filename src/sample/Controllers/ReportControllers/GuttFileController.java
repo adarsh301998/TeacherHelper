@@ -1,6 +1,7 @@
 package sample.Controllers.ReportControllers;
 
 import HelperClasses.ArrayHelper;
+import HelperClasses.Constants;
 import HelperClasses.ListGenerationHelper;
 import HelperClasses.TableViewHelper;
 
@@ -15,7 +16,7 @@ public class GuttFileController extends BaseController {
         int questionSortedIndex[] = GuttSortingHelper.getQuesSortedIndex();
         int questionSum[] = GuttSortingHelper.getQuesSum();
 */
-        int guttArrayTable[][] = ArrayHelper.getGuttImprovised();
+        int guttArrayTable[][] = ArrayHelper.getGuttImprovised(Constants.FULLY_IMPROVISED_GUTT_TABLE);
 
 
         List<List<String>> rowData = ListGenerationHelper.guttArrayToList(guttArrayTable);

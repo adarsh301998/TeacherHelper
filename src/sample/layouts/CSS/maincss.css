@@ -14,6 +14,13 @@
 -fx-background-color: -fx-gray-color;
 }
 
+/*Navigation Vbox height and width*/
+
+.navigationVBox{
+-fx-pref-width: 30;
+-fx-pref-height: 500;
+}
+
 /*
 Tab pane design
 */

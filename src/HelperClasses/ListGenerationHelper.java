@@ -78,6 +78,7 @@ public class ListGenerationHelper {
                     if (testDetails.getSubQuestionList().get(j) != null) {
                         for (int x = 0; x < testDetails.getSubQuestionList().get(j); x++) {
                             Character r = student.getResponse().get(j).get(x);
+                            // Replace null character with Space
                             if (r == null) {
                                 eachStudentResponse.add(' ');
                             } else {
@@ -104,7 +105,7 @@ public class ListGenerationHelper {
         for (int i = 0; i < testDetails.getNumberOfStudent(); i++) {
 
             StudentDetails student = testDetails.getStudentDetails().get(i);
-            //Addding all evaluation in one list
+            //Adding all evaluation in one list
             ArrayList<Integer> eachStudentResponse = new ArrayList<>();
             if (student.getResponse() != null) {
                 for (int j = 0; j < testDetails.getNumberOfQuestion(); j++) {
@@ -337,10 +338,28 @@ public class ListGenerationHelper {
             double ratio = (double) integer / numberOfStudent;
 
             double d = 1.0 - ratio;
+            //rounding up to 3 decimal place
+            d = Math.round(d * 1000.0) / 1000.0;
+
             quesDifficultyList.add(d);
         }
 
         return quesDifficultyList;
+    }
+
+
+    public static ArrayList<String> getQuestionNumberListWithOutSubQuestion() {
+
+        ArrayList<String> questionList = questionList();
+        ArrayList<String> newQuestionList = new ArrayList<>();
+        for (int i = 0; i < questionList.size(); i++) {
+            int q = i + 1;
+            String s = "Q" + q;
+            newQuestionList.add(s);
+        }
+
+        return newQuestionList;
+
     }
 
     public static ArrayList<Integer> integerListToArrayList(List<Integer> integers) {

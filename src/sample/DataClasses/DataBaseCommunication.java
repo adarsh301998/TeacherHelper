@@ -4,6 +4,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import sample.FolderHelpers.StorageLocation;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class DataBaseCommunication {
 
@@ -45,4 +46,25 @@ public class DataBaseCommunication {
         }
         return result;
     }
+
+    public static ArrayList<String> readStringLineFromFile(String filename) {
+        BufferedReader reader = null;
+        ArrayList<String> dataList = new ArrayList<>();
+        try {
+            reader = new BufferedReader(new FileReader(StorageLocation.TEST_STORAGE_PATH + filename + ".txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                dataList.add(line);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return dataList;
+    }
+
 }

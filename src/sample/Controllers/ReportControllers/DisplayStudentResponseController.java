@@ -3,7 +3,6 @@ package sample.Controllers.ReportControllers;
 import HelperClasses.DialogPopUp;
 import HelperClasses.ListGenerationHelper;
 import HelperClasses.TableViewHelper;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,9 +22,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class DisplayStudentResponseController extends BaseController {
-
+/*
     @FXML
-    private JFXButton back_btn;
+    private JFXButton back_btn;*/
 
     @FXML
     private JFXToggleButton binaryToggle;

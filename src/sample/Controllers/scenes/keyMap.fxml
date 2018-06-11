@@ -39,34 +39,71 @@
             </AnchorPane>
         </top>
         <left>
-            <VBox prefHeight="494.0" prefWidth="68.0" spacing="20.0" styleClass="dark-background"
+            <VBox prefWidth="30" spacing="10.0" styleClass="dark-background"
                   BorderPane.alignment="CENTER_LEFT">
             <children>
-                <JFXButton fx:id="openTest_btn" ellipsisString=" " onAction="#navigationActionEvent" prefHeight="48.0"
-                           prefWidth="60.0" styleClass="panelButtonColor">
+                <JFXButton fx:id="openTest_btn" ellipsisString=" " onAction="#navigationActionEvent" prefHeight="30.0"
+                           prefWidth="30.0" styleClass="panelButtonColor">
                     <graphic>
-                        <FontAwesomeIcon fx:id="open_icon" fill="#fffefe" glyphName="FOLDER" size="3em"
+                        <FontAwesomeIcon fx:id="open_icon" fill="#fffefe" glyphName="FOLDER" size="30"
                                          styleClass="icon"/>
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="openStudents_btn" onAction="#navigationActionEvent" prefHeight="48.0" prefWidth="60.0"
+                <JFXButton fx:id="openStudents_btn" onAction="#navigationActionEvent" prefHeight="30.0" prefWidth="30.0"
                            styleClass="panelButtonColor" text="  ">
                     <graphic>
-                        <FontAwesomeIcon glyphName="USER" size="3em" styleClass="icon" text=""/>
+                        <FontAwesomeIcon glyphName="USER" size="30" styleClass="icon" text=""/>
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="newTest_btn" onAction="#navigationActionEvent" prefHeight="48.0" prefWidth="54.0"
+                <JFXButton fx:id="newTest_btn" onAction="#navigationActionEvent" prefHeight="30.0" prefWidth="54.0"
                            styleClass="panelButtonColor" text="  ">
                     <graphic>
-                        <FontAwesomeIcon glyphName="FILE" size="3em" styleClass="icon"/>
+                        <FontAwesomeIcon glyphName="FILE" size="30" styleClass="icon"/>
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="openReport_btn" onAction="#navigationActionEvent" prefHeight="62.0" prefWidth="53.0"
+                <JFXButton fx:id="openReport_btn" onAction="#navigationActionEvent" prefHeight="30" prefWidth="53.0"
                            styleClass="panelButtonColor" text=" ">
                     <graphic>
-                        <ImageView fitHeight="71.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../icons/report3.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </JFXButton>
+
+                <JFXButton fx:id="uploadTestKey_btn" onAction="#uploadTestKeyFromFile"
+                           prefHeight="30.0" prefWidth="30.0" styleClass="panelButtonColor"
+                           text=" ">
+                    <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@../../../icons/upload.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </JFXButton>
+                <JFXButton fx:id="exportReportPDF_btn" onAction="#navigationActionEvent"
+                           prefHeight="30.0" prefWidth="30.0" styleClass="panelButtonColor"
+                           text=" ">
+                    <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@../../../icons/pdf.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </JFXButton>
+                <JFXButton fx:id="printReport_btn" onAction="#navigationActionEvent"
+                           prefHeight="30.0" prefWidth="30.0" styleClass="panelButtonColor"
+                           text=" ">
+                    <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@../../../icons/printer.png"/>
                             </image>
                         </ImageView>
                     </graphic>

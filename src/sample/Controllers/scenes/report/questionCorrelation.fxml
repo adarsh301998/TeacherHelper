@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<StackPane fx:id="stackPane" styleClass="stack-pane" stylesheets="@../../../layouts/CSS/maincss.css"
+           xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="sample.Controllers.ReportControllers.QuestionCorrelationController">
+    <AnchorPane styleClass="light-background">
+        <children>
+            <AnchorPane prefHeight="49.0" prefWidth="746.0" styleClass="tittlePaneBackground"
+                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <children>
+
+                    <JFXButton fx:id="back_btn" layoutX="7.0" onAction="#titlePaneEvent" prefHeight="29.0"
+                               prefWidth="62.0" styleClass="navigationButton" text=" " AnchorPane.leftAnchor="0.0"
+                               AnchorPane.topAnchor="3.0">
+                        <graphic>
+                            <ImageView fitHeight="33.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../../icons/back.png"/>
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </JFXButton>
+                    <Label fx:id="questionCorrelationLabel" layoutX="108.0" layoutY="3.0"
+                           onMouseClicked="#displayBasicInfo" styleClass="titlePaneHeading" text="Question Correlation"
+                           AnchorPane.leftAnchor="108.0" AnchorPane.topAnchor="3.0">
+                        <font>
+                            <Font size="30.0"/>
+                        </font>
+
+                    </Label>
+                </children>
+            </AnchorPane>
+            <TableView fx:id="tableView" layoutX="0.0" layoutY="136.0" prefHeight="464.0" prefWidth="1234.0"
+                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                       AnchorPane.topAnchor="136.0"/>
+            <JFXToggleButton fx:id="contractTableToggle" layoutX="400.0" layoutY="77.0" onAction="#contractTableEvent"
+                             text="Contract">
+                <font>
+                    <Font name="Segoe UI" size="24.0"/>
+                </font>
+            </JFXToggleButton>
+        </children>
+    </AnchorPane>
+</StackPane>

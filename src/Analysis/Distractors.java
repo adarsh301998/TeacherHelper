@@ -19,7 +19,7 @@ public class Distractors {
      * M(nona) - mean of total marks obtain by student who not opted for option A / no. of student not opted
      * Pa - probablity of option A to be choosen
      * Qa - probablity of option A  not to be choosen
-     * sd = Mean of total score of student - student score
+     * sd = SUM((student score - Mean of total score of student)^2)
      * */
     public static ArrayList<ArrayList<Double>> getDistactors() {
 

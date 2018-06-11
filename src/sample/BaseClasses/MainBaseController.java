@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -43,6 +44,12 @@ public class MainBaseController extends Main {
 
     @FXML
     public JFXButton newTest_btn;
+
+    @FXML
+    public JFXButton uploadTestKey_btn;
+
+    @FXML
+    public JFXButton uploadStudentDetails_btn;
 
 
     public MainBaseController() {
@@ -121,6 +128,12 @@ public class MainBaseController extends Main {
 
         return font;
 
+    }
+
+    public Label getSegoiLabel(String labelText, int size) {
+        Label label = new Label(labelText);
+        label.setFont(getSegoiFontSyle(size));
+        return label;
     }
 
 

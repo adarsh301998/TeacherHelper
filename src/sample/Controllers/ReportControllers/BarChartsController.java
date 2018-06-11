@@ -3,6 +3,9 @@ package sample.Controllers.ReportControllers;
 import Analysis.Distractors;
 import HelperClasses.*;
 import calculations.CalculationBase;
+import calculations.MathCutOffScore;
+import calculations.NedelskyScore;
+import calculations.ReliabilityOfQuestion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,15 +15,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.DataClasses.Bus;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class BarChartsController extends BaseController {
 
@@ -43,11 +49,20 @@ public class BarChartsController extends BaseController {
     @FXML
     private AnchorPane anchorPaneDifficultyLevel;
 
+    @FXML
+    private AnchorPane anchorPaneReliability;
+
+    @FXML
+    Tab studentScoreTab;
+
     public void initialize() {
 
         int maxScore = CalculationBase.getNumberOfQuestion();
-        int cutOffScore = (int) (maxScore * 0.50);
+        /*Getting cut of score*/
+        int cutOffScore = MathCutOffScore.getCutOffScore();
+        System.out.println("MathCutOffScore : " + cutOffScore);
         int maxQuesScore = CalculationBase.getNumberOfStudents();
+
         System.out.println("Max Ques Score : " + maxQuesScore);
 
         //Adding total marks bar chart
@@ -112,6 +127,7 @@ public class BarChartsController extends BaseController {
 
 
         //Adding question score
+
         ArrayList<Double> axisLowerUpperUnitsQuestion = calBoundsforBarChart(maxQuesScore);
         Label questionScoreLabel = getLabel("Question Score");
 
@@ -123,11 +139,9 @@ public class BarChartsController extends BaseController {
         questionScoreBarChart.setLayoutX(X_POS);
         questionScoreBarChart.setLayoutY(TOP_GAP);
 
-        relativePos = getLineYCoordinates(axisLowerUpperUnits, totalMarksChartHeight, maxQuesScore);
+        relativePos = getLineYCoordinates(axisLowerUpperUnitsQuestion, totalMarksChartHeight, maxQuesScore);
         //Adjusting y coordinate when greater then ADJUST_LINE_Y_COORDINATE
-        if (maxScore > ADJUST_LINE_Y_COORDINATE) {
-            relativePos += Constants.STROKE_WIDTH;
-        }
+
 
         /*
          *
@@ -152,15 +166,142 @@ public class BarChartsController extends BaseController {
         Label difficultyLevelLabel = getLabel("Difficulty Level");
         BarChart<String, Number> difficultyLevelBarChart = ChartHelper.getDoubleBarChart(ListGenerationHelper.questionList(), ListGenerationHelper.doubleListToArrayList(ListGenerationHelper.getQuestionDifficultyLevel()), "Questions", "", "Difficulty Level", 0.0, 1.0, 0.1);
 
-        //BarChart<String, Number> difficultyLevelBarChart = ChartHelper.getDoubleBarChart(studentRollNumberList, difficultyLevel, "Questions", "","Difficulty Level",0.0,1.1,0.1);
 
+        // Setting up positions
         difficultyLevelLabel.setLayoutX(X_POS);
         difficultyLevelLabel.setLayoutY(Y_POS);
-
         difficultyLevelBarChart.setLayoutX(X_POS);
         difficultyLevelBarChart.setLayoutY(TOP_GAP);
         //vbox.getChildren().addAll(difficultyLevelLabel, difficultyLevelBarChart);
         anchorPaneDifficultyLevel.getChildren().addAll(difficultyLevelLabel, difficultyLevelBarChart);
+
+
+        /*
+
+
+
+
+
+
+
+
+
+
+
+                RELIABILITY TAB
+         *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          *
+          * */
+
+
+        ReliabilityOfQuestion reliabilityOfQuestion = new ReliabilityOfQuestion();
+
+        /*Get total reliability in below variable */
+        Double totalReliabilityTest = reliabilityOfQuestion.getReliabilityScore();
+
+
+        /*Get Reliability list in below varible*/
+        ArrayList<Double> reliabilityList = reliabilityOfQuestion.getReliabilityScores();
+        Double maxReliabilityScore = Collections.max(reliabilityList);
+        Double minReliabilityScore = Collections.min(reliabilityList);
+        Double upperBound = 0.0, lowerBound = 1.0, unitTick = 0.1;
+
+        /*
+         * Getting upper and lower bounds for chart
+         * 1. Upper bound >(greater then) totalReliabilityTest and max(reliabilityList)
+         * 2. Lower bound <(less then) min(reliabilityList)
+         * */
+
+        //Calculating upper bound
+
+        upperBound = maxReliabilityScore + 0.002;
+        lowerBound = minReliabilityScore;
+        unitTick = upperBound - lowerBound;
+
+//        //Calculating lower bound
+//        while(lowerBound > minReliabilityScore){
+//            lowerBound -=unitTick;
+//        }
+
+        ArrayList<Double> arrayListLowerUpperUnitReliability = new ArrayList<>();
+
+        //Lower unit
+        arrayListLowerUpperUnitReliability.add(lowerBound);
+        //Upper unit of chart
+        arrayListLowerUpperUnitReliability.add(upperBound);
+        //Unit tick
+        arrayListLowerUpperUnitReliability.add(unitTick);
+        Label reliabilityLabel = getLabel("Reliability");
+
+        //Creating dummy bar chart
+        DummyBarChart dummyBarChart = new DummyBarChart();
+        ArrayList<String> x = new ArrayList<>();
+        x.add("Q1");
+        ArrayList<Double> y = new ArrayList<>();
+        y.add(totalReliabilityTest);
+        BarChart<String, Number> barChart = dummyBarChart.getDoubleDummyBarChart(x, y, "Question", "ReliabilityScore", "Reliability", arrayListLowerUpperUnitReliability.get(LOWER_BOUND_INDEX), arrayListLowerUpperUnitReliability.get(UPPER_BOUND_INDEX), arrayListLowerUpperUnitReliability.get(UNIT_TICK_INDEX));
+        barChart.setPrefHeight(500);
+        barChart.setLayoutX(X_POS);
+        barChart.setLayoutY(TOP_GAP);
+
+        anchorPaneReliability.getChildren().add(barChart);
+
+        /*Removing dummy chart when student score tab changed*/
+        studentScoreTab.setOnSelectionChanged((event -> {
+            //Removing all nodes
+            for (int i = 0; i < anchorPaneReliability.getChildren().size(); i++) {
+                anchorPaneReliability.getChildren().remove(i);
+            }
+
+            //Creating required bar chart
+            BarChart<String, Number> reliabilityBarChart = ChartHelper.getDoubleBarChart(ListGenerationHelper.questionList(), reliabilityList, "Question", "ReliabilityScore", "Reliability", arrayListLowerUpperUnitReliability.get(LOWER_BOUND_INDEX), arrayListLowerUpperUnitReliability.get(UPPER_BOUND_INDEX), arrayListLowerUpperUnitReliability.get(UNIT_TICK_INDEX));
+            //increasing bar chart height
+            reliabilityBarChart.setPrefHeight(500);
+            reliabilityLabel.setLayoutX(X_POS);
+            reliabilityLabel.setLayoutY(Y_POS);
+
+            reliabilityBarChart.setLayoutX(X_POS);
+            reliabilityBarChart.setLayoutY(TOP_GAP);
+
+            double lineY = dummyBarChart.lineY + TOP_GAP + 14;
+            double lineX = xmin;
+            javafx.scene.shape.Line line = new javafx.scene.shape.Line(lineX, lineY, reliabilityBarChart.getPrefWidth(), lineY);
+            line.setStroke(Color.RED);
+            line.setStrokeWidth(Constants.STROKE_WIDTH);
+
+            Text text = new Text(String.valueOf(totalReliabilityTest));
+            text.setLayoutX(xmin - 15.0);
+            text.setLayoutY(lineY);
+
+            anchorPaneReliability.getChildren().addAll(reliabilityLabel, reliabilityBarChart, line, text);
+
+
+        }));
+
+
+
+
+        /* END RELIABILITY TEST*/
+
 
         /*
          * Setting anchor pane height to maximum
@@ -169,9 +310,16 @@ public class BarChartsController extends BaseController {
         anchorPane.setPrefHeight(screenMaxHeight);
         anchorPaneQuestionScore.setPrefHeight(screenMaxHeight);
         anchorPaneDifficultyLevel.setPrefHeight(screenMaxHeight);
+        anchorPaneReliability.setPrefHeight(screenMaxHeight);
 
 
     }
+
+    private double getReliabilityLineYCoordinate(ArrayList<Double> arrayListLowerUpperUnitReliability, double reliabilityChartHeight, Double reliabilityScore) {
+
+        return 100.0;
+    }
+
 
     private GridPane getGridPane() {
 
@@ -183,20 +331,24 @@ public class BarChartsController extends BaseController {
         standardDeviationLabel.setFont(getSegoiFontSyle(20));
         Label standardDeviationValue = new Label("  " + String.valueOf((Math.round(Distractors.standardDeviation() * 100)) / 100.0) + " ");
         standardDeviationValue.setFont(getSegoiFontSyle(20));
+
         Label meanScoreLabel = new Label("  Mean Score  ");
         meanScoreLabel.setFont(getSegoiFontSyle(20));
-        Label meanScoreValue = new Label("  " + String.valueOf(CalculationHelper.getMeanScore() + "  "));
+        Label meanScoreValue = new Label("  " + String.valueOf(Math.round(CalculationHelper.getMeanScore() * 100.0) / 100.0) + "  ");
         meanScoreValue.setFont(getSegoiFontSyle(20));
 
+        NedelskyScore nedelskyScore = new NedelskyScore();
+        Label nedelSkyScoreLabel = new Label("  NedelSkyScore  ");
+        nedelSkyScoreLabel.setFont(getSegoiFontSyle(20));
+        Label nedelSkyScoreValue = new Label("  " + nedelskyScore.getNedelskyScore() + "  ");
+        nedelSkyScoreValue.setFont(getSegoiFontSyle(20));
+
         gridPane.add(standardDeviationLabel, 0, 0);
-
         gridPane.add(standardDeviationValue, 1, 0);
-
-
         gridPane.add(meanScoreLabel, 0, 1);
-
-
         gridPane.add(meanScoreValue, 1, 1);
+        gridPane.add(nedelSkyScoreLabel, 0, 2);
+        gridPane.add(nedelSkyScoreValue, 1, 2);
         return gridPane;
 
     }

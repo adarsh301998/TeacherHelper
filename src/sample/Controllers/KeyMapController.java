@@ -1,9 +1,6 @@
 package sample.Controllers;
 
-import HelperClasses.Constants;
-import HelperClasses.DialogPopUp;
-import HelperClasses.ListHelper;
-import HelperClasses.RadioButtonHelper;
+import HelperClasses.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSnackbar;
@@ -137,6 +134,17 @@ public class KeyMapController extends MainBaseController {
         keymap_gridpane.setDisable(true);
     }
 
+    @FXML
+    private void uploadTestKeyFromFile(ActionEvent event) {
+
+        ArrayList<String> dataList = UploadFileHelper.openFileChooserAndReadFile();
+        ArrayList<ArrayList<Character>> keyRowSet = UploadFileHelper.getKeyDetailsFromDataList(dataList);
+        System.out.println(keyRowSet);
+        testDetails.setKey(keyRowSet);
+        //Saving Data
+        DataBaseCommunication.convertJavaToJSON(testDetails);
+    }
+
     //Prooced button
     @FXML
     void generateRadioButton(ActionEvent event) {
@@ -206,51 +214,6 @@ public class KeyMapController extends MainBaseController {
 
     }
 
-    /*    @FXML
-        void closeEvent(MouseEvent event) {
-            if (!saveData) {
-                JFXDialogLayout layout = new JFXDialogLayout();
-                layout.setHeading(new Text("Save"));
-
-                Label label = new Label(Constants.ASK_FOR_SAVING_DATA);
-                label.setFont(new Font("Segoi UI", 20));
-
-                layout.setBody(label);
-
-                JFXButton cancel = new JFXButton(Constants.CANCEL_TEXT);
-                JFXButton savebtn = new JFXButton(Constants.SAVE_TXT);
-                savebtn.setPrefWidth(100);
-                cancel.setPrefWidth(100);
-                cancel.getStyleClass().add("btn-dialog");
-                savebtn.getStyleClass().add("btn-dialog");
-                layout.setActions(cancel, savebtn);
-
-                JFXDialog dialog = new JFXDialog(stackPane, layout, JFXDialog.DialogTransition.CENTER);
-                cancel.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        dialog.close();
-                        System.exit(0);
-                    }
-                });
-
-                savebtn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        saveRadioData(event);
-                        System.exit(0);
-                    }
-                });
-                dialog.show();
-            } else {
-                DialogPopUp.closeAlert(stackPane);
-            }
-        }*/
-/*
-    @FXML
-    void openEvent(MouseEvent event) {
-        checkSave();
-    }*/
     @FXML
     void saveRadioData(ActionEvent event) {
         //getting selected toggle
@@ -269,7 +232,9 @@ public class KeyMapController extends MainBaseController {
         testDetails.getKey().set(selectedIndex, key);
 
         RadioButtonHelper.deselectRadioButton(keymap_gridpane);
+        //Updating Student Evaluation
         testDetails.setStudentDetails(ListHelper.keyToStudents(key, testDetails.getStudentDetails(), selectedIndex, testDetails.getSubQuestionList().get(selectedIndex)));
+        //Saving data
         DataBaseCommunication.convertJavaToJSON(testDetails);
         keymap_gridpane.getChildren().clear();
 

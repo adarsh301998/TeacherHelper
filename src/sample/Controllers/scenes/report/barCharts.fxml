@@ -41,7 +41,7 @@
                 <JFXTabPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                             AnchorPane.topAnchor="55.0">
                     <tabs>
-                        <Tab text="Student Score">
+                        <Tab fx:id="studentScoreTab" text="Student Score">
                             <content>
                                 <AnchorPane fx:id="anchorPaneStudentScore">
                                     <children>
@@ -93,6 +93,27 @@
                                 </AnchorPane>
                             </content>
                         </Tab>
+
+
+                        <Tab text="Reliability" fx:id="reliabilityTab">
+                            <content>
+                                <AnchorPane>
+                                    <children>
+                                        <ScrollPane layoutX="0.0" layoutY="70.0" prefHeight="549.0"
+                                                    AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="7.0"
+                                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <content>
+                                                <AnchorPane fx:id="anchorPaneReliability" prefHeight="514.0"
+                                                            prefWidth="1500.0" styleClass="light-background"/>
+                                            </content>
+                                        </ScrollPane>
+
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+
+
                     </tabs>
                 </JFXTabPane>
 

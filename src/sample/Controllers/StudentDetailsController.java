@@ -1,9 +1,6 @@
 package sample.Controllers;
 
-import HelperClasses.Constants;
-import HelperClasses.DialogPopUp;
-import HelperClasses.ListHelper;
-import HelperClasses.RadioButtonHelper;
+import HelperClasses.*;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
@@ -103,70 +100,7 @@ public class StudentDetailsController extends MainBaseController {
     boolean dataSaved = true;
     int oldSelectedIndex = -1;
 
-    /*@FXML
-    void closeEvent(MouseEvent event) {
 
-        if (!dataSaved) {
-            JFXDialogLayout layout = new JFXDialogLayout();
-            layout.setHeading(new Text("Save"));
-
-            Label label = new Label(Constants.ASK_FOR_SAVING_DATA);
-            label.setFont(new Font("Segoi UI", 20));
-
-            layout.setBody(label);
-
-            JFXButton cancel = new JFXButton(Constants.CANCEL_TEXT);
-            JFXButton savebtn = new JFXButton(Constants.SAVE_TXT);
-            savebtn.setPrefWidth(100);
-            cancel.setPrefWidth(100);
-            cancel.getStyleClass().add("btn-dialog");
-            savebtn.getStyleClass().add("btn-dialog");
-            layout.setActions(cancel, savebtn);
-
-            JFXDialog dialog = new JFXDialog(stackPane, layout, JFXDialog.DialogTransition.CENTER);
-            cancel.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    dialog.close();
-                    System.exit(0);
-                }
-            });
-
-            savebtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    saveRadioData(event);
-                    System.exit(0);
-                }
-            });
-            dialog.show();
-        } else {
-            DialogPopUp.closeAlert(stackPane);
-        }
-
-
-
-    }*/
-
-    /*public void init(TestDetails testDetails) {
-        List question = testDetails.getQuestion();
-        //initialize();
-        ques_num_txt.getItems().addAll(question);
-        this.testDetails = testDetails;
-        // List question = testDetails.getQuestion();
-        numberOfQuestion = question.size();
-        //ques_num_txt.getItems().addAll(question);
-
-        if (testDetails.getSubQuestionList() != null) {
-            if (testDetails.getSubQuestionList().get(0) != null)
-                subQuestionTxt.setText("" + testDetails.getSubQuestionList().get(0));
-        }
-
-        loadStudentDetails(0);
-
-        init_StudentList();
-
-    }*/
 
     private void loadStudentDetails(int index) {
 //        ques_num_txt.getSelectionModel().selectFirst();
@@ -257,6 +191,19 @@ public class StudentDetailsController extends MainBaseController {
                 testDetails.getStudentDetails().get(StudentDetails)
             }
         }*/
+
+    }
+
+    @FXML
+    public void uploadStudentDetailsFromFile() {
+
+        ArrayList<String> dataList = UploadFileHelper.openFileChooserAndReadFile();
+        ArrayList<StudentDetails> studentDetails = UploadFileHelper.getStudentDetailsFromDataList(dataList);
+        testDetails.setStudentDetails(studentDetails);
+        //Save Data
+        DataBaseCommunication.convertJavaToJSON(testDetails);
+
+        System.out.println(studentDetails);
 
     }
 

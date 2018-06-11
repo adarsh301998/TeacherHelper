@@ -278,10 +278,14 @@ public class ChartHelper {
 
     }
 
-    public static ScatterChart<Number, Number> getScatterChart(ArrayList<Double> mciArrayList, ArrayList<String> rollNumbers, ArrayList<Double> studentPercent) {
+    public static ScatterChart<Number, Number> getScatterChart(ArrayList<Double> mciArrayList, ArrayList<String> displayDataOnChart, ArrayList<Double> yAxisPoints, boolean questionMCIChart) {
 
         NumberAxis xAxis = new NumberAxis(0, 1.2, .3);
-        NumberAxis yAxis = new NumberAxis(0, 100, 10);
+
+        NumberAxis yAxis;
+
+        if (!questionMCIChart) yAxis = new NumberAxis(0, 100, 10);
+        else yAxis = new NumberAxis(0, 1.0, 0.1);
 
         System.out.println(xAxis.getValueForDisplay(10));
 
@@ -292,13 +296,13 @@ public class ChartHelper {
         series.setName("MCI Index");
         for (int i = 0; i < mciArrayList.size(); i++) {
 
-            XYChart.Data data = new XYChart.Data(mciArrayList.get(i), studentPercent.get(i));
+            XYChart.Data data = new XYChart.Data(mciArrayList.get(i), yAxisPoints.get(i));
             final int index = i;
             data.nodeProperty().addListener(new ChangeListener() {
                 @Override
                 public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                     if (newValue != null) {
-                        displayLabelForScalledChartData(data, rollNumbers.get(index));
+                        displayLabelForScalledChartData(data, displayDataOnChart.get(index));
                     }
                 }
             });

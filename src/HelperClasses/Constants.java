@@ -32,4 +32,9 @@ public class Constants {
     public static final int CHART_TOP_GAP = 15;
 
 
+    //Booleans
+    public static final boolean FULLY_IMPROVISED_GUTT_TABLE = true;
+    public static final boolean NOT_FULLY_IMPROVISED_GUTT_TABLE = false;
+
+
 }

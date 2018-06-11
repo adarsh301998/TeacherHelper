@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<StackPane stylesheets="@../../../layouts/CSS/maincss.css" fx:id="stackPane" xmlns="http://javafx.com/javafx/8.0.141"
+<StackPane stylesheets="@../../../layouts/CSS/maincss.css" xmlns="http://javafx.com/javafx/8.0.141"
            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.ReportControllers.MciIndexController">
-    <AnchorPane prefHeight="600.0" prefWidth="1234.0">
+    <AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="1234.0">
         <children>
             <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                         AnchorPane.topAnchor="0.0">
                 <content>
-                    <AnchorPane fx:id="anchorPaneResize" prefHeight="594.0" prefWidth="1227.0"
+                    <AnchorPane fx:id="anchorPaneResize" prefHeight="588.0" prefWidth="1224.0"
                                 styleClass="light-background">
                         <children>
                             <AnchorPane prefHeight="40.0" prefWidth="839.0" styleClass="tittlePaneBackground"
@@ -34,7 +36,7 @@
                                         </graphic>
                                     </JFXButton>
 
-                                    <Label onMouseClicked="#displayBasicInfo" layoutX="135.0" layoutY="13.0"
+                                    <Label layoutX="135.0" layoutY="3.0" onMouseClicked="#displayBasicInfo"
                                            prefHeight="40.0" prefWidth="261.0" text="MCI Index" textFill="#FFFF">
                                         <font>
                                             <Font name="Segoe UI" size="30.0"/>
@@ -44,6 +46,24 @@
 
                                 </children>
                             </AnchorPane>
+                            <JFXTabPane layoutX="9.0" layoutY="60.0" AnchorPane.bottomAnchor="0.0"
+                                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                        AnchorPane.topAnchor="60.0">
+                                <tabs>
+                                    <Tab text="Student MCI">
+                                        <content>
+                                            <AnchorPane fx:id="anchorPaneStudentMCI" minHeight="0.0" minWidth="0.0"
+                                                        prefHeight="180.0" prefWidth="200.0"/>
+                                        </content>
+                                    </Tab>
+                                    <Tab text="Question MCI">
+                                        <content>
+                                            <AnchorPane fx:id="anchorPaneQuestionMCI" minHeight="0.0" minWidth="0.0"
+                                                        prefHeight="180.0" prefWidth="200.0"/>
+                                        </content>
+                                    </Tab>
+                                </tabs>
+                            </JFXTabPane>
                         </children>
                     </AnchorPane>
                 </content>

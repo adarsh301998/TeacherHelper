@@ -58,7 +58,7 @@ public class ArrayHelper extends BaseHelper {
      * 5. return new array
      *
      * */
-    public static int[][] getGuttImprovised() {
+    public static int[][] getGuttImprovised(boolean fullyImprovisedGuttTable) {
 
         int[][] guttArrayTable = GuttSortingHelper.getSortedArray(ArrayHelper.guttTableArray());
         int questionSortedIndex[] = GuttSortingHelper.getQuesSortedIndex();
@@ -112,6 +112,20 @@ public class ArrayHelper extends BaseHelper {
 
         int array[][] = convertArrayListToArray(improvedGuttTable);
         //Remove student who scored full score
+
+        /*In Reliability test complete guttTable is required*/
+
+
+        /*Returning semi improved gutttable*/
+        if (!fullyImprovisedGuttTable) {
+
+            return array;
+
+        }
+
+
+        /*REMOVING NECESSARY ROW AND COLUMN*/
+
         ArrayList<ArrayList<Integer>> studentScoreFiltered = removeFullScorerStudent(array);
 
         //Remove Item who scored full score

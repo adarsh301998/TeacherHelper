@@ -62,6 +62,9 @@ public class ReportOptionController extends MainBaseController {
     private JFXButton binaryCorelation_btn;
 
     @FXML
+    private JFXButton questionCorrelation_btn;
+
+    @FXML
     JFXButton mciIndex_btn;
     TestDetails testDetails;
     NavigationHelper navigationHelper;
@@ -95,6 +98,9 @@ public class ReportOptionController extends MainBaseController {
         }
         if (event.getSource() == mciIndex_btn) {
             frame = "scenes/report/mciIndex.fxml";
+        }
+        if (event.getSource() == questionCorrelation_btn) {
+            frame = "scenes/report/questionCorrelation.fxml";
         }
 
         loadFrame(frame);
